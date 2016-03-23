@@ -62,17 +62,44 @@
 			<meta name="utype">epntap</meta>
 
 			<meta name="info" infoName="SERVICE_PROTOCOL" 
-				infoValue="0.37">EPN-TAP</meta>
+				infoValue="0.37">EPN-TAP 2.0</meta>
 
+<!--the parameter _index v1.0 is renamed to granule_uid in v2.0
 			<column name="index_" type="bigint" required="True"
 				ucd="meta.id"
 				description="Numeric identifier (like a record number) of this
 				row.">
 				<property key="std">1</property>
 			</column>
-				
+-->
+			<column name="granule_uid" type="text" required="True"
+				ucd="meta.id"
+				description="Internal table row index 
+					Unique ID in data service, also in v2. Can be alphanum.">
+				<property key="std">1</property>
+			</column>
+
+<!-- i don't think we need this
 			<column name="accref" original="//products#products.accref"/>
 
+-->
+<!--the following parameters are new to v2.0: granule_gid, obs_id-->
+			<column name="granule_gid" type="text" required="True"
+				ucd="meta.id"
+				description="Common to granules of same type (e.g. same map projection, 
+					or geometry data products). Can be alphanum.">
+				<property key="std">1</property>
+			</column>
+			<column name="obs_id" type="text" required="True"
+				ucd="meta.id"
+				description="Associates granules derived from the same data (e.g. 
+					various representations / processing levels). 
+					Can be alphanum., may be the ID of original observation.">
+				<property key="std">1</property>
+			</column>
+
+<!--END NEW PARAMS granule_uid, granule_gid, obs_id-->
+<!-- resource_type is not in v2.0
 			<column name="resource_type" type="text" 
 				utype="Epn.ResourceType" ucd="meta.id;class" 
 				description="'granule' if the row describes a smallest 
@@ -85,7 +112,14 @@
 					<option>granule</option>
 				</values>
 			</column>
-
+-->
+<!-- dataset_id is TBC in v2.0
+			<column name="dataset_id" type="text"
+				ucd="meta.id;meta.dataset"
+				description="An identifier for the dataset this granule belongs to.">
+				<property key="std">1</property>
+			</column>
+-->
 			<column name="dataproduct_type"	type="text" 
 				ucd="meta.id;class" utype="Epn.dataProductType"
 				description="The high-level organization of the data product
@@ -107,11 +141,7 @@
 				</values>
 			</column>
 
-			<column name="dataset_id" type="text"
-				ucd="meta.id;meta.dataset"
-				description="An identifier for the dataset this granule belongs to.">
-				<property key="std">1</property>
-			</column>
+
 
 			<column name="target_name"	type="text" 
 				ucd="meta.id;src" utype="Epn.TargetName"
@@ -338,7 +368,7 @@
 					related to the characteristics of the instrument .
 				profile
 					scalar or vectorial measurements along 1 spatial dimension, e.g.,
-					atmospheric profiles, atmospheric paths, sub-surface profiles...
+					atmospheric profiles, atmospheric paths, sub-surface profiles…
 				volume
 					other measurements with 3 spatial dimensions, e.g., internal or
 					atmospheric structures.
