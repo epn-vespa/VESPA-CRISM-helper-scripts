@@ -120,7 +120,7 @@
 				<property key="std">1</property>
 			</column>
 -->
-<--! STOPPED HERE -->
+<!-- STOPPED HERE -->
 			<column name="dataproduct_type"	type="text" 
 				ucd="meta.id;class" utype="Epn.dataProductType"
 				description="The high-level organization of the data product
