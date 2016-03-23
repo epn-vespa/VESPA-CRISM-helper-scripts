@@ -27,5 +27,6 @@ The defalut values are provided by <mixinPar>, eg
 			
 I'm confused what does <property key="std">1</property> mean?
 
-
+New row definitions are taken from this table:
+https://voparis-confluence.obspm.fr/display/VES/EPN-TAP+V2.0+parameters
 
