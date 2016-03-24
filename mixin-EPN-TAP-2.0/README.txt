@@ -43,3 +43,13 @@ grants access to the structure of the mixin as "substrate"
 mixin parameters as "mixinPars"
 and to parse context as "context"
 
+Using <processEarly> is probably preferable, as this is called on element fixup, rathar than resource fixup.
+Consequently makes sense to place this at the end of <mixinDef>
+
+Maybe something like
+		<processEarly>
+			<code>
+			\c3unit='deg'
+			</code>
+		</processEarly> 
+will work...
