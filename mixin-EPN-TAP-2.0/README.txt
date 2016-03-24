@@ -53,3 +53,5 @@ Maybe something like
 			</code>
 		</processEarly> 
 will work...
+
+There is an example of <processLate> in obscore.rd
