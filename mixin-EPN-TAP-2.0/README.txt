@@ -194,3 +194,39 @@ To get value from a mixinPars follow example:
 spatialFrameType = context.resolveId(mixinPars["spatialFrameType"])
 
 To see how context.resolveId works, see gavo/base/parsecontext.py
+
+Maybe something like this might work here:
+
+<!---->
+<!--NEW CODE STARTS!-->
+<!--first declare variables-->
+		<mixinPar key="spatialFrameType" description="input variable">myFrame</mixinPar>
+		<mixinPar key="c1unit" description="Unit of the first spatial coordinate override">_EMPTY_</mixinPar>
+		<mixinPar key="c2unit" description="Unit of the second spatial coordinate override">_EMPTY_</mixinPar>
+		<mixinPar key="c3unit" description="Unit of the third spatial coordinate override">_EMPTY_</mixinPar>
+<!--on element complet run-->
+		<processEarly>
+			<setup>
+<!--import libraries-->
+				<code>
+					from gavo import base
+					from gavo import rscdef
+					from gavo.protocols import sdm
+				</code>
+			</setup>
+<!--run code-->
+			<code>
+				from gavo import base
+				from gavo import rscdef
+				from gavo.protocols import sdm
+				#get input variable, note that this is from library rscdef, which itself imports base.resolveId
+				spatialFrameType = mixinPars["spatialFrameType"]
+				#note that mixinPars is actually a dictionary
+				#and now based on that input variable we can compute output
+				mixinPars["c1unit"] = "myc1unit"+spatialFrameType
+				mixinPars["c2unit"] = "myc2unit"+spatialFrameType
+				mixinPars["c3unit"] = "myc3unit"+spatialFrameType
+			</code>
+		</processEarly>
+<!--NEW CODE ENDS!-->
+<!---->
