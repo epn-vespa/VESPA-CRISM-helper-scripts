@@ -188,3 +188,9 @@ gavo/resources/inputs/__system__/ssap.rd
 			</code>
 		</processEarly>
 	</mixinDef>
+
+
+To get value from a mixinPars follow example:
+spatialFrameType = context.resolveId(mixinPars["spatialFrameType"])
+
+To see how context.resolveId works, see gavo/base/parsecontext.py
