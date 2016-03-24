@@ -34,3 +34,12 @@ I'm confused what does <property key="std">1</property> mean?
 New row definitions are taken from this table:
 https://voparis-confluence.obspm.fr/display/VES/EPN-TAP+V2.0+parameters
 
+To add control flow to mixin best to use <code> tag...
+which can be a child of either <processEarly> or <processLate>
+which could be children of <mixinDef>.
+
+<mixinDef> <processEarly code="..."> ... </processEarly> </mixinDef>
+grants access to the structure of the mixin as "substrate"
+mixin parameters as "mixinPars"
+and to parse context as "context"
+
