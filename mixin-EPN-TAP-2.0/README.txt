@@ -134,3 +134,8 @@ this is the example refered to from products.rd of <processLate>:
 		]]></code>
 	</processLate>
 </STREAM>
+These are the only 2 instances of <processLate> in GAVO source code.
+
+The definitions of <processEarly> and <processLate> are in 
+gavo/rscdef/mixins.py
+<processEarly> is used once - in ssap.rd to fill UCDs and Units!!
