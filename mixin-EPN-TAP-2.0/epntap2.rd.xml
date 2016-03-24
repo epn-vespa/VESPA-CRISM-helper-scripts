@@ -40,7 +40,16 @@
 			Use the `//epntap#populate`_ apply in rowmakers
 			feeding tables mixing this in.
 		]]></doc>
-
+<!-- 
+c1/c2/c3 units depend on spatial_frame_type value. We should build a STREAM to
+set the correct units:
+ - celestial	c1: deg	(RA)	c2: deg	(Dec)	c3: m (Dist)
+ - body 		c1: deg	(Lon)	c2: deg	(Lat)	c3: m (Alt)
+ - cartesian	c1: m	(X)		c2: m	(Y)		c3: m (Z)
+ - cylindrical	c1: m	(R)		c2: deg	(Azi)	c3: m (Z)
+ - spherical	c1: m	(R)		c2: deg	(Colat)	c3: m (Azi)
+ - healpix		c1: no unit (H)	c2: no unit	(K)	c3: N/A
+-->
 		<mixinPar key="c1unit" description="Unit of the first spatial
 			coordinate">deg</mixinPar>
 		<mixinPar key="c2unit" description="Unit of the second spatial
