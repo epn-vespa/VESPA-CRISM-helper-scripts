@@ -84,3 +84,53 @@ There is an example of <processLate> in obscore.rd:
 			]]></code>
 		</processLate>
 	</STREAM>
+
+this is the example refered to from products.rd of <processLate>:
+<STREAM id="hackProductsData">
+	<doc>
+		This defines a processLate proc that hacks data instances
+		building tables with products such that the products table
+		is fed and the products instance columns are assigned to.
+	</doc>
+	<!-- This sucks.  We want a mechanism that lets us
+		deposit events within the table definition; strutures referring
+		to them could then replay them -->
+	<processLate>
+		<setup>
+			<code>
+				from gavo import rscdef
+			</code>
+		</setup>
+		<code><![CDATA[
+			if not substrate.onDisk:
+				raise base.StructureError("Tables mixing in product must be"
+					" onDisk, but %s is not"%substrate.id)
+				# Now locate all DDs we are referenced in and...
+			prodRD = base.caches.getRD("//products")
+			for dd in substrate.rd.iterDDs():
+				for td in dd:
+					if td.id==substrate.id:
+						# ...feed instructions to make the row table to it and...
+						dd._makes.feedObject(dd, rscdef.Make(dd, 
+							table=prodRD.getTableDefById("products"),
+							rowmaker=prodRD.getById("productsMaker"),
+							role="products"))
+							# ...add some rules to ensure prodcut table cleanup,
+						# and add mappings for the embedding table.
+						for make in dd.makes:
+							if make.table.id==substrate.id:
+								# it was stupid to hack the host rowmaker from the mixin.
+								# I need some exit strategy here.
+								# Meanwhile: we're suppressing the hack if it'd fail
+								# anyway.
+								if "owner" in make.table.columns.nameIndex:
+									base.feedTo(make.rowmaker,
+										prodRD.getById("prodcolMaps").getEventSource(), context,
+										True)
+
+								base.feedTo(make,
+									prodRD.getById("hostTableMakerItems").getEventSource(), 
+									context, True)
+		]]></code>
+	</processLate>
+</STREAM>
