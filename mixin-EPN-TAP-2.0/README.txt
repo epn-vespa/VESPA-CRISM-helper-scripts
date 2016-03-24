@@ -138,4 +138,53 @@ These are the only 2 instances of <processLate> in GAVO source code.
 
 The definitions of <processEarly> and <processLate> are in 
 gavo/rscdef/mixins.py
-<processEarly> is used once - in ssap.rd to fill UCDs and Units!!
+<processEarly> is used once - in ssap.rd to fill UCDs and Units:
+gavo/resources/inputs/__system__/ssap.rd
+
+	<mixinDef id="sdm-instance">
+		<mixinPar key="spectralUnitOverride" description="Force unit of
+			 the spectral column (don't use this)">__EMPTY__</mixinPar>
+		<mixinPar key="spectralUCDOverride" description="Force UCD of the
+			 spectral column (don't use this)">__EMPTY__</mixinPar>
+
+		<processEarly>
+			<setup>
+				<code>
+					from gavo import base
+					from gavo import rscdef
+					from gavo.protocols import sdm
+				</code>
+			</setup>
+			<code>
+				# copy over columns and params from the instance table as
+				# params for us.
+				ssapInstance = context.resolveId(mixinPars["ssaTable"])
+				for col in ssapInstance.columns:
+					atts = col.getAttributes()
+					atts["utype"] = sdm.getSDM1UtypeForSSA(atts["utype"])
+					atts["required"] = False
+					substrate.feedObject("param", 
+						base.makeStruct(rscdef.Param, parent_=substrate, **atts))
+				for param in ssapInstance.params:
+					newUtype = sdm.getSDM1UtypeForSSA(param.utype)
+					substrate.feedObject("param", 
+						param.change(utype=newUtype))
+
+				specCol = substrate.getColumnByName("spectral")
+				specCol.feed("ucd", "\spectralUCDOverride" or
+					substrate.getParamByName("ssa_spectralucd").value)
+				specCol.feed("unit", "\spectralUnitOverride" or
+					substrate.getParamByName("ssa_spectralunit").value)
+
+				fluxCol = substrate.getColumnByName("flux")
+				fluxCol.feed("ucd",
+					substrate.getParamByName("ssa_fluxucd").value)
+				fluxCol.feed("unit",
+					substrate.getParamByName("ssa_fluxunit").value)
+
+				# set the SDM container meta if not already present
+				if substrate.getMeta("utype", default=None) is None:
+					substrate.setMeta("utype", "spec:Spectrum")
+			</code>
+		</processEarly>
+	</mixinDef>
