@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <resource schema="__system">
 	<STREAM id="_minmax">
@@ -47,10 +47,14 @@
 			coordinate">deg</mixinPar>
 		<mixinPar key="c3unit" description="Unit of the third spatial
 			coordinate">__EMPTY__</mixinPar>
+<!-- Spectral is now always for em radiation. 
+Particle or mass spectroscopy is described with specific keywords
+ 
 		<mixinPar key="spectralUCD" description="UCD of the spectral
 			axis; this must be one of em.freq (for electromagnetic
 			radiation) or phys.energy;phys.part (for particles)"
-			>em.freq</mixinPar>
+			>em.freq</mixinPar>-->
+
 		<mixinPar key="processing_level" description="How processed is the
 			data?  This is a numerical code explained in the corresponding
 			table footnote.  In short: 1 -- Raw; 2 -- Edited; 3 -- Calibrated;
@@ -113,7 +117,7 @@
 				</values>
 			</column>
 -->
-<!-- dataset_id is TBC in v2.0
+<!-- dataset_id is replaced by granule_gid in v2.0
 			<column name="dataset_id" type="text"
 				ucd="meta.id;meta.dataset"
 				description="An identifier for the dataset this granule belongs to.">
@@ -199,7 +203,7 @@
 				basedescr="Integration time of the measurement"/>
 			<FEED source="_minmax"
 				basename="spectral_range"
-				baseucd="\spectralUCD" unit="Hz"
+				baseucd="em.freq" unit="Hz"
 				baseutype="Epn.Spectral.Spectral_range"
 				basedescr="Spectral domain of the data"/>
 			<FEED source="_minmax"
@@ -247,8 +251,17 @@
 			<column name="spatial_frame_type"	type="text" 
 				ucd="pos.frame"
 				description="Flavor of coordinate system, also defining the 
-					nature of coordinates"/>
-
+					nature of coordinates">
+					<values>
+						<option>celestial</option>
+						<option>body</option>
+						<option>cartesian</option>
+						<option>cylindrical</option>
+						<option>spherical</option>
+						<option>healpix</option>
+				</values>
+			</column>
+			
 			<FEED source="_minmax"
 				basename="incidence"
 				baseucd="pos.incidenceAng" unit="deg"
