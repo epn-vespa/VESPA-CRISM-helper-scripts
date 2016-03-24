@@ -54,4 +54,33 @@ Maybe something like
 		</processEarly> 
 will work...
 
-There is an example of <processLate> in obscore.rd
+There is an example of <processLate> in obscore.rd:
+		<processLate>
+			<doc>
+				Find all data items importing the table and furnish them
+				with the scripts necessary to update the obscore view.
+			</doc>
+			<!-- see //products#hackProductsData for why this is a huge pain in
+			the neck and how to get out of this. -->
+			<code><![CDATA[
+				if not substrate.onDisk:
+					raise base.StructureError("Only onDisk tables can be obscore"
+						" published, but %s is not."%substrate.id)
+
+				rd = base.caches.getRD("//obscore")
+				insertScript = rd.getById("addTableToObscoreSources")
+				removeScript = rd.getById("removeTableFromObscoreSources")
+
+				for dd in substrate.rd.iterDDs():
+					addDependent = False
+					for make in dd.makes:
+						if make.table is substrate:
+							make.scripts.append(insertScript)
+							# the remove script needs to have the right parent
+							make.feedObject("script", removeScript.copy(make))
+							addDependent = True
+					if addDependent:
+						dd.dependents.append("//obscore#create")
+			]]></code>
+		</processLate>
+	</STREAM>
