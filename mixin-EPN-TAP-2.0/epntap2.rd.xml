@@ -43,11 +43,11 @@
 <!-- 
 c1/c2/c3 units depend on spatial_frame_type value. We should build a STREAM to
 set the correct units:
- - celestial	c1: deg	(RA)	c2: deg	(Dec)	c3: m (Dist)
- - body 		c1: deg	(Lon)	c2: deg	(Lat)	c3: m (Alt)
+ - celestial	c1: deg	(RA)	c2: deg	(Dec)	c3: m (Distance)
+ - body 		c1: deg	(Lon)	c2: deg	(Lat)	c3: m (Radius)
  - cartesian	c1: m	(X)		c2: m	(Y)		c3: m (Z)
- - cylindrical	c1: m	(R)		c2: deg	(Azi)	c3: m (Z)
- - spherical	c1: m	(R)		c2: deg	(Colat)	c3: m (Azi)
+ - cylindrical	c1: m	(R)		c2: deg	(Azimuth)	c3: m (Z)
+ - spherical	c1: m	(R)		c2: deg	(Colatitude)c3: m (Azimuth)
  - healpix		c1: no unit (H)	c2: no unit	(K)	c3: N/A
 -->
 		<mixinPar key="c1unit" description="Unit of the first spatial
