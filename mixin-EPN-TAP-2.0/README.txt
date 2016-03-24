@@ -216,10 +216,6 @@ Maybe something like this might work here:
 			</setup>
 <!--run code-->
 			<code>
-				from gavo import base
-				from gavo import rscdef
-				from gavo.protocols import sdm
-				#get input variable, note that this is from library rscdef, which itself imports base.resolveId
 				spatialFrameType = mixinPars["spatialFrameType"]
 				#note that mixinPars is actually a dictionary
 				#and now based on that input variable we can compute output
