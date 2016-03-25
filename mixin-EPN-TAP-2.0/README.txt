@@ -259,3 +259,25 @@ So it's possible to edit the values of mixinPars, as in
 
 Note, however, that process Early runs after the <events>, and while <mixinPars> are updated, 
 this has no effect on the output, since by that time columns are already created!
+
+Somehow the events must be called again, perhaps through substrate or context.
+
+The substrate members are:
+
+['_IVOMetaMixin__getFromDB', '_MacroPackage__findMacro', '_MetaMixin__hasMetaParent', '_RDAttribute__rd', '__class__', '__contains__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__implemented__', '__init__', '__iter__', '__metaclass__', '__module__', '__new__', '__providedBy__', '__provides__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_addMeta', '_adql', '_allProfiles', '_cacheProcessEarly140094857785488', '_cols', '_completeElementNext', '_defineFixupFunction', '_delMeta', '_dupePolicy', '_forceUnique', '_foreignKeys', '_getFromAtom', '_getMeta', '_groups', '_hasAtom', '_id', '_indices', '_iterMeta', '_makeUpwardCaller', '_makeUpwardCallerOneArg', '_metaAttr', '_meta_dateUpdated', '_meta_datetimeUpdated', '_meta_identifier', '_meta_recTimestamp', '_meta_referenceURL', '_meta_sets', '_meta_status', '_mixins', '_namePath', '_nop', '_onDisk', '_onElementCompleteNext', '_original', '_params', '_primary', '_pristine', '_properties', '_rd', '_readProfiles', '_registration', '_resolveSTC', '_setForAtom', '_stcs', '_system', '_temporary', '_validateNext', '_viewStatement', 'addMeta', 'adopt', 'adql', 'allProfiles', 'attrSeq', 'buildRepr', 'callCompletedCallbacks', 'change', 'clearProperty', 'columns', 'completeElement', 'completedCallbacks', 'copy', 'copyMetaFrom', 'deepCopyMeta', 'delMeta', 'disambiguateColumns', 'dupePolicy', 'end_', 'execMacro', 'expand', 'feed', 'feedEvent', 'feedFrom', 'feedObject', 'finishElement', 'fixupFunction', 'forceUnique', 'foreignKeys', 'fromColumns', 'fromStructure', 'getAllMetaPairs', 'getAttribute', 'getAttributes', 'getByName', 'getByUtype', 'getByUtypes', 'getColumnById', 'getColumnByName', 'getColumnByUCD', 'getColumnByUCDs', 'getColumnsByUCD', 'getColumnsByUCDs', 'getCopyableAttributes', 'getDDL', 'getDefaults', 'getElementForName', 'getExpander', 'getFieldIndex', 'getFullId', 'getMeta', 'getMetaKeys', 'getMetaParent', 'getNote', 'getParamByName', 'getPrimaryIn', 'getProductColumns', 'getProperty', 'getQName', 'getSTCDefs', 'getURL', 'groups', 'hasProperty', 'id', 'idmap', 'indices', 'isEmpty', 'iterChildren', 'iterEvents', 'iterMeta', 'keys', 'listMacros', 'macro_RSTservicelink', 'macro_RSTtable', 'macro_colNames', 'macro_curtable', 'macro_decapitalize', 'macro_getConfig', 'macro_getParam', 'macro_internallink', 'macro_magicEmpty', 'macro_metaString', 'macro_nameForUCD', 'macro_nameForUCDs', 'macro_qName', 'macro_quote', 'macro_rdId', 'macro_rdIdDotted', 'macro_schema', 'macro_tablename', 'macro_test', 'macro_today', 'macro_upper', 'macro_urlquote', 'makeRowFromTuple', 'managedAttrs', 'metaModel', 'meta_', 'mixesIn', 'mixin', 'namePath', 'name_', 'onDisk', 'onElementComplete', 'original', 'params', 'parent', 'primary', 'properties', 'qualifiedId', 'rd', 'readProfiles', 'registration', 'resType', 'resolveName', 'setMeta', 'setMetaParent', 'setProperty', 'start_', 'stc', 'system', 'temporary', 'traverse', 'validate', 'validateRow', 'value_', 'viewStatement']
+
+the context members are
+['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'addExitFunc', 'doQueries', 'eventSource', 'exitFuncs', 'failuresAreCacheable', 'forRD', 'fromContext', 'getById', 'getQualifiedId', 'idmap', 'pos', 'registerId', 'resolveId', 'restricted', 'runExitFuncs', 'setEventSource', 'srcPath']
+
+Since it is too late to update the MixinPars, the column should be updated instead, 
+however, it should be updated using method feed:
+#from      /usr/lib/python2.7/dist-packages/gavo/base/structure.py
+        def feed(self, name, literal, ctx=None):
+                """feeds the literal to the attribute name.
+
+                If you do not have a proper parse context ctx, so there
+                may be restrictions on what literals can be fed.
+                """
+                self.managedAttrs[name].feed(ctx, self, literal)
+
+
