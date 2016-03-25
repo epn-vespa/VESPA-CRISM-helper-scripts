@@ -226,3 +226,8 @@ Maybe something like this might work here:
 		</processEarly>
 <!--NEW CODE ENDS!-->
 <!---->
+
+On the server the correct file to create is located at
+/usr/lib/python2.7/dist-packages/gavo/resources/inputs/__system__/epntap2.rd
+
+
