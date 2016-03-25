@@ -281,3 +281,6 @@ however, it should be updated using method feed:
                 self.managedAttrs[name].feed(ctx, self, literal)
 
 
+EXTREMELY IMPORTAINT POI: __system RD are not updated by default.
+For the changes to take place a command "gavo serve reload" must be run
+prior to running "gavo --debug imp q.rd"
