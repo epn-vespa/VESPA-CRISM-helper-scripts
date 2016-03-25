@@ -230,4 +230,32 @@ Maybe something like this might work here:
 On the server the correct file to create is located at
 /usr/lib/python2.7/dist-packages/gavo/resources/inputs/__system__/epntap2.rd
 
+So it's possible to edit the values of mixinPars, as in
 
+                <processEarly>
+                        <setup>
+                                <code>
+                                        from gavo import base
+                                        from gavo import rscdef
+                                        from gavo.protocols import sdm
+                                        #print mixinPars
+                                        print "setup complete"
+                                </code>
+                        </setup>
+                        <code>
+                                print "process Early code executing"
+                                #print mixinPars
+                                #firstUnit = mixinPars["c1unit"]
+                                #print firstUnit
+                                mixinPars["c3unit"] = u'deg'
+                                mixinPars.update()
+                                print mixinPars
+                                #print context
+                                #print dir(substrate)
+                                #print dir(context)
+                                #print dir(mixinPars)
+                        </code>
+                </processEarly>
+
+Note, however, that process Early runs after the <events>, and while <mixinPars> are updated, 
+this has no effect on the output, since by that time columns are already created!
