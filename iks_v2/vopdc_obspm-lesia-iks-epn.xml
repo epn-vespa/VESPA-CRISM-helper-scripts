@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ri:Resource status="active" updated="2013-10-12T00:00:00Z" created="2013-10-12T00:00:00Z"
+   xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+   xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.0"
+   xmlns:tr="http://www.ivoa.net/xml/TAPRegExt/v1.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/VODataService/v1.0 http://www.ivoa.net/xml/VODataService/v1.0 http://www.ivoa.net/xml/TAPRegExt/v1.0 http://www.ivoa.net/xml/TAPRegExt/v1.0"
+   xsi:type="vs:CatalogService">
+   <validationLevel validatedBy="ivo://vopdc">3</validationLevel>
+   <title>IR spectroscopy of comet Halley</title>
+   <shortName>iks</shortName>
+   <identifier>ivo://vopdc.obspm/lesia/iks/epn</identifier>
+   <curation>
+      <publisher ivo-id="ivo://vopdc.obspm/lesia">VO-Paris Data Centre - LESIA</publisher>
+      <creator>
+         <name>LESIA</name>
+      </creator>
+      <contributor>S. Erard, IKI, PDS, VOPDC</contributor>
+      <contact>
+         <name>VOPDC support team</name>
+         <address>Observatoire de Paris VOPDC, bat. Perrault, 77 av. Denfert Rochereau, 75014 Paris, FRANCE</address>
+         <email>vo.paris@obspm.fr</email>
+         <telephone>+33140512089</telephone>
+      </contact>
+   </curation>
+   <content>
+      <!-- subject = IAU thesaurus key words (http://www.mso.anu.edu.au/library/thesaurus/) -->
+      <subject>Virtual Observatory</subject>
+      <subject>Comets</subject>
+      <subject>Spectroscopy</subject>
+      <subject>Infrared</subject>
+      <subject>P/Halley</subject>
+      <description>Measurements of comet Halley in the spectral channel of IKS on board the Vega-1
+         spacecraft. Data are retrieved from the PDS Small Bodies Node archive (2011 reformatted
+         version) and completed with extra information from the original team. The dataset consists
+         in 101 tables providing the calibrated radiance spectra of comet Halley as distance
+         decreases, plus two composite spectra in different spectral ranges. For details and further
+         references, see: Combes M. et al., 1988, The 2.3-12 micron Spectrum of Comet Halley from
+         the IKS-VEGA Experiment, Icarus, 76, 404-436.</description>
+      <source>1988Icar...76..404C</source>
+      <referenceURL>http://lesia.obspm.fr/IKS/</referenceURL>
+      <type>Archive</type>
+      <contentLevel>General</contentLevel>
+      <contentLevel>University</contentLevel>
+      <contentLevel>Research</contentLevel>
+      <relationship>
+         <relationshipType>related-to</relationshipType>
+         <relatedResource ivo-id="ivo://vopdc.obspm">VO-Paris Data Centre</relatedResource>
+      </relationship>
+   </content>
+   <!-- Table Access Service -->
+   <capability standardID="ivo://ivoa.net/std/TAP" xsi:type="tr:TableAccess">
+      <interface role="std" xsi:type="vs:ParamHTTP">
+         <accessURL use="base">http://voparis-tap.obspm.fr/__system__/tap/run/tap</accessURL>
+      </interface>
+      <dataModel ivo-id="ivo://vopdc.obspm/std/EpnCore-1.0">EpnCore-1.0</dataModel>
+      <language>
+         <name>ADQL</name>
+         <version ivo-id="ivo://ivoa.net/std/ADQL#v2.0">2.0</version>
+      </language>
+      <outputFormat ivo-id="ivo://ivoa.net/std/TAPRegEXT#output-votable-td">
+         <mime>application/x-votable+xml</mime>
+         <alias>votable</alias>
+      </outputFormat>
+   </capability>
+   <instrument>IKS/Vega-1</instrument>
+</ri:Resource>
