@@ -51,16 +51,16 @@ set the correct units:
  - healpix		c1: no unit (H)	c2: no unit	(K)	c3: N/A
 -->
 		<mixinPar key="c1unit" description="Unit of the first spatial
-			coordinate">deg</mixinPar>
+			coordinate">myC1</mixinPar>
 		<mixinPar key="c2unit" description="Unit of the second spatial
-			coordinate">deg</mixinPar>
+			coordinate">myC2</mixinPar>
 		<mixinPar key="c3unit" description="Unit of the third spatial
-			coordinate">__EMPTY__</mixinPar>
-<!-- mixinPar values are only accessible only from within the code block of 
-either processEarly or processLate. processEarly is called as the final step of element fix-up
-making it already too late to edit mixinPar, since by that time the columns within the events have already been fixed.
+			coordinate">myC3</mixinPar>
+<!-- mixinPar values are only accessible only from within the code block of either processEarly or processLate. 
+processEarly is called as the final step of element fix-up making it already too late to edit mixinPar, 
+since by that time the columns within the events have already been fixed.
 Hence, to edit the column property values such as units, these should be changed not in the mixinPars, but in the 
-columns themselves. This is a little bit more bulky then I would like, but it works.
+columns themselves.
 -->
                 <processEarly>
                         <setup>
@@ -68,11 +68,11 @@ columns themselves. This is a little bit more bulky then I would like, but it wo
                                         from gavo import base
                                         from gavo import rscdef
                                         from gavo.protocols import sdm
-                                        print "setup complete"			#DEBUG
                                 </code>
                         </setup>
                         <code>
-				print "processEarly code executing"		#DEBUG
+				mySpatialFrameType = "body"		#TEST - this value should be supplied from elsewhere
+				#
 				def setMyUnits(mySpatialFrameType):
 					if   mySpatialFrameType == "celestial":   c1, c2, c3 = "deg (RA)",    "deg (Dec)",   "m (Dist)"
 					elif mySpatialFrameType == "body":        c1, c2, c3 = "deg (Lon)",   "deg (Lat)",   "m (Alt)"	
@@ -80,23 +80,12 @@ columns themselves. This is a little bit more bulky then I would like, but it wo
 					elif mySpatialFrameType == "cylindrical": c1, c2, c3 = "m (R)",       "deg (Azi)",   "m (Z)"
 					elif mySpatialFrameType == "spherical":   c1, c2, c3 = "m (R)",       "deg (Colat)", "m (Azi)"
 					elif mySpatialFrameType == "healpix":     c1, c2, c3 = "no unit (H)", "no unit (K)", "N/A"
-					return c1,c2,c3
-				print "processEarly functions defined"		#DEBUG
-				#
-				mySpatialFrameType = "celestial"		#TEST - fake feed, assuming homogeneity
-				#
-				#NOTE THAT THIS MAY BE CHALLENGING TO IMPLEMENT
-				# IF SPATIAL FRAME TYPE IS HETEROGENEOUS
-				#  DO WE ALWAYS DEAL WITH THE SAME TYPE 
-				#   OR CAN THAT VARY IN THE SAME TABLE?
-				#
-				c1,c2,c3 = setMyUnits(mySpatialFrameType)
-				print "c1unit = " + c1 + " c2unit = " + c2 +" c3unit = " + c3
-				#
-				#workColumn =  substrate.getColumnByName("c3_min")
-				#workColumn.feed(u'unit',u'abracadabra')
-				#print dir(workColumn)
-				#print workColumn.unit
+					return (c1,c2,c3)
+				getColumnNamesC  = lambda n: map(lambda a,b:b+a,("_min","_max","_resol_min","_resol_max"),["c"+str(n)]*4)
+				feedMyColumnUnit = lambda myName, myUnit: substrate.getColumnByName(myName).feed(u'unit',myUnit)
+				cUnits = setMyUnits(mySpatialFrameType)
+				for i in range(3):
+					for name in getColumnNamesC(i+1): feedMyColumnUnit(name,cUnits[i])
                         </code>
                 </processEarly>
 
