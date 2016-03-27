@@ -56,12 +56,16 @@ set the correct units:
 			coordinate">myC2</mixinPar>
 		<mixinPar key="c3unit" description="Unit of the third spatial
 			coordinate">myC3</mixinPar>
-<!-- mixinPar values are only accessible only from within the code block of either processEarly or processLate. 
-processEarly is called as the final step of element fix-up making it already too late to edit mixinPar, 
-since by that time the columns within the events have already been fixed.
+<!-- mixinPar values are only accessible only from within the code block of 
+either processEarly or processLate. processEarly is called as the final step of element fix-up
+making it already too late to edit mixinPar, since by that time the columns within the events have already been fixed.
 Hence, to edit the column property values such as units, these should be changed not in the mixinPars, but in the 
-columns themselves.
+columns themselves. This is a little bit more bulky then I would like, but it works.
 -->
+<!-- mixinPar cXunit perhaps should be removed completely, the spatial_frame_type is present as a parameter, but
+a parameter for procDef, and not a mixinPar, so at this stage we create a mixinPar of the same name-->
+		<mixinPar key="spatial_frame_type" description="Flavour of the coordinate system,
+			should be the same as for ProcDef" />
                 <processEarly>
                         <setup>
                                 <code>
@@ -71,8 +75,6 @@ columns themselves.
                                 </code>
                         </setup>
                         <code>
-				mySpatialFrameType = "body"		#TEST - this value should be supplied from elsewhere
-				#
 				def setMyUnits(mySpatialFrameType):
 					if   mySpatialFrameType == "celestial":   c1, c2, c3 = "deg (RA)",    "deg (Dec)",   "m (Dist)"
 					elif mySpatialFrameType == "body":        c1, c2, c3 = "deg (Lon)",   "deg (Lat)",   "m (Alt)"	
@@ -83,7 +85,7 @@ columns themselves.
 					return (c1,c2,c3)
 				getColumnNamesC  = lambda n: map(lambda a,b:b+a,("_min","_max","_resol_min","_resol_max"),["c"+str(n)]*4)
 				feedMyColumnUnit = lambda myName, myUnit: substrate.getColumnByName(myName).feed(u'unit',myUnit)
-				cUnits = setMyUnits(mySpatialFrameType)
+				cUnits = setMyUnits(mixinPars["spatial_frame_type"])
 				for i in range(3):
 					for name in getColumnNamesC(i+1): feedMyColumnUnit(name,cUnits[i])
                         </code>
