@@ -56,6 +56,50 @@ set the correct units:
 			coordinate">deg</mixinPar>
 		<mixinPar key="c3unit" description="Unit of the third spatial
 			coordinate">__EMPTY__</mixinPar>
+<!-- mixinPar values are only accessible only from within the code block of 
+either processEarly or processLate. processEarly is called as the final step of element fix-up
+making it already too late to edit mixinPar, since by that time the columns within the events have already been fixed.
+Hence, to edit the column property values such as units, these should be changed not in the mixinPars, but in the 
+columns themselves. This is a little bit more bulky then I would like, but it works.
+-->
+                <processEarly>
+                        <setup>
+                                <code>
+                                        from gavo import base
+                                        from gavo import rscdef
+                                        from gavo.protocols import sdm
+                                        print "setup complete"			#DEBUG
+                                </code>
+                        </setup>
+                        <code>
+				print "processEarly code executing"		#DEBUG
+				def setMyUnits(mySpatialFrameType):
+					if   mySpatialFrameType == "celestial":   c1, c2, c3 = "deg (RA)",    "deg (Dec)",   "m (Dist)"
+					elif mySpatialFrameType == "body":        c1, c2, c3 = "deg (Lon)",   "deg (Lat)",   "m (Alt)"	
+					elif mySpatialFrameType == "cartesian":   c1, c2, c3 = "m (X)",       "m (Y)",       "m (Z)"
+					elif mySpatialFrameType == "cylindrical": c1, c2, c3 = "m (R)",       "deg (Azi)",   "m (Z)"
+					elif mySpatialFrameType == "spherical":   c1, c2, c3 = "m (R)",       "deg (Colat)", "m (Azi)"
+					elif mySpatialFrameType == "healpix":     c1, c2, c3 = "no unit (H)", "no unit (K)", "N/A"
+					return c1,c2,c3
+				print "processEarly functions defined"		#DEBUG
+				#
+				mySpatialFrameType = "celestial"		#TEST - fake feed, assuming homogeneity
+				#
+				#NOTE THAT THIS MAY BE CHALLENGING TO IMPLEMENT
+				# IF SPATIAL FRAME TYPE IS HETEROGENEOUS
+				#  DO WE ALWAYS DEAL WITH THE SAME TYPE 
+				#   OR CAN THAT VARY IN THE SAME TABLE?
+				#
+				c1,c2,c3 = setMyUnits(mySpatialFrameType)
+				print "c1unit = " + c1 + " c2unit = " + c2 +" c3unit = " + c3
+				#
+				#workColumn =  substrate.getColumnByName("c3_min")
+				#workColumn.feed(u'unit',u'abracadabra')
+				#print dir(workColumn)
+				#print workColumn.unit
+                        </code>
+                </processEarly>
+
 <!-- Spectral is now always for em radiation. 
 Particle or mass spectroscopy is described with specific keywords
  
@@ -92,26 +136,19 @@ Particle or mass spectroscopy is described with specific keywords
 				<property key="std">1</property>
 			</column>
 
-<!-- i don't think we need this
+<!-- i don't think we need this-->
 			<column name="accref" original="//products#products.accref"/>
 
--->
-<!--the following parameters are new to v2.0: granule_gid, obs_id-->
-			<column name="granule_gid" type="text" required="True"
-				ucd="meta.id"
-				description="Common to granules of same type (e.g. same map projection, 
-					or geometry data products). Can be alphanum.">
-				<property key="std">1</property>
-			</column>
-			<column name="obs_id" type="text" required="True"
-				ucd="meta.id"
-				description="Associates granules derived from the same data (e.g. 
-					various representations / processing levels). 
-					Can be alphanum., may be the ID of original observation.">
-				<property key="std">1</property>
-			</column>
+<!--However, something breaks at import when above line is commented out
+giving the following error:
 
-<!--END NEW PARAMS granule_uid, granule_gid, obs_id-->
+Failed db query: '
+                        CREATE OR REPLACE RULE cleanupProducts AS ON DELETE TO mypolydd.epn_core 
+                        DO ALSO
+                        DELETE FROM dc.products WHERE accref=OLD.accref
+                '
+-->
+
 <!-- resource_type is not in v2.0
 			<column name="resource_type" type="text" 
 				utype="Epn.ResourceType" ucd="meta.id;class" 
@@ -133,6 +170,22 @@ Particle or mass spectroscopy is described with specific keywords
 				<property key="std">1</property>
 			</column>
 -->
+			<column name="granule_gid" type="text" required="True"
+				ucd="meta.id"
+				description="Common to granules of same type (e.g. same map projection, 
+					or geometry data products). Can be alphanum.">
+				<property key="std">1</property>
+			</column>
+<!--the parameters obs_id is new to v2.0 -->
+			<column name="obs_id" type="text" required="True"
+				ucd="meta.id"
+				description="Associates granules derived from the same data (e.g. 
+					various representations / processing levels). 
+					Can be alphanum., may be the ID of original observation.">
+				<property key="std">1</property>
+			</column>
+<!--END NEW PARAMS granule_uid, granule_gid, obs_id-->
+
 <!-- STOPPED HERE -->
 			<column name="dataproduct_type"	type="text" 
 				ucd="meta.id;class" utype="Epn.dataProductType"
