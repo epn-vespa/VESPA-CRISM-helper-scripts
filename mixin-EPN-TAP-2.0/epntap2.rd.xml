@@ -6,13 +6,13 @@
 			Generates a pair of minimum/maximum column pairs.  You must
 			fill out basename, baseucd, basedescr, unit.
 		</doc>
-		<column name="\basename\+_min"
+		<column name="\basename\+_min" type="Double"
 			ucd="\baseucd;stat.min" unit="\unit"
 			description="\basedescr, lower limit."
 			utype="\baseutype\+_min">
 			<property key="std">1</property>
 		</column>
-		<column name="\basename\+_max"
+		<column name="\basename\+_max" type="Double"
 			ucd="\baseucd;stat.max" unit="\unit"
 			description="\basedescr, upper limit"
 			utype="\baseutype\+_max">
@@ -108,10 +108,20 @@ Particle or mass spectroscopy is described with specific keywords
 			<adql>True</adql>
 			<onDisk>True</onDisk>
 			<meta name="utype">epntap</meta>
-
 			<meta name="info" infoName="SERVICE_PROTOCOL" 
 				infoValue="0.37">EPN-TAP 2.0</meta>
+<!-- i don't think we need this-->
+			<column name="accref" original="//products#products.accref"/>
+<!--However, something breaks at import when above line is commented out
+giving the following error:
 
+Failed db query: '
+                        CREATE OR REPLACE RULE cleanupProducts AS ON DELETE TO mypolydd.epn_core 
+                        DO ALSO
+                        DELETE FROM dc.products WHERE accref=OLD.accref
+                '
+So i'm leaving it as the first column to make it easy to find
+-->
 <!--the parameter _index v1.0 is renamed to granule_uid in v2.0
 			<column name="index_" type="bigint" required="True"
 				ucd="meta.id"
@@ -126,20 +136,6 @@ Particle or mass spectroscopy is described with specific keywords
 					Unique ID in data service, also in v2. Can be alphanum.">
 				<property key="std">1</property>
 			</column>
-
-<!-- i don't think we need this-->
-			<column name="accref" original="//products#products.accref"/>
-
-<!--However, something breaks at import when above line is commented out
-giving the following error:
-
-Failed db query: '
-                        CREATE OR REPLACE RULE cleanupProducts AS ON DELETE TO mypolydd.epn_core 
-                        DO ALSO
-                        DELETE FROM dc.products WHERE accref=OLD.accref
-                '
--->
-
 <!-- resource_type is not in v2.0
 			<column name="resource_type" type="text" 
 				utype="Epn.ResourceType" ucd="meta.id;class" 
@@ -176,10 +172,10 @@ Failed db query: '
 				<property key="std">1</property>
 			</column>
 <!--END NEW PARAMS granule_uid, granule_gid, obs_id-->
-
-<!-- STOPPED HERE -->
+<!--ucd for dataproduct_type was changed from "meta.id;class" to "meta.code.class"-->
+<!--also, what's utype? and what does "et_prod" in the note mean?-->
 			<column name="dataproduct_type"	type="text" 
-				ucd="meta.id;class" utype="Epn.dataProductType"
+				ucd="meta.code.class" utype="Epn.dataProductType"
 				description="The high-level organization of the data product
 					described (image, spectrum, etc)"
 				note="et_prod">
@@ -198,19 +194,17 @@ Failed db query: '
 					<option>sv</option>
 				</values>
 			</column>
-
-
-
 			<column name="target_name"	type="text" 
 				ucd="meta.id;src" utype="Epn.TargetName"
-				description="The name of the target of the observation, or a
-					suitable id.">
+				description="Standard IAU name of target (from a list related 
+					to target class), case sensitive">
 				<property key="std">1</property>
 			</column>
-			
+<!--target_class ucd changed from "src.class" to "meta.code.class;src"
+THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
 			<column name="target_class"	type="text" 
-				ucd="src.class"  utype="Epn.TargetClass"
-				description="Type of target (from a controlled vocabulary)">
+				ucd="meta.code.class;src"  utype="Epn.TargetClass"
+				description="Type of target, from enumerated list">
 				<property key="std">1</property>
 				<values>
 					<option>asteroid</option>
@@ -231,26 +225,31 @@ Failed db query: '
 
 			<!-- time doesn't use not _minmax because ucds and utypes
 			are irregular -->
-			<column name="time_min" 
-				ucd="time.start;obs.exposure" unit="d"
-				utype=" Char.TimeAxis.Coverage.Bounds.Limits.Interval.StartTime"
-				description="Acquisition start time (as JD)"/>
-			<column name="time_max" 
-				ucd="time.stop;obs.exposure" unit="d"
+<!--for time _min _max removed obs.exposure from ucd, relaced unit from "d" to "d (date as JD)"
+added type="double"-->
+			<column name="time_min"		type="double"
+				ucd="time.start;" unit="d (date as JD)"
+				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StartTime"
+				description="Acquisition start time (in JD). UTC measured 
+					at time_origin location (default is observer's frame)"/>
+			<column name="time_max"		type="double"
+				ucd="time.stop;" unit="d (date as JD)"
 				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StopTime"
-				description="Acquisition stop time (as JD)"/>
-			<column name="time_scale"	type="text" 
-				ucd="time.scale" 
-				description="Time scale as defined by the IVOA STC Data model."/>
-
+				description="Acquisition stop time (in JD). UTC measured 
+					at time_origin location (default is observer's frame)"/>
+<!-- time_scale was moved to the end of the table-->
+<!--changed t_* to time_*, also in the stream said that type="Double"-->
+<!--I'm keeping Descriptions for time_sampling_step, time_exp, spectral_range,
+spectral_sampling_step
+the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 			<FEED source="_minmax"
-				basename="t_sampling_step"
+				basename="time_sampling_step"
 				baseucd="time.interval" unit="s"
 				baseutype="Epn.Time.Time_sampling_step"
 				basedescr="Sampling time for measurements of dynamical
 					phenomena"/>
 			<FEED source="_minmax"
-				basename="t_exp"
+				basename="time_exp"
 				baseucd="time.duration;obs.exposure" unit="s"
 				baseutype="Epn.Time.Time_exp"
 				basedescr="Integration time of the measurement"/>
@@ -259,12 +258,15 @@ Failed db query: '
 				baseucd="em.freq" unit="Hz"
 				baseutype="Epn.Spectral.Spectral_range"
 				basedescr="Spectral domain of the data"/>
+<!--STOPPED HERE -->
+<!-- sampling_step renamed to spectral_sampling_step, also baseucd="spect" changed to ="em.freq.step"-->
 			<FEED source="_minmax"
-				basename="sampling_step"
-				baseucd="spect" unit="Hz"
+				basename="spectral_sampling_step"
+				baseucd="em.freq.step" unit="Hz"
 				baseutype="Epn.Spectral.Spectral_sampling_step"
 				basedescr="Separation between the centers of two adjacent
 					filters or channels"/>
+
 			<FEED source="_minmax"
 				basename="spectral_resolution"
 				baseucd="spec.resolution" unit="Hz"
@@ -408,6 +410,9 @@ Failed db query: '
 				<property key="std">1</property>
 			</column>
 
+			<column name="time_scale"	type="text" 
+				ucd="time.scale" 
+				description="Time scale as defined by the IVOA STC Data model."/>
 
 			<param name="processing_level" type="integer"
 				utype="PSR:processingLevel"
