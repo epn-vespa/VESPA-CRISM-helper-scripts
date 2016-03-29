@@ -130,10 +130,14 @@ So i'm leaving it as the first column to make it easy to find
 				<property key="std">1</property>
 			</column>
 -->
+
+<!-- modified the column descriptions. It is a column description that will 
+	appear in the VOTable header description. It should not contain advices 
+	on content, but only description of content. --> 
+
 			<column name="granule_uid" type="text" required="True"
 				ucd="meta.id"
-				description="Internal table row index 
-					Unique ID in data service, also in v2. Can be alphanum.">
+				description="Unique ID of granule in data service">
 				<property key="std">1</property>
 			</column>
 <!-- resource_type is not in v2.0
@@ -159,8 +163,7 @@ So i'm leaving it as the first column to make it easy to find
 -->
 			<column name="granule_gid" type="text" required="True"
 				ucd="meta.id"
-				description="Common to granules of same type (e.g. same map projection, 
-					or geometry data products). Can be alphanum.">
+				description="Group ID of granule in data service.">
 				<property key="std">1</property>
 			</column>
 <!--the parameters obs_id is new to v2.0 -->
@@ -176,8 +179,7 @@ So i'm leaving it as the first column to make it easy to find
 <!--also, what's utype? and what does "et_prod" in the note mean?-->
 			<column name="dataproduct_type"	type="text" 
 				ucd="meta.code.class" utype="Epn.dataProductType"
-				description="The high-level organization of the data product
-					described (image, spectrum, etc)"
+				description="High-level organization of the data product"
 				note="et_prod">
 				<property key="std">1</property>
 				<values>
@@ -196,15 +198,14 @@ So i'm leaving it as the first column to make it easy to find
 			</column>
 			<column name="target_name"	type="text" 
 				ucd="meta.id;src" utype="Epn.TargetName"
-				description="Standard IAU name of target (from a list related 
-					to target class), case sensitive">
+				description="Standard IAU name of target">
 				<property key="std">1</property>
 			</column>
 <!--target_class ucd changed from "src.class" to "meta.code.class;src"
 THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
 			<column name="target_class"	type="text" 
 				ucd="meta.code.class;src"  utype="Epn.TargetClass"
-				description="Type of target, from enumerated list">
+				description="Type of target">
 				<property key="std">1</property>
 				<values>
 					<option>asteroid</option>
@@ -231,13 +232,11 @@ added type="double"-->
 			<column name="time_min"		type="double"
 				ucd="time.start;" unit="d"
 				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StartTime"
-				description="Acquisition start time (in JD). UTC measured 
-					at time_origin location (default is observer's frame)"/>
+				description="Acquisition start time (in JD)."/>
 			<column name="time_max"		type="double"
 				ucd="time.stop;" unit="d"
 				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StopTime"
-				description="Acquisition stop time (in JD). UTC measured 
-					at time_origin location (default is observer's frame)"/>
+				description="Acquisition stop time (in JD)."/>
 <!-- time_scale was moved to the end of the table-->
 <!--changed t_* to time_*, also in the stream said that type="Double"-->
 <!--I'm keeping Descriptions for time_sampling_step, time_exp, spectral_range,
