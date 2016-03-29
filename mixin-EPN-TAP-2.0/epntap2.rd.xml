@@ -227,13 +227,14 @@ THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
 			are irregular -->
 <!--for time _min _max removed obs.exposure from ucd, relaced unit from "d" to "d (date as JD)"
 added type="double"-->
+<!-- unit must be a valid VOUnit character string. Then,it must be "d". -->
 			<column name="time_min"		type="double"
-				ucd="time.start;" unit="d (date as JD)"
+				ucd="time.start;" unit="d"
 				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StartTime"
 				description="Acquisition start time (in JD). UTC measured 
 					at time_origin location (default is observer's frame)"/>
 			<column name="time_max"		type="double"
-				ucd="time.stop;" unit="d (date as JD)"
+				ucd="time.stop;" unit="d"
 				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StopTime"
 				description="Acquisition stop time (in JD). UTC measured 
 					at time_origin location (default is observer's frame)"/>
