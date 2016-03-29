@@ -6,13 +6,13 @@
 			Generates a pair of minimum/maximum column pairs.  You must
 			fill out basename, baseucd, basedescr, unit.
 		</doc>
-		<column name="\basename\+_min" type="Double"
+		<column name="\basename\+_min" type="double precision"
 			ucd="\baseucd;stat.min" unit="\unit"
 			description="\basedescr, lower limit."
 			utype="\baseutype\+_min">
 			<property key="std">1</property>
 		</column>
-		<column name="\basename\+_max" type="Double"
+		<column name="\basename\+_max" type="double precision"
 			ucd="\baseucd;stat.max" unit="\unit"
 			description="\basedescr, upper limit"
 			utype="\baseutype\+_max">
@@ -109,7 +109,7 @@ Particle or mass spectroscopy is described with specific keywords
 			<onDisk>True</onDisk>
 			<meta name="utype">epntap</meta>
 			<meta name="info" infoName="SERVICE_PROTOCOL" 
-				infoValue="2.0">EPN-TAP 2.0</meta>   <!-- changed infoValue attribute-->
+				infoValue="0.37">EPN-TAP 2.0</meta>
 <!-- i don't think we need this-->
 			<column name="accref" original="//products#products.accref"/>
 <!--However, something breaks at import when above line is commented out
@@ -130,14 +130,10 @@ So i'm leaving it as the first column to make it easy to find
 				<property key="std">1</property>
 			</column>
 -->
-
-<!-- modified the column descriptions. It is a column description that will 
-	appear in the VOTable header description. It should not contain advices 
-	on content, but only description of content. --> 
-
 			<column name="granule_uid" type="text" required="True"
 				ucd="meta.id"
-				description="Unique ID of granule in data service">
+				description="Internal table row index 
+					Unique ID in data service, also in v2. Can be alphanum.">
 				<property key="std">1</property>
 			</column>
 <!-- resource_type is not in v2.0
@@ -163,7 +159,8 @@ So i'm leaving it as the first column to make it easy to find
 -->
 			<column name="granule_gid" type="text" required="True"
 				ucd="meta.id"
-				description="Group ID of granule in data service.">
+				description="Common to granules of same type (e.g. same map projection, 
+					or geometry data products). Can be alphanum.">
 				<property key="std">1</property>
 			</column>
 <!--the parameters obs_id is new to v2.0 -->
@@ -179,7 +176,8 @@ So i'm leaving it as the first column to make it easy to find
 <!--also, what's utype? and what does "et_prod" in the note mean?-->
 			<column name="dataproduct_type"	type="text" 
 				ucd="meta.code.class" utype="Epn.dataProductType"
-				description="High-level organization of the data product"
+				description="The high-level organization of the data product
+					described (image, spectrum, etc)"
 				note="et_prod">
 				<property key="std">1</property>
 				<values>
@@ -198,14 +196,15 @@ So i'm leaving it as the first column to make it easy to find
 			</column>
 			<column name="target_name"	type="text" 
 				ucd="meta.id;src" utype="Epn.TargetName"
-				description="Standard IAU name of target">
+				description="Standard IAU name of target (from a list related 
+					to target class), case sensitive">
 				<property key="std">1</property>
 			</column>
 <!--target_class ucd changed from "src.class" to "meta.code.class;src"
 THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
 			<column name="target_class"	type="text" 
 				ucd="meta.code.class;src"  utype="Epn.TargetClass"
-				description="Type of target">
+				description="Type of target, from enumerated list">
 				<property key="std">1</property>
 				<values>
 					<option>asteroid</option>
@@ -228,19 +227,21 @@ THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
 			are irregular -->
 <!--for time _min _max removed obs.exposure from ucd, relaced unit from "d" to "d (date as JD)"
 added type="double"-->
-<!-- unit must be a valid VOUnit character string. Then,it must be "d". -->
-			<column name="time_min"		type="double"
-				ucd="time.start;" unit="d"
+			<column name="time_min"	type="double precision"
+				ucd="time.start;" unit="d (date as JD)"
 				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StartTime"
-				description="Acquisition start time (in JD)."/>
-			<column name="time_max"		type="double"
-				ucd="time.stop;" unit="d"
+				description="Acquisition start time (in JD). UTC measured 
+					at time_origin location (default is observer's frame)"/>
+			<column name="time_max"		type="double precision"
+				ucd="time.stop;" unit="d (date as JD)"
 				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StopTime"
-				description="Acquisition stop time (in JD)."/>
+				description="Acquisition stop time (in JD). UTC measured 
+					at time_origin location (default is observer's frame)"/>
 <!-- time_scale was moved to the end of the table-->
 <!--changed t_* to time_*, also in the stream said that type="Double"-->
 <!--I'm keeping Descriptions for time_sampling_step, time_exp, spectral_range,
-spectral_sampling_step
+spectral_sampling_step, spectral_resolution, c1, c2, c3, c*_resol, 
+incidence, emergence, phase,
 the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 			<FEED source="_minmax"
 				basename="time_sampling_step"
@@ -258,7 +259,6 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 				baseucd="em.freq" unit="Hz"
 				baseutype="Epn.Spectral.Spectral_range"
 				basedescr="Spectral domain of the data"/>
-<!--STOPPED HERE -->
 <!-- sampling_step renamed to spectral_sampling_step, also baseucd="spect" changed to ="em.freq.step"-->
 			<FEED source="_minmax"
 				basename="spectral_sampling_step"
@@ -266,27 +266,37 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 				baseutype="Epn.Spectral.Spectral_sampling_step"
 				basedescr="Separation between the centers of two adjacent
 					filters or channels"/>
-
 			<FEED source="_minmax"
 				basename="spectral_resolution"
 				baseucd="spec.resolution" unit="Hz"
 				baseutype="Epn.Spectral.Spectral_resolution"
 				basedescr="FWHM of the instrument profile"/>
+<!--c1, c2, c3 baseucd changed from "obs.field" to "pos"-->
 			<FEED source="_minmax"
 				basename="c1"
-				baseucd="obs.field" unit="\c1unit"
+				baseucd="pos" unit="\c1unit"
 				baseutype="Epn.Spatial.Spatial_range.c1"
 				basedescr="First coordinate (e.g., longitude, 'x')"/>
 			<FEED source="_minmax"
 				basename="c2"
-				baseucd="obs.field" unit="\c2unit"
+				baseucd="pos" unit="\c2unit"
 				baseutype="Epn.Spatial.Spatial_range.c2"
 				basedescr="Second coordinate (e.g., latitude, 'y')"/>
 			<FEED source="_minmax"
 				basename="c3"
-				baseucd="obs.field" unit="\c3unit"
+				baseucd="pos" unit="\c3unit"
 				baseutype="Epn.Spatial.Spatial_range.c3"
 				basedescr="Third coordinate (e.g., height, 'z')"/>
+<!--added s_region, new to V2.0; 
+I'm not including "instr.fov" in ucd, as it's TBC 
+ucd="obs" is from obsCore-->
+			<column name="s_region"	type="text" 
+				ucd="phys.angArea;obs" unit="(STC-S String)" 
+				description="ObsCore-like footprint, assume 
+					spatial_coordinate_description – 
+					this one TBC (needs another param for GIS interface?)">
+				<property key="std">1</property>
+			</column>
 			<FEED source="_minmax"
 				basename="c1_resol"
 				baseucd="pos.resolution" unit="\c1unit"
@@ -302,51 +312,57 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 				baseucd="pos.resolution" unit="\c3unit"
 				baseutype="Epn.Spatial.Spatial_resolution.c3_resol"
 				basedescr="Resolution in the third coordinate"/>
-
+<!-- changed ucd of "spatial_frame_type" to "meta.code.class;pos.frame" from "pos.frame"--> 
+<!--THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
+<!--THIS SHOULD BE OBTAINED FROM Q.RD, IS IT?-->
 			<column name="spatial_frame_type"	type="text" 
-				ucd="pos.frame"
-				description="Flavor of coordinate system, also defining the 
-					nature of coordinates">
-					<values>
-						<option>celestial</option>
-						<option>body</option>
-						<option>cartesian</option>
-						<option>cylindrical</option>
-						<option>spherical</option>
-						<option>healpix</option>
+				ucd="meta.code.class;pos.frame"
+				description="Flavor of coordinate system, 
+					defines the nature of coordinates. From enumerated list">
+				<property key="std">1</property>
+				<values>
+					<option>celestial</option>
+					<option>body</option>
+					<option>cartesian</option>
+					<option>cylindrical</option>
+					<option>spherical</option>
+					<option>healpix</option>
 				</values>
 			</column>
-			
+<!--changed "incidence" baseucd from "pos.incidenceAng" to "pos.posAng"-->
 			<FEED source="_minmax"
 				basename="incidence"
-				baseucd="pos.incidenceAng" unit="deg"
+				baseucd="pos.posAng" unit="deg"
 				baseutype="Epn.View_angle.Incidence_angle"
 				basedescr="Incidence angle (solar zenithal angle) during
 					data acquisition"/>
+<!--changed "emergence" baseucd from "pos.emergenceAng" to "pos.posAng"-->
 			<FEED source="_minmax"
 				basename="emergence"
-				baseucd="pos.emergenceAng" unit="deg"
+				baseucd="pos.posAng" unit="deg"
 				baseutype="Epn.View_angle.Emergence_angle"
 				basedescr="Emergence angle during data acquisition"/>
+<!--changed "phase" baseucd from "pos.posang" to "pos.posAng"-->
 			<FEED source="_minmax"
 				basename="phase"
-				baseucd="pos.posang" unit="deg"
+				baseucd="pos.posAng" unit="deg"
 				baseutype="Epn.View_angle.Phase_angle"
 				basedescr="Phase angle during data acquisition"/>
-
+<!--change instrument_host_name ucd from "meta.class" to "meta.id;instr.obsty"-->
 			<column name="instrument_host_name"	type="text" 
-				ucd="meta.class"
+				ucd="meta.id;instr.obsty"
 				utype="Provenance.ObsConfig.Facility.name"
-				description="Name of the observatory or spacecraft that
-					performed the measurements.">
+				description="Standard name of the observatory or spacecraft.">
 				<property key="std">1</property>
 			</column>
 			<column name="instrument_name"	type="text" 
 				ucd="meta.id;instr" 
 				utype="Provenance.ObsConfig.Instrument.name"
-				description="Instrument used to acquire the data.">
+				description="Standard name of instrument">
 				<property key="std">1</property>
 			</column>
+<!--Did not change the description here. Are multiple entries still separated by space characters 
+in V2.0?-->
 			<column name="measurement_type"	type="text" 
 				ucd="meta.ucd" 
 				utype="Epn.Measurement_type"
@@ -354,12 +370,53 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 					separated by space characters.">
 				<property key="std">1</property>
 			</column>
+<!--processing_level CODMAC calibration level in v1 TO BE replaced 
+with enumerated list of PDS4 values in v2:
 
-			<column name="reference"	type="text" 
-				ucd="meta.bib" 
-				description="A bibcode or URL of a publication about the data.">
+Telemetry
+Raw
+Partially Processed
+Calibrated
+Derived (includes ancillary/calibration data)
+
+Most EPN_TAP data services are expected to include Calibrated or Derived data. Other values would therefore only flag associated products.
+
+There doesn't seem to be a column for this, I'm creating a new one:
+-->
+			<column name="processing_level" type="integer"
+				ucd="meta.code;obs.calib" 
+				description="Calibration level coded according to PDS4 values."
+				note="et_cal">
+				<property key="std">\processing_level</property>
+			</column>
+<!--columns creation_date, modification_date, release_date are new-->
+			<column name="creation_date"	type="date" 
+				ucd="time.creation" 	unit="(ISO-8601 String)"
+				description="Date of first entry of this granule">
 				<property key="std">1</property>
 			</column>
+			<column name="modification_date"	type="date" 
+				ucd="time.update" 		unit="(ISO-8601 String)"
+				description="Date of last modification (used to handle mirroring)">
+				<property key="std">1</property>
+			</column>
+			<column name="release_date" 	type="date" 
+				ucd="time.release" 	unit="(ISO-8601 String)"
+				description="Start of public access period">
+				<property key="std">1</property>
+			</column>
+
+<!--STOPPED HERE -->
+<!-- in service_title changed ucd from "meta.ref" to "meta.title" -->
+<!-- Probably needs to be mandatory for cross-reference and mulitple db processing - nickname needed -->
+			<column name="service_title"	type="text" 
+				ucd="meta.title" 
+				description="The title of the data service producing this row. 	
+					(will be used to handle multiservice results)">
+				<property key="std">1</property>
+			</column>
+
+<!-- i think the rest of the columns are optional, hence could be commented out
 
 			<column name="publisher"	type="text" 
 				ucd="meta.ref" 
@@ -367,11 +424,7 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 					the data service used.">
 				<property key="std">1</property>
 			</column>
-			<column name="service_title"	type="text" 
-				ucd="meta.ref" 
-				description="The title of the data service producing this row.">
-				<property key="std">1</property>
-			</column>
+
 			<column name="collection_id" type="text"
 				ucd="meta.id"
 				description="Identifier of the collection this piece of data
@@ -413,7 +466,12 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 			<column name="time_scale"	type="text" 
 				ucd="time.scale" 
 				description="Time scale as defined by the IVOA STC Data model."/>
-
+			<column name="reference"	type="text" 
+				ucd="meta.bib" 
+				description="A bibcode or URL of a publication about the data.">
+				<property key="std">1</property>
+			</column>
+-->
 			<param name="processing_level" type="integer"
 				utype="PSR:processingLevel"
 				ucd="meta.class.qual" 
@@ -465,24 +523,42 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 					list of summit coordinates defining a vector, e.g., vector
 					information from a GIS, spatial footprints...
 			</meta>
+<!-- replaced processing_level CODMAC calibration level in v1
+with enumerated list of PDS4 values in v2:
 
-			<meta name="note" tag="et_cal">
 				CODMAC levels are:
+				1  Raw (UDR in PDS)
+				2  Edited (EDR in PDS, NASA level 0)
+				3  Calibrated (RDR in PDS, NASA Level 1A)
+				4  Resampled (REFDR in PDS, NASA Level 1B)
+				5  Derived (DDR in PDS, NASA Level 3)
+				6  Ancillary (ANCDR in PDS)
 
-				1 -- Raw (UDR in PDS)
+Telemetry
+Raw
+Partially Processed
+Calibrated
+Derived (includes ancillary/calibration data)
 
-				2 -- Edited (EDR in PDS, NASA level 0)
+Most EPN_TAP data services are expected to include Calibrated or Derived data. Other values would therefore only flag associated products.
 
-				3 -- Calibrated (RDR in PDS, NASA Level 1A)
+There doesn't seem to be a column for this, I'm creating a new one:
+-->
+			<meta name="note" tag="et_cal">
+				PDS4 levels are:
 
-				4 -- Resampled (REFDR in PDS, NASA Level 1B)
+				1 -- Telemetry
 
-				5 -- Derived (DDR in PDS, NASA Level 3)
+				2 -- Raw
 
-				6 -- Ancillary (ANCDR in PDS)
+				3 -- Partially Processed
+
+				4 -- Calibrated
+
+				5 -- Derived
 			</meta>
 		</events>
-
+<!--STOPPED HERE -->
 		<FEED source="//products#hackProductsData"/>
 	</mixinDef>
 
