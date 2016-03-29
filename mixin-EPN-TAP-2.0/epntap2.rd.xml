@@ -109,7 +109,7 @@ Particle or mass spectroscopy is described with specific keywords
 			<onDisk>True</onDisk>
 			<meta name="utype">epntap</meta>
 			<meta name="info" infoName="SERVICE_PROTOCOL" 
-				infoValue="0.37">EPN-TAP 2.0</meta>
+				infoValue="2.0">EPN-TAP 2.0</meta>   <!-- changed infoValue attribute-->
 <!-- i don't think we need this-->
 			<column name="accref" original="//products#products.accref"/>
 <!--However, something breaks at import when above line is commented out
