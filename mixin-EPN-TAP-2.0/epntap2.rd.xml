@@ -173,7 +173,7 @@ So i'm leaving it as the first column to make it easy to find
 			</column>
 <!--END NEW PARAMS granule_uid, granule_gid, obs_id-->
 <!--ucd for dataproduct_type was changed from "meta.id;class" to "meta.code.class"-->
-<!--also, what's utype? and what does "et_prod" in the note mean?-->
+<!--also, what's utype? -->
 			<column name="dataproduct_type"	type="text" 
 				ucd="meta.code.class" utype="Epn.dataProductType"
 				description="The high-level organization of the data product
