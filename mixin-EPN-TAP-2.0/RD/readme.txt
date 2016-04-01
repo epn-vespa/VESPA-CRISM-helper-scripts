@@ -1,5 +1,7 @@
-A test dataset is now online at as TAP service for TOPCAT at
+A test dataset is now online at
 http://epn1.epn-vespa.jacobs-university.de/__system__/tap/run/tap
+as TAP service epn_vespa_crism.epn_core
+
 
 Note:
 When writing resource descriptor it may be necessary to validate data for imports 
