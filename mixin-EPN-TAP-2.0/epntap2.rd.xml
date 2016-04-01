@@ -173,7 +173,11 @@ So i'm leaving it as the first column to make it easy to find
 			</column>
 <!--END NEW PARAMS granule_uid, granule_gid, obs_id-->
 <!--ucd for dataproduct_type was changed from "meta.id;class" to "meta.code.class"-->
-<!--also, what's utype? -->
+<!--
+Utype can be used as a reference to a data model, like the EPNcore data model or other IVOA data models 
+(VOUnit, Characterization, STC...). 
+We will have to think of it at some point, but it is not crucial for now.
+-->
 			<column name="dataproduct_type"	type="text" 
 				ucd="meta.code.class" utype="Epn.dataProductType"
 				description="The high-level organization of the data product
@@ -668,6 +672,10 @@ There doesn't seem to be a column for this, I'm creating a new one:
 				del p
 			</code>
 		</setup>
+		<!-- uncomment this if you want accref generated from input table location
+and if you want access_url to point to data which is on your server.
+My service simply provides a table of footprints, the actual images are on a different server, 
+to which i point in q.rd, hence i commented this out
 		<code>
 			l = locals()
 			for key in EPNTAP_KEYS:
@@ -680,5 +688,6 @@ There doesn't seem to be a column for this, I'm creating a new one:
 				vars["preview_url"] = @prodtblPreview
 			vars["accref"] = vars["prodtblAccref"]
 		</code>
+		-->
 	</procDef>
 </resource>
