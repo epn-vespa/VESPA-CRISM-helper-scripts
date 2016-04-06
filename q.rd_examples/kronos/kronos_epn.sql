@@ -12,7 +12,7 @@ CREATE SCHEMA kronos;
 
 CREATE EXTENSION mysql_fdw SCHEMA kronos;
 CREATE SERVER typhon2_server FOREIGN DATA WRAPPER mysql_fdw OPTIONS (host 'typhon2.obspm.fr', port '3306');
-CREATE USER MAPPING FOR postgres SERVER typhon2_server OPTIONS (username 'kronos', password 'RPWS#kronos');
+CREATE USER MAPPING FOR postgres SERVER typhon2_server OPTIONS (username 'kronos', password '############');
 
 -- Creating MySQL Foreign Table from Typhon2:kronos
 
@@ -43,7 +43,7 @@ SERVER typhon2_server
 
 CREATE EXTENSION postgres_fdw SCHEMA kronos;
 CREATE SERVER kronos_server FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'kronos', dbname 'kronosdb', port '5432');
-CREATE USER MAPPING FOR postgres SERVER kronos_server OPTIONS (user 'hchain', password 'use a password in the future');
+CREATE USER MAPPING FOR postgres SERVER kronos_server OPTIONS (user 'hchain', password '############');
 
 -- Creating PostgresQL Foreign Table from Kronos:n0_epn
 
