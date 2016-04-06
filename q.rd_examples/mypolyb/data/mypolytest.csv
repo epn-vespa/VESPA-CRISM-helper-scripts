@@ -1,0 +1,6 @@
+id,s_region,feature_name
+0,Polygon 10.0 -10.5 20.0 20.5 30.0 30.5,LALALA
+1,Polygon 0.174533 0.174533 0.174533 0.2000 0.200 0.174533,abc
+2,Polygon 10 30 45 45 80 60,def
+3,Polygon 10 -20 45 5 80 10,hij
+4,Polygon 270 -10 270 30 290 10,pol
