@@ -27,3 +27,6 @@ This can be acieved by doing something similar to
 which would output -9999 into field c1_min on rows with corrupted data, running 
 SELECT * FROM myschema.epn_core WHERE c1_min=-9999
 in TOPCAT will pick out these rows.
+
+
+Note: VO resource type meta for EPN-TAP should always be catalog.
