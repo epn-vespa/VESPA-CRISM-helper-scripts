@@ -6,7 +6,7 @@ out (or delete them) -->
         <meta name="description">
                 ___
         </meta>
-        <meta name="creationDate">March 30th, 2016</meta>
+        <meta name="creationDate">2016-03-30T00:00:00</meta>
         <meta name="subject">___</meta>
         <meta name="subject">__</meta>
 
