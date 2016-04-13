@@ -8,7 +8,7 @@
 CREATE OR REPLACE VIEW iks.corrected AS SELECT
 	CAST(rootname || 'C' AS TEXT)				 AS granule_uid,
 	TEXT 'corrected'							 AS granule_gid,
-		CAST(rootname AS TEXT)					 AS obs_id,
+	CAST(rootname AS TEXT)						 AS obs_id,
 	TEXT 'sp'  									AS dataproduct_type,
 	TEXT '1P'	 								AS target_name,
 	CAST(target AS TEXT)						AS alt_target_name,

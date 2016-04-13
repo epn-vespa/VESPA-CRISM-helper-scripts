@@ -25,7 +25,7 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
 <table id="epn_core" onDisk="True" adql="True">
     <meta name="info" infoName="SERVICE_PROTOCOL" infoValue="2.0"> EPN-TAP </meta>
     <meta name="description"> IR spectroscopy of comet Halley </meta>
-    <meta name="referenceURL">http://lesia.obspm.fr </meta>
+    <meta name="referenceURL">http://lesia.obspm.fr</meta>
     <meta name="utype">EPN-TAP 2.0</meta>
     <property key="supportsModel">EPN-TAP 2.0</property>
     <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore-2.0</property>
@@ -195,7 +195,7 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
       description="Name root of the data file"/>
     <column name="bib_reference"  type="text"
       ucd="meta.bib"
-      description="Extra: bibliograpic reference"/>
+      description="Bibliograpic reference"/>
     <column name="creation_date"  type="date"
       ucd="time.creation"
       description="Creation date of entry"/>

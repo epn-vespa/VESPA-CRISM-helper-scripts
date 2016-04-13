@@ -106,7 +106,7 @@ If IKSparam(i).Filename EQ 'iksfinal.tab' then begin ; long wvl spectrum
 	 ; @Cor2014: added ref for published spectra
 	IKSparam(i).ref = 'http://cdsads.u-strasbg.fr/abs/1988Icar...76..404C'
 endif
-;IKSparam(i).phase_ang = 100.	; ***** @Corr2015, very rough approsimation *****
+;IKSparam(i).phase_ang = 100.	; ***** @Corr2015, very rough approximation *****
 
 ; result for 101 individual spectra, from phaseiks.pro (interpolated from image timings) 
 ; last 2 writen manually (composite spectra)
@@ -159,7 +159,7 @@ cstsql= $
 '-- Stephane Erard, LESIA/PADC, '+systime() +' (written by IDL routine dbiks.pro)',$
 '-- Can be used as a template for other light services ',$
 ' ',$
-'-- DATABASE "IKS", must be created first;       ',$
+'-- With no DaCHS, database "IKS", must be created first;       ',$
 ' ',$
 '-- Name: '+ Nschema+'; Type: SCHEMA; Schema: '+ Nschema+'; Owner: postgres',$
 '',$
