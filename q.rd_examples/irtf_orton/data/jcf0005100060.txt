@@ -1,0 +1,132 @@
+SIMPLE  =                    T / Written by IDL:   3-Mar-2016 10:51:08.00
+BITPIX  =                  -64 / IEEE double precision floating point
+NAXIS   =                    2 / NUMBER OF AXIS
+NAXIS1  =                  566 / PIXELS ON 1st MOST VARYING AXIS
+NAXIS2  =                  538 / PIXELS ON 2nd MOST VARYING AXIS
+BZERO   =              0.00000 / Offset factor for data
+DATAMIN =               -519.0 / MIN DATA VALUE IN FILE
+DATAMAX =              59289.0 / MAX DATA VALUE IN FILE
+DATAMEAN=                38.64 / MEAN DATA VALUE IN FILE
+DIVISOR =                   21 / Normalization value
+ORIGIN  = 'Institute for Astronomy'
+TELESCOP= 'NASA IRTF'
+INSTRUME= 'SpeX Imager'
+PROG_ID =           '2016A999' / IRTF Program ID YYYSNNN
+OBSERVER= 'your name'
+OBJECT  = 'Jupiter'
+COMMENT = 'FITS comment'
+IRAFNAME= 'jup-00051.a.fits'
+BEAM    =                  'A' / Object(A) or sky(B)
+COMMENT = Using PC time for DATE, TIME_OBS
+COMMENT = iarc timestamp is 1970-01-01 00:00:00.000000
+DATE_OBS=         '2016-03-03' / DATE OF OBS IN UTC
+TIME_OBS= '10:46:37.82422'     / Mean UT Time of Observation
+MJD_OBS =     57450.4483471862 / MJD from DATE_OBS+TIME_OBS
+DATE_PC =         '2016-03-03' / Date when PC started GO in UTC
+TIME_PC =    '10:45:37.196904' / Time when PC started GO in UTC
+CAMMODE =                    0 / CameraMode is Basic
+ITIME   =               9.8810 / Integration time in seconds
+CO_ADDS =                    1 / Integration co-added
+CYCLES  =                    1 / Number of cycles
+DATATYPE= 'REAL*8  '           / FITS/SDAS version of BITPIX
+ARRAY   =          0,0,512,512 / x,y,wid,hgt of data sub-arrays
+BEAMPAT =                    2 / Beam Pattern
+RO_MODE =                    1 / ReadOut Mode is DOUBLE
+NDR     =                   21 / Number of Non-Destructive Reads
+TABLE_SE=             0.241000 / sec to clock out array
+QTH_LAMP=                  Off / Quart 0.8-2.5 10W lamp
+INC_LAMP=                  Off / Inc 0.8-2.5 0.1W lamp
+IR_LAMP =                  Off / IR 1.9-5.5 lamp
+ARG_LAMP=                  Off / AR 0.8-3.5 Argon lamp
+CALMIR  =                  Out / menu=0,dpos=252000
+DIT     =                 open / menu=2,dpos=160000
+OSF     =                 Open / menu=0,dpos=21333
+ROTATOR =                89.22 / Rotator_Mechanical_Angle; dpos=356900
+POSANGLE=               360.00 / Sky_Position_Angle
+SLIT    =               Mirror / menu=1,dpos=57000
+GRAT    =                Prism / menu=1,dpos=360800
+GFLT    =                3.417 / menu=13,dpos=576000
+AFOC    =                    0 / dpos=0,volts= 2.50
+PLATE_SC=             0.112986 /-DRM by bergmanw 03/03/16
+FLTZP   =                 0.00 / GFlt Filter Zero Point
+EXT_COF =                0.000 / GFlt Extinction coefficient
+TC335A  = '36.99,74.17,37.00,Med,37.00%' / Bigdog ctempK,stempK,SetPt,Heater
+TC335B  = '30.01,12.86,30.00,Med,23.50%' / Guider ctempK,stempK,SetPt,Heater
+TC218   = ' 43.8  17.3  74.5  74.1  74.9  77.8  81.0 277.4'
+CAMERA  =                 iarc / Camera: iarc, sim
+VOFFSET =                    0 / IARC preamp offset in counts
+VDD     =                    0 / IARC VDD in millivolts
+VDDA    =                    0 / IARC VDDA in millivolts
+VBG     =                    0 / IARC VBG in millivolts
+VBP     =                    0 / IARC VBP in millivolts
+VDSUB   =                    0 / IARC VDBUS in millivolts
+VRST    =                    0 / IARC VRST in millivolts
+IA_GAIN =                    1 / IARC n_gain_flag, 0=LOW 1=HIGH
+IA_ROM  =                    1 / IARC ReadOut Mode 1 = DOUBLE.
+IA_INDR =                   20 / IARC itime_ndrs
+IA_NDR  =                   21 / IARC n_ndr_count
+IA_COADD=                    1 / IARC n_coadd_count
+IA_PX_TM=                    3 / IARC n_pixel_time 3 is 3 us/px.
+TCSSYS  =                 tcs3 / TCS System Parameter
+TCS_OK  =                    1 / 0=TCS_comm_ERR; 1=TCS_comm_OK
+TCS_UTC =     57450.4483472226 / TCS UTC MJD. UTC=2016-03-03 10:45:37.200
+TCS_RA  =          11:20:51.70 / TCS Right Ascension, FK5 J2000
+TCS_DEC =           05:48:43.9 / TCS Declination FK5 J2000
+TCS_HA  =         -00:11:24.92 / TCS Observed Hour Angle
+TCS_AZ  =               168.49 / TCS Observed Azimuth, degrees
+TCS_EL  =                75.63 / TCS Observed Elevation, degrees
+TCS_NSRA=              -0.0051 / TCS non-sidereal rate RA, as/s
+TCS_NSDE=               0.0022 / TCS non-sidereal rate Dec, as/s
+TCS_PA  =               -10.88 / TCS Parallactic Angle, degrees
+TCS_AM  =                1.032 / TCS Airmass
+TCS_OBJ =      'Jupiter_(599)' / TCS object name
+TCS_MAG =                 -2.5 / TCS object magnitude
+TCS_SEC =                    1 / TCS secondary:0=chopper;1=hexapod
+TCS_FOC =                0.220 / TCS actual focus
+TCS_AIRT=                  4.9 / TCS outside air temp, DegC
+TCS_HUM =                 25.8 / TCS humidity, 0-100
+TCS_WSP =                 13.6 / TCS wind speed, mph
+TCS_WDIR=                285.0 / TCS wind direction, deg
+TCS_TD6 =                  3.7 / TCS Dome TD6, degC
+O_BZERO =                32248 / Original BZERO Value
+PDDATA  = '        '           /TEMPORARY HOLDER ONLY!
+ORIGNAME= 'jup-00051.a.fits.gz' /-DRM by go 02/05/16
+CCW     =             -360.000 /
+HLAT    =        1.20195000000 /Heliocentric Latitude, Degrees -DRM by go 02/05/
+HLON    =        167.696000000 /Heliocentric Longitude, Degrees -DRM by go 02/05
+RVEL    =        2.87751000000 /Radial velocity, km/s-DRM by go 02/05/16
+DISTOBJ =        4.43979000000 /Distance from Earth, AU   -DRM by go 02/05/16
+HDIST   =        5.42704000000 /Distance from Sun, AU -DRM by go 02/05/16
+RA      = '11:20:51.59'        / Ephemeris RA -DRM by go 02/05/16
+DEC     = '05:48:40.42'        / Ephemeris DEC -DRM by go 02/05/16
+LCMIII  =              93.4074 / Mean System III Longitude
+LCMII   =              80.7868 / Mean System II Longitude
+LCMI    =              166.777 / Mean System I Longitude
+HA      = '23:52:01'           / Hour Angle in hours,degrees,min-DRM by go 02/05
+AIRMASS =        1.03125490438 / Airmass -DRM by go 02/05/16
+HISTORY Expression applied : _x(i)==_x(i)-_x(i+1); /loop, step=2-DRM by bergmanw
+HISTORY  03/03/16
+HISTORY Value of i : 2
+HISTORY _x(2) is /prvt/cirs10/spex/2016mar3/3.42/jupiter/wjup-00051.a.fits.gz
+HISTORY _x(3) is /prvt/cirs10/spex/2016mar3/3.42/jupiter/wjup-00052.b.fits.gz
+HISTORY Expression applied : _x(i)==_x(i)/_x(0); /loop-DRM by bergmanw 03/03/16
+HISTORY Value of i : 2
+HISTORY _x(0) is /prvt/cirs10/spex/flat3.42_2016jan26.gz
+HISTORY _x(2) is /prvt/cirs10/spex/2016mar3/3.42/jupiter/wjup-00051.a.fits.gz
+HISTORY Expression applied : _x(i)==exp_despike(_x(i),nsigma=9); /loop-DRM by be
+HISTORY rgmanw 03/03/16
+HISTORY Value of i : 2
+HISTORY _x(2) is /prvt/cirs10/spex/2016mar3/3.42/jupiter/wjup-00051.a.fits.gz
+HISTORY Coadd of the following images : -DRM by bergmanw 03/03/16
+HISTORY wjup-00051.a.fits.gz; shifted by (28,24)
+HISTORY wjup-00053.a.fits.gz; shifted by (0,26)
+HISTORY wjup-00055.a.fits.gz; shifted by (54,25)
+HISTORY wjup-00057.a.fits.gz; shifted by (27,0)
+HISTORY Coadded using Astro Correlate method -DRM by bergmanw 03/03/16
+HISTORY Image flipped vertically -DRM by bergmanw 03/03/16
+CX      =              339.000 /-DRM by bergmanw 03/03/16
+CY      =              264.500 /-DRM by bergmanw 03/03/16
+PEAKCNTS=            9364061.6 /-DRM by bergmanw 03/03/16  Total counts in image
+AVECNTS =            67.030749 /-DRM by bergmanw 03/03/16  Average counts in ima
+SIGBG   =            153.24603 /-DRM by bergmanw 03/03/16  Background sigma
+_BZERO  =            86.484167 /-DRM by bergmanw 03/03/16
