@@ -1,3 +1,3 @@
 # DaCHS-for-VESPA
-Current task is to build a mixin for EPN-TAP 2.0
+Current task is to build a wizard to make q.rd from scratch with user-friendly webform interface.
 
