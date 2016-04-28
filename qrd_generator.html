@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script src=""></script>
+  <script src="jquery-1.12.3.min.js"></script>
+<!-- <link rel="stylesheet" href=".css"> -->
+<body>
+<div>
+<h1>Metadata for the resource:</h1>
+<table>
+<tr><td>Schema name: </td><td><input id="mSchema"></input></td></tr>
+<tr><td>Title: </td><td><input id="mTitle"></input></td></tr>
+<tr><td>Description: </td><td><input id="mDescription"></input></td></tr>
+<tr><td>Creation date: </td><td><input id="mCreationDate"></input> (e.g. 2016-03-30T00:00:00)</td></tr>
+<tr><td>Subject: </td><td><input id="mSubject"></input></td></tr>
+<tr><td>Creator name: </td><td><input id="mCreatorName"></input></td></tr>
+<tr><td>Contact name: </td><td><input id="mContactName"></input></td></tr>
+<tr><td>Contact email: </td><td><input id="mContactEmail"></input></td></tr>
+<tr><td>Instrument: </td><td><input id="mInstrument"></input></td></tr>
+<tr><td>Facility: </td><td><input id="mFacility"></input></td></tr>
+<tr><td>Source: </td><td><input id="mSource"></input></td></tr>
+<tr><td>Content level: </td><td><input id="mContentLevel"></input></td></tr>
+<tr><td>Waveband (Mark all that apply)</td><td>
+<input type="checkbox" name="mWbRadio">Radio<br />
+<input type="checkbox" name="mWbMillimeter">Millimeter<br />
+<input type="checkbox" name="mWbInfrared">Infrared<br />
+<input type="checkbox" name="WbOptical">Optical<br />
+<input type="checkbox" name="WbUV">UV<br />
+<input type="checkbox" name="WbEUV">EUV<br />
+<input type="checkbox" name="WbXRay">X-ray<br />
+<input type="checkbox" name="WbGammaRay">Gamma-ray</td></tr>
+<tr><td>Profile:</td><td><input id="mProfile"></input><br/></td></tr>
+</table>
+
+<h1>Mandatory parameters:</h1>
+<p><i>This may include python expressions. <br />
+To map input directly to output choose "MAP" <br />
+To use expressions choose "VAR"<br />
+For null values choose "NUL" 
+</i></p>
+<h2></h2>
+<p><i>NUL values not, values required</i></p>
+<table>
+<tr>
+<td><select id="rVM_granule_uid">
+<option>MAP</option><option>VAR</option></select></td>
+<td>granule_uid: </td>
+<td><input id="r_granule_uid"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_granule_gid">
+<option>MAP</option><option>VAR</option></select></td>
+<td>granule_gid: </td>
+<td><input id="r_granule_gid"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_obs_id">
+<option>MAP</option><option>VAR</option></select></td>
+<td>obs_id: </td>
+<td><input id="r_obs_id"></input></td>
+</tr>
+</table>
+
+
+
+<h2>Data description</h2>
+<table>
+<tr>
+<td><select id="rVM_dataproduct_type">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>DataProduct Type: </td>
+<td><input id="r_dataproduct_type"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_measurement_type">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Measurement Type: </td>
+<td><input id="r_measurement_type"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_processing_level">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Processing Level: </td>
+<td><input id="r_processing_level"></input></td>
+</tr>
+<tr>
+</table>
+<h2>Target descripion</h2>
+<table>
+<tr>
+<td><select id="rVM_target_name">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Target Name: </td>
+<td><input id="r_target_name"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_target_class">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Target Class: </td>
+<td><input id="r_target_class"></input></td>
+</tr>
+</table>
+<h2>Axes</h2>
+<table>
+<tr>
+<td><select id="rVM_time_range">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Time Range: </td>
+<td><input id="r_time_range"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_time_sampling_step">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Time Sampling Step: </td>
+<td><input id="r_time_sampling_step"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_time_exp">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>time_exp: </td>
+<td><input id="r_time_exp"></input></td>
+</tr>
+<tr><td><br /></td></tr>
+<tr>
+<td><select id="rVM_spectral_range_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Spectral Range (minimum): </td>
+<td><input id="r_spectral_range_min"></td>
+</tr>
+<td><select id="rVM_spectral_range_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Spectral Range (maximum): </td>
+<td><input id="r_spectral_range_max"></td>
+</tr>
+<tr>
+<td><select id="rVM_spectral_sampling_step">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Spectral Sampling Step: </td>
+<td><input id="r_spectral_sampling_step"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_spectral_resolution">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Spectral Resolution: </td>
+<td><input id="r_spectral_resolution"></input></td>
+</tr>
+<tr><td colspan="2"><p><b>Spatial Coordinates:</b></p></td></tr>
+<tr>
+<td><select id="rVM_c1_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C1 minimum: </td>
+<td><input id="r_c1_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c1_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C1 maximum: </td>
+<td><input id="r_c1_max"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c1_resol_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C1 Spatial Resolution minimum: </td>
+<td><input id="r_c1_resol_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c1_resol_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C1 Spatial Resolution maximum: </td>
+<td><input id="r_c1_resol_max"></input></td>
+</tr>
+<tr><td><br /></td></tr>
+<tr>
+<td><select id="rVM_c2_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C2 minimum: </td>
+<td><input id="r_c2_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c2_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C2 maximum: </td>
+<td><input id="r_c2_max"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c2_resol_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C2 Spatial Resolution minimum: </td>
+<td><input id="r_c2_resol_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c2_resol_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C2 Spatial Resolution maximum: </td>
+<td><input id="r_c2_resol_max"></input></td>
+</tr>
+<tr><td><br /></td></tr>
+<tr>
+<td><select id="rVM_c3_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C3 minimum: </td>
+<td><input id="r_c3_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c3_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C3 maximum: </td>
+<td><input id="r_c3_max"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c3_resol_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C3 Spatial Resolution minimum: </td>
+<td><input id="r_c3_resol_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_c3_resol_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>C3 Spatial Resolution maximum: </td>
+<td><input id="r_c3_resol_max"></input></td>
+</tr>
+<tr><td><br /></td></tr>
+<tr>
+<td><select id="rVM_spatial_frame_type">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Spatial Frame Type: </td>
+<td>
+<select id="r_spatial_frame_type">
+<option>celestial</option>
+<option>body</option>
+<option>cartesian</option>
+<option>cylindrical</option>
+<option>spherical</option>
+<option>healpix</option>
+</select>
+</td>
+</tr>
+<tr><td colspan="2"><p><b>Angles:</b></p></td></tr>
+<tr>
+<td><select id="rVM_incidence_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Incidence Angle minimum: </td>
+<td><input id="r_incidence_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_incidence_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Incidence Angle maximum: </td>
+<td><input id="r_incidence_max"></input></td>
+</tr>
+<tr><td><br /></td></tr>
+<tr>
+<td><select id="rVM_emergence_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Emergence Angle minimum: </td>
+<td><input id="r_emergence_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_emergence_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Emergence Angle maximum: </td>
+<td><input id="r_emergence_max"></input></td>
+</tr>
+<tr><td><br /></td></tr>
+<tr>
+<td><select id="rVM_phase_min">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Phase Angle minimum: </td>
+<td><input id="r_phase_min"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_phase_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Phase Angle maximum: </td>
+<td><input id="r_phase_max"></input></td>
+</tr>
+</table>
+<h1>Data origin</h1>
+<table>
+<tr>
+<td><select id="rVM_instrument_host_name">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Instrument_Host_Name: </td>
+<td><input id="r_instrument_host_name"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_instrument_name">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Instrument_Name: </td>
+<td><input id="r_instrument_name"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_instrument_name">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Instrument_Name: </td>
+<td><input id="r_instrument_name"></input></td>
+</tr>
+</table>
+<h1>Granule call-back info</h1>
+<table>
+<tr>
+<td><select id="rVM_service_title">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Service title: </td>
+<td><input id="r_service_title"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_creation_date">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Creation date: </td>
+<td><input id="r_creation_date"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_modification_date">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Modification date: </td>
+<td><input id="r_modification_date"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_release_date">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Release date: </td>
+<td><input id="r_release_date"></input></td>
+</tr>
+</table>
+<p>
+<button id="btnGenerate">generate q.rd</button>
+</p>
+<div><PRE  id="output"> javascript outputs here </PRE></div>
+
+
+<script>
+$(document).ready(function(e){
+$("#btnGenerate").click( function(){
+chr=String.fromCharCode;
+urResourceName = $('#mSchema').val();
+myStr = "\<resource schema=\"" + $('#mSchema').val() + "\"\>" + chr(13)
+	+ chr(9) + "\<meta name=\"title\"\>"         + $('#mTitle').val()        + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"description\"\>"   + $('#mDescription').val()  + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"creationDate\"\>"  + $('#mCreationDate').val() + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"subject\"\>"       + $('#mSubject').val()      + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"creator.name\"\>"  + $('#mCreatorName').val()  + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"contact.name\"\>"  + $('#mContactName').val()  + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"contact.email\"\>" + $('#mContactEmail').val() + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"instrument\"\>"    + $('#mInstrument').val()   + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"facility\"\>"      + $('#mFacility').val()     + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"source\"\>"        + $('#mSource').val()       + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"contentLevel\"\>"  + $('#mContentLevel').val() + "\</meta\>"  + chr(13)
+	+ chr(9) + "\<meta name=\"type\"\>"          + "Catalog"                 + "\</meta\>"  + chr(13);
+
+ document.getElementById("output").innerText = myStr;
+});
+});
+</script>
+</body>
+</html>
+<!--
+
+<tr>
+<td><select id="rVM_">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>: </td>
+<td><input id="r_"></input></td>
+</tr>
+
+-->
