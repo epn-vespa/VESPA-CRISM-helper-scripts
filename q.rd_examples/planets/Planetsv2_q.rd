@@ -4,7 +4,7 @@
   <meta name="title">Characteristics of Planets (demo)</meta>
   <meta name="creationDate">2016-04-23T23:42:00Z</meta>
   <meta name="description" format="plain">
-Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IAU report, 2011CeMDA.109..101A) [radii] and Cox et al 2000 (Allen's astrophysical quantities, 2000asqu.book.....C) [masses, heliocentric distances, and rotation periods]. </meta>
+Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IAU report, 2011CeMDA.109..101A) [radii] and Cox et al 2000 (Allen s astrophysical quantities, 2000asqu.book.....C) [masses, heliocentric distances, and rotation periods]. </meta>
   <meta name="copyright">LESIA-Obs Paris</meta>
   <meta name="creator.name">Stephane Erard</meta>
   <meta name="publiser">Paris Astronomical Data Centre - LESIA</meta>
