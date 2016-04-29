@@ -1,9 +1,9 @@
  
 -- SQL procedure to define the IKS service datatable  
--- Stephane Erard, LESIA/PADC, Sat Mar 26 09:02:35 2016 (written by IDL routine dbiks.pro)
+-- Stephane Erard, LESIA/PADC, Thu Apr 28 18:59:18 2016 (written by IDL routine dbiks.pro)
 -- Can be used as a template for other light services 
  
--- DATABASE "IKS", must be created first;       
+-- With no DaCHS, database "IKS", must be created first;       
  
 -- Name: iks; Type: SCHEMA; Schema: iks; Owner: postgres
 

@@ -22,6 +22,7 @@
 ;  SE, 14/11/2013: fixed minor issues (some values & units in PARAMs)
 ;		+ now handles the unique data file with 3 columns 
 ;		+ fixed scaling factor according to Combes et al 1988
+;  SE, 28/4/2016: fixed radiance UCD
 ; --------------------------------------------------------------------------------------------------
 
 
@@ -50,7 +51,10 @@ metadata = {name:'IKS spectral data',$
 
 metadata.modify_date = v_time()	; Virtis function, provides current UTC as an ISO string
 
-dir= '/Volumes/Data3/Comets/vega1-c-iks-3-rdr-halley-processed-v1.0/data/'tab = v_readpds(fdima, lab, /silent)	
+;dir= '/Volumes/Data3/Comets/vega1-c-iks-3-rdr-halley-processed-v1.0/data/'
+dir= '/Data4/Comets/vega1-c-iks-3-rdr-halley-processed-v1.0/data/'
+
+tab = v_readpds(fdima, lab, /silent)	
 
 ; Structure for table  metadata
 IKSparam = {Fname:'',obsid:'', time:'',target:'',distance:1.,InstN:'',Host:''} 
@@ -79,7 +83,10 @@ IKSparam.Host = 'vega-1'
 ;IKSparam(i).format = 'votable'
 
 ; data proper
-table = tab.table.column1Nfield = (size(tab.column_names, /dim))(0)	; nb of columnsfor j=2, Nfield do table = [[table],[tab.table.(j)]]table = transpose(table)
+table = tab.table.column1
+Nfield = (size(tab.column_names, /dim))(0)	; nb of columns
+for j=2, Nfield do table = [[table],[tab.table.(j)]]
+table = transpose(table)
 	; correct scaling factor from Combes et al
 If nomps EQ 'iksfinal.tab' then table(1,*) = table(1,*)*1E-6 $
 	else table(1,*) = table(1,*)*1E-7
@@ -93,7 +100,7 @@ field(0:1).name = ['wavelength','radiance']	; some files have only two columns
 field(0:1).ID = ['wvl','rad']
 field(0:1).datatype = ['double','double']
 field(0:1).unit = ['um','W/cm**2/sr/um']
-field(0:1).ucd = ['em.wl','phot.flux.density']
+field(0:1).ucd = ['em.wl','phys.luminosity;phys.angArea;em.wl']
 ;field.fill = ['','']
 
 If Nfield EQ 3 then begin	; if error bar provided
@@ -101,7 +108,7 @@ If Nfield EQ 3 then begin	; if error bar provided
  field(2).ID = 'err'
  field(2).datatype = 'double'
  field(2).unit = 'W/cm**2/sr/um'
- field(2).ucd = 'stat.error;phot.flux.density'
+ field(2).ucd = 'stat.error;phys.luminosity;phys.angArea;em.wl'
 endif
 
 
@@ -282,7 +289,9 @@ END
 
 Pro catiksfiles
 
-dir = '/Volumes/Data3/Comets/vega1-c-iks-3-rdr-halley-processed-v1.0/data'
+;dir = '/Volumes/Data3/Comets/vega1-c-iks-3-rdr-halley-processed-v1.0/data'
+; nadja
+dir = '/Data4/Comets/vega1-c-iks-3-rdr-halley-processed-v1.0/data'
 Flist = file_search(dir, '*.lbl')
 
 Nf = N_elements(Flist)

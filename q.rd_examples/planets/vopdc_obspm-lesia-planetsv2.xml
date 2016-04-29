@@ -1,0 +1,67 @@
+<ri:Resource created="2015-08-16T12:00:00Z" status="active" updated="2015-08-16T13:00:00Z" xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0" xmlns:tr="http://www.ivoa.net/xml/TAPRegExt/v1.0" xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/VODataService/v1.1 http://www.ivoa.net/xml/VODataService/v1.1 http://www.ivoa.net/xml/TAPRegExt/v1.0 http://www.ivoa.net/xml/TAPRegExt/v1.0" xsi:type="vs:CatalogService">
+   <validationLevel validatedBy="ivo://vopdc">3</validationLevel>
+   <title>Main characteristics of planets</title>
+   <shortName>planets</shortName>
+   <identifier>ivo://vopdc.obspm/lesia/planets/epn</identifier>
+   <curation>
+      <publisher ivo-id="ivo://vopdc.obspm/lesia">VO-Paris Data Centre - LESIA</publisher>
+      <creator>
+         <name>Observatoire de Paris - LESIA</name>
+         <logo>http://vo.obspm.fr/logo/lesia.png</logo>
+      </creator>
+      <creator>
+         <name>S. Erard</name>
+      </creator>
+       
+      <contributor>VOPDC</contributor>
+      <contact>
+         <name>VOPDC support team</name>
+         <address>Observatoire de Paris VOPDC, bat. Perrault, 77 av. Denfert Rochereau, 75014 Paris, FRANCE</address>
+         <email>vo.paris@obspm.fr</email>
+         <telephone>+33140512089</telephone>
+      </contact>
+   </curation>
+   <content>
+      
+      <subject>Virtual Observatory</subject>
+      <subject>Planet</subject>
+      <subject>Mass</subject>
+      <subject>Radius</subject>
+      <subject>Period</subject>
+       <description>Reference values for dimensions, mass, and rotation period of Solar System planets.</description>
+      <source>Archinal et al 2009, Cox et al 2000 </source>
+      <referenceURL>http://lesia.obspm.fr</referenceURL>
+      <type>Catalog</type>
+      <contentLevel>General</contentLevel>
+      <contentLevel>University</contentLevel>
+      <contentLevel>Research</contentLevel>
+      <contentLevel>Amateur</contentLevel>
+      <relationship>
+         <relationshipType>related-to</relationshipType>
+         <relatedResource ivo-id="ivo://vopdc.obspm">VO-Paris Data Centre</relatedResource>
+      </relationship>
+   </content>
+   
+   <capability standardID="ivo://ivoa.net/std/TAP" xsi:type="tr:TableAccess">
+      <interface role="std" xsi:type="vs:ParamHTTP">
+         <accessURL use="base">http://voplus.obspm.fr:81/__system__/tap/run/tap</accessURL>
+      </interface>
+      <dataModel ivo-id="ivo://vopdc.obspm/std/EpnCore-2.0">EpnCore-2.0</dataModel>
+      <language>
+         <name>ADQL</name>
+         <version ivo-id="ivo://ivoa.net/std/ADQL#v2.0">2.0</version>
+      </language>
+      <outputFormat ivo-id="ivo://ivoa.net/std/TAPRegEXT#output-votable-td">
+         <mime>application/x-votable+xml</mime>
+         <alias>votable/td</alias>
+      </outputFormat>
+   </capability>
+   <tableset>
+      <schema>
+         <name>planets</name>
+         <table>
+            <name>planets.epn_core</name>
+         </table>
+      </schema>
+   </tableset>
+</ri:Resource>

@@ -58,7 +58,7 @@ CREATE OR REPLACE VIEW iks.corrected AS SELECT
 	CAST(phase_ang AS DOUBLE PRECISION)	 as phase_max,
 	array_to_string(array(select distinct inst_host_name from iks.data_table), ' ')	AS  instrument_host_name,
 	array_to_string(array(select distinct inst_name from iks.data_table), ' ') 		AS  instrument_name,
-	TEXT 'phot.flux.density'					AS measurement_type,
+	TEXT 'phys.luminosity;phys.angArea;em.wl'				AS measurement_type,
 	--	CAST('http://voparis-srv.obspm.fr/vo/planeto/iks/' || filename AS character varying)	AS access_url,
 	CAST(a_url AS TEXT)				AS access_url,
 	CAST(a_format AS TEXT)			AS access_format,
@@ -66,7 +66,7 @@ CREATE OR REPLACE VIEW iks.corrected AS SELECT
 	CAST(rootname || '.xml' AS TEXT)		 	AS file_name,
 	CAST(ref AS TEXT) 				AS bib_reference,
 	DATE '2013-11-17T10:41:00.00+00:00'	AS  creation_date,
-	DATE '2013-11-17T10:41:00.00+00:00'	AS  modification_date,
+	DATE '2016-04-28T15:43:00.00+00:00'	AS  modification_date,
 	DATE '2013-11-17T10:41:00.00+00:00'	AS  release_date,
 	TEXT 'IKS'  					AS  service_title,
 	integer '3'						AS processing_level
@@ -126,7 +126,7 @@ CREATE OR REPLACE VIEW iks.archive AS SELECT
 	CAST(phase_ang AS DOUBLE PRECISION)	 as phase_max,
 	array_to_string(array(select distinct inst_host_name from iks.data_table), ' ')	AS  instrument_host_name,
 	array_to_string(array(select distinct inst_name from iks.data_table), ' ') 		AS  instrument_name,
-	TEXT 'phot.flux.density'					AS measurement_type,
+	TEXT 'phys.luminosity;phys.angArea;em.wl'				AS measurement_type,
 	CAST(o_url AS TEXT)				AS access_url, 		-- this is different
 	CAST(o_format AS TEXT)			AS access_format, 	-- this is different
 	INTEGER '4'						AS access_estsize, 			-- this is different
