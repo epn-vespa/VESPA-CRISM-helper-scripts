@@ -132,10 +132,10 @@ IKSparam(i).inst_Host_name = 'Vega 1'	; @Cor2014: no space allowed in string
 ;IKSparam(i).format = 'ascii'
 	; modified VOtable files at VO-Paris
 IKSparam(i).a_url = 'http://voparis-srv.obspm.fr/vo/planeto/iks/'+nomout
-IKSparam(i).a_format = 'votable'
+IKSparam(i).a_format = 'application/x-votable+xml'
 ; @Cor2014: added link to native file 
 IKSparam(i).o_url = 'http://pdssbn.astro.umd.edu/holdings/vega1-c-iks-3-rdr-halley-processed-v1.0/data/'+nomps
-IKSparam(i).o_format = 'ascii'
+IKSparam(i).o_format = 'text/plain'
 
 endfor
 IKSparam.id = indgen(Nf)+1

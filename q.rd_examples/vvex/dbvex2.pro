@@ -211,8 +211,8 @@ for ii = 0, Nm-1 do tata(Mfiles(ii)) = '_H.JPG'
 for ii = 0, Nmv-1 do tata(MVfiles(ii)) = '_D.JPG'
 VExparam.th_Gurl = tata
 
-VExparam.a_format = 'PDS3'
-
+VExparam.a_format = 'application/x-pds'
+; should be application/x-pds ? TBC
 
 
 toto = (strsplit(strtrim(temp.index_table.(30)), '"', /extr))	; remove extra spaces on shorter strings!

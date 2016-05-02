@@ -182,7 +182,7 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
       ucd="meta.ucd"
       description="UCD(s) defining the nature of measurements"/>
     <column name="access_url"  type="text"
-      ucd="meta.ref.url"
+      ucd="meta.ref.url;meta.file"
       description="URL of the data file"/>
     <column name="access_format"  type="text"
       ucd="meta.code;mime"
@@ -190,6 +190,9 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
     <column name="access_estsize"  type="integer" unit="kbyte" required="True"
       ucd="phys.size;meta.file"
       description="Estimate file size in kB"/>
+    <column name="thumbnail_url"  type="text" 
+      ucd="meta.ref.url;meta.file"
+      description="URL of a small thumbnail"/>
     <column name="file_name"  type="text"
       ucd="meta.id;meta.file"
       description="Name root of the data file"/>

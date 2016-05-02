@@ -63,6 +63,7 @@ CREATE OR REPLACE VIEW iks.corrected AS SELECT
 	CAST(a_url AS TEXT)				AS access_url,
 	CAST(a_format AS TEXT)			AS access_format,
 	INTEGER '19'					AS access_estsize,
+	CAST(a_url || '.png' AS TEXT)			AS thumbnail_url,
 	CAST(rootname || '.xml' AS TEXT)		 	AS file_name,
 	CAST(ref AS TEXT) 				AS bib_reference,
 	DATE '2013-11-17T10:41:00.00+00:00'	AS  creation_date,
@@ -129,8 +130,9 @@ CREATE OR REPLACE VIEW iks.archive AS SELECT
 	TEXT 'phys.luminosity;phys.angArea;em.wl'				AS measurement_type,
 	CAST(o_url AS TEXT)				AS access_url, 		-- this is different
 	CAST(o_format AS TEXT)			AS access_format, 	-- this is different
-	INTEGER '4'						AS access_estsize, 			-- this is different
-	CAST(rootname || '.tab' AS TEXT)		 				AS file_name,		-- this is may be different
+	INTEGER '4'						AS access_estsize, 		-- this is different
+	CAST(NULL AS TEXT)				AS thumbnail_url,		-- this is different
+	CAST(rootname || '.tab' AS TEXT)		 				AS file_name,		-- this is different
 	CAST(ref AS TEXT) 				AS bib_reference,
 	DATE '1993-11-10T07:54:00.00+00:00'	AS  creation_date,		-- this is different
 	DATE '1993-11-10T07:54:00.00+00:00'	AS  modification_date,	-- this is different

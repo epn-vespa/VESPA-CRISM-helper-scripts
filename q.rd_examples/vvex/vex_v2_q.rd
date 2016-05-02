@@ -134,12 +134,14 @@ VIRTIS/Venus Express demonstrator service: imaging spectroscopy of Venus in the 
       description="Standard name of the instrument"/>
     <column name="measurement_type"  type="text" ucd="meta.ucd"
       description="UCD(s) defining the nature of measurements"/>
-    <column name="access_url"  type="text" ucd="meta.ref.url"
+    <column name="access_url"  type="text" ucd="meta.ref.url;meta.file"
       description="URL of the data file"/>
     <column name="access_format"  type="text" ucd="meta.code;mime"
       description="File format type"/>
     <column name="access_estsize"  type="integer" unit="kbyte" required="True" ucd="phys.size;meta.file"
       description="Estimate file size in kB"/>
+    <column name="thumbnail_url"  type="text" ucd="meta.ref.url;meta.file"
+      description="URL of a small thumbnail"/>
     <column name="file_name"  type="text" ucd="meta.id;meta.file"
       description="Name root of the data file"/>
     <column name="bib_reference"  type="text" ucd="meta.bib"
