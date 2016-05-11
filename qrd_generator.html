@@ -390,15 +390,15 @@ wavebands = [	["Radio",      $('#mWbRadio'      ).is(':checked')],
 		["Gamma-ray",  $('#WbGammaRay'    ).is(':checked')]   ];
 myWavebands = [];
 for (band of wavebands) { if (band[1]) {myWavebands.push(band[0])}}
-var myOutWaveband = function (band) {return cN + cTT
-					+ '\<meta name=\"waveband\"\>' + band + '\<\/meta\>'}
+var myOutWaveband = function (band) {return cTT
+					+ '\<meta name=\"waveband\"\>' + band + '\<\/meta\>' + cN}
 outMyMetaWavebands= "";
 for (band of myWavebands) {outMyMetaWavebands += myOutWaveband(band)}
 // Profile:
 var myMetaProfile = $('#mProfile').val();
-var myMetaProfileT = cN + cT + metaOpen("Profile") + myMetaProfile + metaClose + cT;
+var myMetaProfileT = cT + metaOpen("Profile") + myMetaProfile + metaClose + cT;
 var outMyMetaProfile = (myMetaProfile != "" ? myMetaProfileT : "");
-myStr += metaOpen("coverage") + outMyMetaWavebands + outMyMetaProfile + metaClose;
+myStr += metaOpen("coverage") + cN + outMyMetaWavebands + outMyMetaProfile + metaClose + cN;
 // END of METADATA
 myStr += '\<!-- METADATA COMPLETE --\>' + cN + cN;
 // START make TABLE
