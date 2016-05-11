@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <script src=""></script>
   <script src="jquery-1.12.3.min.js"></script>
 <!-- <link rel="stylesheet" href=".css"> -->
 <body>
 <div>
+URL of your data relative to the q.rd: <input id="m_Data_Source"></input><br />
+<i>e.g.: data/fp05-good.csv</i><br /><br />
+Describe your table: <input id="m_Service_Description"></input><br />
+<i>e.g.: EPN-TAP access to the Test CRISM database.</i>
 <h1>Metadata for the resource:</h1>
 <table>
 <tr><td>Schema name: </td><td><input id="mSchema"></input></td></tr>
@@ -20,14 +23,14 @@
 <tr><td>Source: </td><td><input id="mSource"></input></td></tr>
 <tr><td>Content level: </td><td><input id="mContentLevel"></input></td></tr>
 <tr><td>Waveband (Mark all that apply)</td><td>
-<input type="checkbox" name="mWbRadio">Radio<br />
-<input type="checkbox" name="mWbMillimeter">Millimeter<br />
-<input type="checkbox" name="mWbInfrared">Infrared<br />
-<input type="checkbox" name="WbOptical">Optical<br />
-<input type="checkbox" name="WbUV">UV<br />
-<input type="checkbox" name="WbEUV">EUV<br />
-<input type="checkbox" name="WbXRay">X-ray<br />
-<input type="checkbox" name="WbGammaRay">Gamma-ray</td></tr>
+<input type="checkbox" id="mWbRadio">Radio<br />
+<input type="checkbox" id="mWbMillimeter">Millimeter<br />
+<input type="checkbox" id="mWbInfrared">Infrared<br />
+<input type="checkbox" id="WbOptical">Optical<br />
+<input type="checkbox" id="WbUV">UV<br />
+<input type="checkbox" id="WbEUV">EUV<br />
+<input type="checkbox" id="WbXRay">X-ray<br />
+<input type="checkbox" id="WbGammaRay">Gamma-ray</td></tr>
 <tr><td>Profile:</td><td><input id="mProfile"></input><br/></td></tr>
 </table>
 
@@ -76,11 +79,24 @@ For null values choose "NUL"
 <td>Measurement Type: </td>
 <td><input id="r_measurement_type"></input></td>
 </tr>
+<tr><td><br /></td></tr>
 <tr>
-<td><select id="rVM_processing_level">
+<td>
+<!--
+<select id="rVM_processing_level">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+-->
 <td>Processing Level: </td>
-<td><input id="r_processing_level"></input></td>
+<td>
+<select id="r_processing_level">
+<option title="Unprocessed Data Record" value ="1">1 - Unprocessed</option>
+<option title="Experiment Data Record"  value ="2">2 - Experiment</option>
+<option title="Reduced Data Record"     value ="3">3 - Reduced</option>
+<option title="Reformatted Data Record" value ="4">4 - Reformatted</option>
+<option title="Derived Data Record"     value ="5">5 - Derived</option>
+<option title="Ancillary Data Record"   value ="6">6 - Ancillary</option>
+</select>
+<i> * This field is mandatory.</i></td>
 </tr>
 <tr>
 </table>
@@ -102,10 +118,16 @@ For null values choose "NUL"
 <h2>Axes</h2>
 <table>
 <tr>
-<td><select id="rVM_time_range">
+<td><select id="rVM_time_min">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
-<td>Time Range: </td>
-<td><input id="r_time_range"></input></td>
+<td>Time Range Min: </td>
+<td><input id="r_time_min"></input><i> * in Julian days</i></td>
+</tr>
+<tr>
+<td><select id="rVM_time_max">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>Time Range Max: </td>
+<td><input id="r_time_max"></input></td>
 </tr>
 <tr>
 <td><select id="rVM_time_sampling_step">
@@ -121,7 +143,7 @@ For null values choose "NUL"
 </tr>
 <tr><td><br /></td></tr>
 <tr>
-<td><select id="rVM_spectral_range_max">
+<td><select id="rVM_spectral_range_min">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
 <td>Spectral Range (minimum): </td>
 <td><input id="r_spectral_range_min"></td>
@@ -220,8 +242,12 @@ For null values choose "NUL"
 </tr>
 <tr><td><br /></td></tr>
 <tr>
-<td><select id="rVM_spatial_frame_type">
-<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>
+<!--
+<select id="rVM_spatial_frame_type">
+<option>NUL</option><option>MAP</option><option>VAR</option></select>
+-->
+</td>
 <td>Spatial Frame Type: </td>
 <td>
 <select id="r_spatial_frame_type">
@@ -232,6 +258,7 @@ For null values choose "NUL"
 <option>spherical</option>
 <option>healpix</option>
 </select>
+<i> * This field is mandatory.</i>
 </td>
 </tr>
 <tr><td colspan="2"><p><b>Angles:</b></p></td></tr>
@@ -288,12 +315,6 @@ For null values choose "NUL"
 <td>Instrument_Name: </td>
 <td><input id="r_instrument_name"></input></td>
 </tr>
-<tr>
-<td><select id="rVM_instrument_name">
-<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
-<td>Instrument_Name: </td>
-<td><input id="r_instrument_name"></input></td>
-</tr>
 </table>
 <h1>Granule call-back info</h1>
 <table>
@@ -332,34 +353,240 @@ For null values choose "NUL"
 $(document).ready(function(e){
 $("#btnGenerate").click( function(){
 chr=String.fromCharCode;
+cN  = chr(13);
+cT = chr(9);
+cTT = cT + cT;
+cTTT = cTT + cT;
 urResourceName = $('#mSchema').val();
-myStr = "\<resource schema=\"" + $('#mSchema').val() + "\"\>" + chr(13)
-	+ chr(9) + "\<meta name=\"title\"\>"         + $('#mTitle').val()        + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"description\"\>"   + $('#mDescription').val()  + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"creationDate\"\>"  + $('#mCreationDate').val() + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"subject\"\>"       + $('#mSubject').val()      + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"creator.name\"\>"  + $('#mCreatorName').val()  + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"contact.name\"\>"  + $('#mContactName').val()  + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"contact.email\"\>" + $('#mContactEmail').val() + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"instrument\"\>"    + $('#mInstrument').val()   + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"facility\"\>"      + $('#mFacility').val()     + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"source\"\>"        + $('#mSource').val()       + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"contentLevel\"\>"  + $('#mContentLevel').val() + "\</meta\>"  + chr(13)
-	+ chr(9) + "\<meta name=\"type\"\>"          + "Catalog"                 + "\</meta\>"  + chr(13);
 
+
+var metaOpen  = function (name) {return cT + "\<meta name=\"" + name + "\"\>";}
+var metaClose = "\</meta\>"  + cN;
+var metaLine  = function (name, value) { return metaOpen(name) + value + metaClose;}
+//BEGIN by filling out METADATA
+myStr = "\<resource schema=\"" + $('#mSchema').val() + "\"\>" + cN
+	+ metaLine("title",         $('#mTitle').val()        )
+	+ metaLine("description",   $('#mDescription').val()  )
+	+ metaLine("creationDate",  $('#mCreationDate').val() )
+	+ metaLine("subject",       $('#mSubject').val()      )
+	+ metaLine("creator.name",  $('#mCreatorName').val()  )
+	+ metaLine("contact.name",  $('#mContactName').val()  )
+	+ metaLine("contact.email", $('#mContactEmail').val() )
+	+ metaLine("instrument",    $('#mInstrument').val()   )
+	+ metaLine("facility",      $('#mFacility').val()     )
+	+ metaLine("source",        $('#mSource').val()       )
+	+ metaLine("contentLevel",  $('#mContentLevel').val() )
+	+ metaLine("type",          "Catalog"                 );
+// Waveband and Profile are children of Coverage, these should be computed first
+// Wavebands:
+var myMetaWavebands = ["band1", "band2", "band3"];
+wavebands = [	["Radio",      $('#mWbRadio'      ).is(':checked')],
+		["Millimeter", $('#mWbMillimeter' ).is(':checked')],
+		["Infrared",   $('#mWbInfrared'   ).is(':checked')],
+		["Optical",    $('#WbOptical'     ).is(':checked')],
+		["UV",         $('#WbUV'          ).is(':checked')],
+		["EUV",        $('#WbEUV'         ).is(':checked')],
+		["X-ray",      $('#WbXRay'        ).is(':checked')],
+		["Gamma-ray",  $('#WbGammaRay'    ).is(':checked')]   ];
+myWavebands = [];
+for (band of wavebands) { if (band[1]) {myWavebands.push(band[0])}}
+var myOutWaveband = function (band) {return cN + cTT
+					+ '\<meta name=\"waveband\"\>' + band + '\<\/meta\>'}
+outMyMetaWavebands= "";
+for (band of myWavebands) {outMyMetaWavebands += myOutWaveband(band)}
+// Profile:
+var myMetaProfile = $('#mProfile').val();
+var myMetaProfileT = cN + cT + metaOpen("Profile") + myMetaProfile + metaClose + cT;
+var outMyMetaProfile = (myMetaProfile != "" ? myMetaProfileT : "");
+myStr += metaOpen("coverage") + outMyMetaWavebands + outMyMetaProfile + metaClose;
+// END of METADATA
+myStr += '\<!-- METADATA COMPLETE --\>' + cN + cN;
+// START make TABLE
+var myTableID = "epn_core";
+myStr += cT + '\<table id=\"' + myTableID + '\" onDisk=\"true\"\>' + cN;
+// add mixin
+var myProcessingLvl = $('#r_processing_level').val();
+var mySpatialFrameType = $('#r_spatial_frame_type').val();
+myStr += cTT + '\<mixin processing_level=\"' + myProcessingLvl
+		+ '\" spatial_frame_type=\"' + mySpatialFrameType + '\"\>//epntap2#table\</mixin\>' + cN;
+// make table metadata
+myStr += cTT + '\<meta name=\"info\" infoName=\"SERVICE_PROTOCOL\" infoValue=\"0.3\"\>EPN-TAP\</meta\>' + cN;
+var myServiceDescription = $('#m_Service_Description').val();
+myStr += cTT + '\<meta name=\"description\"\>' + myServiceDescription + '\</meta\>' + cN;
+// make table STC
+myStr += cTT + '\<stc\>' + cN + cTTT + "Polygon ICRS [s_region]" + cN + cTT + '\</stc\>' + cN;
+// make table optional columns
+// ??? [========================] ???
+// ??? [===> Place holder < ====] ???
+// ??? [========================] ???
+myStr += '\<!-- MAKE OPTIONAL COLUMNS, for example: --\>' + cN;
+myStr += '\<!--' + cN + cTT + '\<column name=\"access_url\" type=\"text\" ucd=\"meta.ref.url;meta.file\" verbLevel=\"1\" description=\"URL of the data file, ' + cN + cTTT + 'case sensitive. If present, next 2 paramenters must be present.\"/\> ' + cN + '--\>' + cN;
+// make table non-standard columns
+// ??? [========================] ???
+// ??? [===> Place holder < ====] ???
+// ??? [========================] ???
+myStr += '\<!-- MAKE NON-STANDARD COLUMNS, for example: --\>' + cN;
+myStr += '\<!--' + cN + cTT + '\<column name=\"counter\" type=\"text\" ucd=\"meta.note;meta.main\" tablehead=\"value\" verbLevel=\"1\" description=\"non standard\" /\>' + cN + '--\>' + cN;
+// publish
+myStr += cTT + '\<publish /\>' + cN;
+// close
+myStr += cT + '\</table\>' + cN;
+// END make TABLE
+myStr += '\<!-- TABLE COMPLETE --\>' + cN + cN;
+// START data import
+myDataSource = $('#m_Data_Source').val();
+myStr += cT + '\<data id=\"import\"\>' + cN + cTT + '\<sources\>' + myDataSource + '\</sources\>' + cN;
+myStr += cTT + '\<csvGrammar\>' + cN + cTTT + '\<rowfilter procDef=\"//products#define\"\>' + cN
+		+ cT + cTTT + '\<bind name=\"table\"\>\"\schema.epn_core\"\</bind\>'+ cN
+			+ cTTT + '\</rowfilter\>' + cN + cTT + '\</csvGrammar\>' + cN;
+// maketable & rowmaker
+myStr += cTT + '\<make table=\"epn_core\"\>' + cN + cTTT + '\<rowmaker idmaps=\"*\"\>' + cN;
+//START of MANDATORY PARAMS:
+//in case of map
+
+//granule_uid_type = $('#rVM_granule_uid').val()
+//granule_uid = $('#r_granule_uid').val()
+
+var makeRow = function(myType, myValue, myKey) {
+	if (myType == "MAP") {
+		return cTT + cTT + '\<var key=\"' + myKey +  '\" source=\"' + myValue + '\" /\>' + cN;
+	}
+	else if (myType == "VAR") {
+		return cTT + cTT + '\<var key=\"' + myKey +  '\"\>' + myValue + '\</var\>' + cN;
+	}
+	else if (myType == "NUL") {
+		return "";
+	}
+}
+
+var makeRowStd = function(name) { return makeRow($('#rVM_' + name).val(), $('#r_' + name).val(), name);}
+
+
+myStr += makeRowStd("granule_uid");
+myStr += makeRowStd("granule_gid");
+myStr += makeRowStd("obs_id") + cN;
+
+myStr += makeRowStd("dataproduct_type");
+myStr += makeRowStd("measurement_type") + cN;
+
+myStr += makeRowStd("target_name");
+myStr += makeRowStd("target_class") + cN;
+
+myStr += makeRowStd("time_min");
+myStr += makeRowStd("time_max");
+myStr += makeRowStd("time_sampling_step");
+myStr += makeRowStd("time_exp") + cN;
+
+myStr += makeRowStd("spectral_range_min");
+myStr += makeRowStd("spectral_range_max");
+myStr += makeRowStd("spectral_sampling_step");
+myStr += makeRowStd("spectral_resolution") + cN;
+
+myStr += makeRowStd("c1_min");
+myStr += makeRowStd("c1_max");
+myStr += makeRowStd("c1_resol_min");
+myStr += makeRowStd("c1_resol_max") + cN;
+
+myStr += makeRowStd("c2_min");
+myStr += makeRowStd("c2_max");
+myStr += makeRowStd("c2_resol_min");
+myStr += makeRowStd("c2_resol_max") + cN;
+
+myStr += makeRowStd("c3_min");
+myStr += makeRowStd("c3_max");
+myStr += makeRowStd("c3_resol_min");
+myStr += makeRowStd("c3_resol_max") + cN;
+
+myStr += makeRowStd("incidence_min");
+myStr += makeRowStd("incidence_max");
+myStr += makeRowStd("emergence_min");
+myStr += makeRowStd("emergence_max");
+myStr += makeRowStd("phase_min");
+myStr += makeRowStd("phase_max") + cN;
+
+myStr += makeRowStd("instrument_host_name");
+myStr += makeRowStd("instrument_name") + cN;
+
+myStr += makeRowStd("service_title");
+myStr += makeRowStd("creation_date");
+myStr += makeRowStd("modification_date");
+myStr += makeRowStd("release_date") + cN;
+
+/*
+myStr += makeRowStd("");
+myStr += makeRowStd("");
+*/
+
+//apply procDef:
+myStr += cTT + cTT + '\<apply procDef=\"//epntap2#populate\" name=\"fillepn\"\>' + cN;
+
+var procDefBind = function(name) { 
+	if ($('#rVM_' + name).val() != "NUL") {
+		return cTTT + cTT + '\<bind name=\"' + name + '\">@' + name + '\</bind\>' + cN;}
+		else {return "";}
+	}
+
+myStr += procDefBind("granule_uid");
+myStr += procDefBind("granule_gid");
+myStr += procDefBind("obs_id") + cN;
+
+myStr += procDefBind("dataproduct_type");
+myStr += procDefBind("measurement_type") + cN;
+
+myStr += procDefBind("target_name");
+myStr += procDefBind("target_class") + cN;
+
+myStr += procDefBind("time_min");
+myStr += procDefBind("time_max");
+myStr += procDefBind("time_sampling_step");
+myStr += procDefBind("time_exp") + cN;
+
+myStr += procDefBind("spectral_range_min");
+myStr += procDefBind("spectral_range_max");
+myStr += procDefBind("spectral_sampling_step");
+myStr += procDefBind("spectral_resolution") + cN;
+
+myStr += procDefBind("c1_min");
+myStr += procDefBind("c1_max");
+myStr += procDefBind("c1_resol_min");
+myStr += procDefBind("c1_resol_max") + cN;
+
+myStr += procDefBind("c2_min");
+myStr += procDefBind("c2_max");
+myStr += procDefBind("c2_resol_min");
+myStr += procDefBind("c2_resol_max") + cN;
+
+myStr += procDefBind("c3_min");
+myStr += procDefBind("c3_max");
+myStr += procDefBind("c3_resol_min");
+myStr += procDefBind("c3_resol_max") + cN;
+
+myStr += procDefBind("incidence_min");
+myStr += procDefBind("incidence_max");
+myStr += procDefBind("emergence_min");
+myStr += procDefBind("emergence_max");
+myStr += procDefBind("phase_min");
+myStr += procDefBind("phase_max") + cN;
+
+myStr += procDefBind("instrument_host_name");
+myStr += procDefBind("instrument_name") + cN;
+
+myStr += procDefBind("service_title");
+myStr += procDefBind("creation_date");
+myStr += procDefBind("modification_date");
+myStr += procDefBind("release_date");
+
+//close
+myStr += cTT + cTT + '\</apply\>' + cN;
+myStr += cTTT + '\</rowmaker\>' + cN;
+myStr += cTT + '\</make\>' + cN;
+myStr += cT + '\</data\>' + cN;
+myStr += '\</resource\>' + cN;
+
+// EXORT WRITEOUT:
  document.getElementById("output").innerText = myStr;
 });
 });
 </script>
 </body>
 </html>
-<!--
-
-<tr>
-<td><select id="rVM_">
-<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
-<td>: </td>
-<td><input id="r_"></input></td>
-</tr>
-
--->
