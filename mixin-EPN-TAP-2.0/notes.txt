@@ -1,3 +1,14 @@
+BUGS:
+* Parameter access_format should be optional unless access_url is provided. 
+	However it appears to be currently mandatory:
+	"Parameter access_format is not defaulted in fillepn and thus must be bound."
+* Similar issue with spatial_frame_type?
+
+For q.rd maker:
+* Non-existing parameters should not be bound.
+	
+
+
 NOTE that epntap2.xml should be renamed to epntap2.rd
 (i've named it .xml only so that GitHub highlights it correctly)
 
