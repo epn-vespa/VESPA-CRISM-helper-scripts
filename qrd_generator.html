@@ -34,13 +34,13 @@ Describe your table: <input id="m_Service_Description"></input><br />
 <tr><td>Profile:</td><td><input id="mProfile"></input><br/></td></tr>
 </table>
 
-<h1>Mandatory parameters:</h1>
+<h1 style="color:red">Mandatory parameters:</h1>
 <p><i>This may include python expressions. <br />
 To map input directly to output choose "MAP" <br />
 To use expressions choose "VAR"<br />
 For null values choose "NUL" 
 </i></p>
-<h2></h2>
+<h2>1 - Granule references</h2>
 <p><i>NUL values not, values required</i></p>
 <table>
 <tr>
@@ -65,7 +65,7 @@ For null values choose "NUL"
 
 
 
-<h2>Data description</h2>
+<h2>2 - Data description</h2>
 <table>
 <tr>
 <td><select id="rVM_dataproduct_type">
@@ -100,7 +100,7 @@ For null values choose "NUL"
 </tr>
 <tr>
 </table>
-<h2>Target descripion</h2>
+<h2>3 - Target descripion</h2>
 <table>
 <tr>
 <td><select id="rVM_target_name">
@@ -115,7 +115,7 @@ For null values choose "NUL"
 <td><input id="r_target_class"></input></td>
 </tr>
 </table>
-<h2>Axes</h2>
+<h2>4 - Axes</h2>
 <table>
 <tr>
 <td><select id="rVM_time_min">
@@ -301,7 +301,7 @@ For null values choose "NUL"
 <td><input id="r_phase_max"></input></td>
 </tr>
 </table>
-<h1>Data origin</h1>
+<h2>5 - Data origin</h2>
 <table>
 <tr>
 <td><select id="rVM_instrument_host_name">
@@ -316,7 +316,7 @@ For null values choose "NUL"
 <td><input id="r_instrument_name"></input></td>
 </tr>
 </table>
-<h1>Granule call-back info</h1>
+<h2>6 - Granule call-back info</h1>
 <table>
 <tr>
 <td><select id="rVM_service_title">
@@ -343,6 +343,44 @@ For null values choose "NUL"
 <td><input id="r_release_date"></input></td>
 </tr>
 </table>
+<p />
+<p />
+<h1 style="color:red">Optional parameters</h1>
+
+<h2>7 - Data Access Reference:</h2>
+<table>
+<tr>
+<td><select id="rVM_access_url">
+<option>MAP</option><option>VAR</option></select></td>
+<td>access_url: </td>
+<td><input id="r_access_url"></input> <i>URL of the data file, case sensitive. If present, next 2 paramenters must be present.</i></td>
+</tr>
+<tr>
+<td><select id="rVM_access_format">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>access_format: </td>
+<td><input id="r_access_format"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_access_estsize">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>access_estsize: </td>
+<td><input id="r_access_estsize"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_thumbnail_url">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>thumbnail_url: </td>
+<td><input id="r_thumbnail_url"></input></td>
+</tr>
+<tr>
+<td><select id="rVM_file_name">
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<td>file_name: </td>
+<td><input id="r_file_name"></input></td>
+</tr>
+</table>
+
 <p>
 <button id="btnGenerate">generate q.rd</button>
 </p>
@@ -416,10 +454,36 @@ myStr += cTT + '\<meta name=\"description\"\>' + myServiceDescription + '\</meta
 // make table STC
 myStr += cTT + '\<stc\>' + cN + cTTT + "Polygon ICRS [s_region]" + cN + cTT + '\</stc\>' + cN;
 // make table optional columns
+myStr += '\<!-- MAKE OPTIONAL COLUMNS: --\>' + cN;
+//   // make access reference
+/*
+var procDefBind = function(name) { 
+	if ($('#rVM_' + name).val() != "NUL") {
+		return cTTT + cTT + '\<bind name=\"' + name + '\">@' + name + '\</bind\>' + cN;}
+		else {return "";}
+	}*/
+
+if ($('#rVM_' + 'access_url').val() != "NUL") {
+	myStr += cTT + '\<column name=\"access_url\" type=\"text\" ucd=\"meta.ref.url;meta.file\" verbLevel=\"1\" description=\"URL of the data file, ' 
++ cN + cTTT + 'case sensitive. If present, next 2 paramenters must be present.\"/\> ' + cN;}
+if ($('#rVM_' + 'access_format').val() != "NUL") {
+	myStr += cTT + '\<column name=\"access_format\" type=\"text\" ucd=\"meta.code.mime\" verbLevel=\"1\" description=\"File format type\"/\> ' + cN;}
+if ($('#rVM_' + 'access_estsize').val() != "NUL") {
+	myStr += cTT + '\<column name=\"access_estsize\" type=\"Integer\" unit=\"kbyte\" '
+                   + 'ucd=\"phys.size;meta.file\" verbLevel=\"1\" description=\"Estimate file size in kbyte (with this spelling)\"/\> ' + cN;}
+
+if ($('#rVM_' + 'thumbnail_url').val() != "NUL") {
+	myStr += cTT + '\<column name=\"thumbnail_url\" type=\"text\" '
+                   + 'ucd=\"meta.ref.url;meta.preview \" verbLevel=\"1\" description=\"URL of a thumbnail image with predefined size '
+                   + '(png ~200 pix, for use in a client only)\"/\> ' + cN;}
+if ($('#rVM_' + 'file_name').val() != "NUL") {
+	myStr += cTT + '\<column name=\"file_name\" type=\"text\" '
+                   + 'ucd=\"meta.id;meta.file" verbLevel=\"1\" description=\"Name of the data file only, case sensitive\"/\> ' + cN;}
+
 // ??? [========================] ???
 // ??? [===> Place holder < ====] ???
 // ??? [========================] ???
-myStr += '\<!-- MAKE OPTIONAL COLUMNS, for example: --\>' + cN;
+myStr += cN + '\<!-- MAKE more OPTIONAL COLUMNS, for example: --\>' + cN;
 myStr += '\<!--' + cN + cTT + '\<column name=\"access_url\" type=\"text\" ucd=\"meta.ref.url;meta.file\" verbLevel=\"1\" description=\"URL of the data file, ' + cN + cTTT + 'case sensitive. If present, next 2 paramenters must be present.\"/\> ' + cN + '--\>' + cN;
 // make table non-standard columns
 // ??? [========================] ???
@@ -511,6 +575,13 @@ myStr += makeRowStd("service_title");
 myStr += makeRowStd("creation_date");
 myStr += makeRowStd("modification_date");
 myStr += makeRowStd("release_date") + cN;
+
+myStr += makeRowStd("access_url");
+myStr += makeRowStd("access_format");
+myStr += makeRowStd("access_estsize");
+myStr += makeRowStd("thumbnail_url");
+myStr += makeRowStd("file_name") + cN;
+
 
 /*
 myStr += makeRowStd("");
