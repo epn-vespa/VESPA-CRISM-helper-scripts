@@ -469,7 +469,7 @@ if ($('#rVM_' + 'access_url').val() != "NUL") {
 if ($('#rVM_' + 'access_format').val() != "NUL") {
 	myStr += cTT + '\<column name=\"access_format\" type=\"text\" ucd=\"meta.code.mime\" verbLevel=\"1\" description=\"File format type\"/\> ' + cN;}
 if ($('#rVM_' + 'access_estsize').val() != "NUL") {
-	myStr += cTT + '\<column name=\"access_estsize\" type=\"Integer\" unit=\"kbyte\" '
+	myStr += cTT + '\<column name=\"access_estsize\" type=\"integer\" unit=\"kbyte\" '
                    + 'ucd=\"phys.size;meta.file\" verbLevel=\"1\" description=\"Estimate file size in kbyte (with this spelling)\"/\> ' + cN;}
 
 if ($('#rVM_' + 'thumbnail_url').val() != "NUL") {
