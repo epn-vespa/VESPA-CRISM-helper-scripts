@@ -12,15 +12,9 @@
   <meta name="subject">Aurora</meta>
 
 <table id="epn_core" onDisk="True" adql="True">
-    <meta name="info" infoName="SERVICE_PROTOCOL" infoValue="0.3"> EPN-TAP </meta>
+    <meta name="info" infoName="SERVICE_PROTOCOL" infoValue="2.0"> EPN-TAP </meta>
     <meta name="description"> Jovian radio emission routine observation from Nancay decameter array </meta>
-    <meta name="referenceURL">To be define </meta>
-    <column name="dataset_id" type="text"
-      ucd="meta.id;class" 
-      description="ID to link granule to a dataset"/> 
-    <column name="resource_type" type="text" 
-      ucd="meta.id;class" 
-      description="ressource type can be dataset or granule"/>
+    <meta name="referenceURL">TBD</meta>
     <column name="dataproduct_type"  type="text" 
       ucd="meta.id;class" 
       description="Organization of the data product, from enumerated list"/>
