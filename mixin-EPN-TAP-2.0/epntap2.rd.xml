@@ -294,7 +294,7 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 <!--added s_region, new to V2.0; 
 I'm not including "instr.fov" in ucd, as it's TBC 
 ucd="obs" is from obsCore-->
-			<column name="s_region"	type="text" 
+			<column name="s_region"	type="spoly" 
 				ucd="phys.angArea;obs" unit="(STC-S String)" 
 				description="ObsCore-like footprint, assume 
 					spatial_coordinate_description – 
