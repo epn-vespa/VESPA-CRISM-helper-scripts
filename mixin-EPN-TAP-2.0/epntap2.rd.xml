@@ -101,7 +101,7 @@ a parameter for procDef, and not a mixinPar, so at this stage we create a mixinP
 					elif mySpatialFrameType == "spherical":   c1, c2, c3 = "m (R)",       "deg (Colat)", "m (Azi)"
 					elif mySpatialFrameType == "healpix":     c1, c2, c3 = "no unit (H)", "no unit (K)", "N/A"
 					return (c1,c2,c3)
-				getColumnNamesC  = lambda n: map(lambda a,b:b+a,("_min","_max","_resol_min","_resol_max"),["c"+str(n)]*4)
+				getColumnNamesC  = lambda n: map(lambda a,b:b+a,("min","max","_resol_min","_resol_max"),["c"+str(n)]*4)
 				feedMyColumnUnit = lambda myName, myUnit: substrate.getColumnByName(myName).feed(u'unit',myUnit)
 				cUnits = setMyUnits(mixinPars["spatial_frame_type"])
 				for i in range(3):
