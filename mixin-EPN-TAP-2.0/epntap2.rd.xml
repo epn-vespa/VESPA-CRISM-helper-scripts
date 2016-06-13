@@ -19,6 +19,24 @@
 			<property key="std">1</property>
 		</column>
 	</STREAM>
+	<STREAM id="_c_minmax">
+		<doc>
+			Generates a pair of minimum/maximum column pairs.  You must
+			fill out basename, baseucd, basedescr, unit.
+		</doc>
+		<column name="\basename\+min" type="double precision"
+			ucd="\baseucd;stat.min" unit="\unit"
+			description="\basedescr, lower limit."
+			utype="\baseutype\+min">
+			<property key="std">1</property>
+		</column>
+		<column name="\basename\+max" type="double precision"
+			ucd="\baseucd;stat.max" unit="\unit"
+			description="\basedescr, upper limit"
+			utype="\baseutype\+max">
+			<property key="std">1</property>
+		</column>
+	</STREAM>
 
 	<mixinDef id="table">
 		<doc><![CDATA[
@@ -276,17 +294,17 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 				baseutype="Epn.Spectral.Spectral_resolution"
 				basedescr="FWHM of the instrument profile"/>
 <!--c1, c2, c3 baseucd changed from "obs.field" to "pos"-->
-			<FEED source="_minmax"
+			<FEED source="_c_minmax"
 				basename="c1"
 				baseucd="pos" unit="\c1unit"
 				baseutype="Epn.Spatial.Spatial_range.c1"
 				basedescr="First coordinate (e.g., longitude, 'x')"/>
-			<FEED source="_minmax"
+			<FEED source="_c_minmax"
 				basename="c2"
 				baseucd="pos" unit="\c2unit"
 				baseutype="Epn.Spatial.Spatial_range.c2"
 				basedescr="Second coordinate (e.g., latitude, 'y')"/>
-			<FEED source="_minmax"
+			<FEED source="_c_minmax"
 				basename="c3"
 				baseucd="pos" unit="\c3unit"
 				baseutype="Epn.Spatial.Spatial_range.c3"
@@ -295,7 +313,7 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 I'm not including "instr.fov" in ucd, as it's TBC 
 ucd="obs" is from obsCore-->
 			<column name="s_region"	type="spoly" 
-				ucd="phys.angArea;obs" unit="(STC-S String)" 
+				ucd="phys.outline;obs.field" unit="(STC-S String)" 
 				description="ObsCore-like footprint, assume 
 					spatial_coordinate_description – 
 					this one TBC (needs another param for GIS interface?)">
