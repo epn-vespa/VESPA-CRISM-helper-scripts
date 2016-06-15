@@ -167,16 +167,16 @@ For null values choose "NUL"
 </tr>
 <tr><td colspan="2"><p><b>Spatial Coordinates:</b></p></td></tr>
 <tr>
-<td><select id="rVM_c1_min">
+<td><select id="rVM_c1min">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
 <td>C1 minimum: </td>
-<td><input id="r_c1_min"></input></td>
+<td><input id="r_c1min"></input></td>
 </tr>
 <tr>
-<td><select id="rVM_c1_max">
+<td><select id="rVM_c1max">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
 <td>C1 maximum: </td>
-<td><input id="r_c1_max"></input></td>
+<td><input id="r_c1max"></input></td>
 </tr>
 <tr>
 <td><select id="rVM_c1_resol_min">
@@ -192,16 +192,16 @@ For null values choose "NUL"
 </tr>
 <tr><td><br /></td></tr>
 <tr>
-<td><select id="rVM_c2_min">
+<td><select id="rVM_c2min">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
 <td>C2 minimum: </td>
-<td><input id="r_c2_min"></input></td>
+<td><input id="r_c2min"></input></td>
 </tr>
 <tr>
-<td><select id="rVM_c2_max">
+<td><select id="rVM_c2max">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
 <td>C2 maximum: </td>
-<td><input id="r_c2_max"></input></td>
+<td><input id="r_c2max"></input></td>
 </tr>
 <tr>
 <td><select id="rVM_c2_resol_min">
@@ -217,16 +217,16 @@ For null values choose "NUL"
 </tr>
 <tr><td><br /></td></tr>
 <tr>
-<td><select id="rVM_c3_min">
+<td><select id="rVM_c3min">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
 <td>C3 minimum: </td>
-<td><input id="r_c3_min"></input></td>
+<td><input id="r_c3min"></input></td>
 </tr>
 <tr>
-<td><select id="rVM_c3_max">
+<td><select id="rVM_c3max">
 <option>NUL</option><option>MAP</option><option>VAR</option></select></td>
 <td>C3 maximum: </td>
-<td><input id="r_c3_max"></input></td>
+<td><input id="r_c3max"></input></td>
 </tr>
 <tr>
 <td><select id="rVM_c3_resol_min">
@@ -546,18 +546,18 @@ myStr += makeRowStd("spectral_range_max");
 myStr += makeRowStd("spectral_sampling_step");
 myStr += makeRowStd("spectral_resolution") + cN;
 
-myStr += makeRowStd("c1_min");
-myStr += makeRowStd("c1_max");
+myStr += makeRowStd("c1min");
+myStr += makeRowStd("c1max");
 myStr += makeRowStd("c1_resol_min");
 myStr += makeRowStd("c1_resol_max") + cN;
 
-myStr += makeRowStd("c2_min");
-myStr += makeRowStd("c2_max");
+myStr += makeRowStd("c2min");
+myStr += makeRowStd("c2max");
 myStr += makeRowStd("c2_resol_min");
 myStr += makeRowStd("c2_resol_max") + cN;
 
-myStr += makeRowStd("c3_min");
-myStr += makeRowStd("c3_max");
+myStr += makeRowStd("c3min");
+myStr += makeRowStd("c3max");
 myStr += makeRowStd("c3_resol_min");
 myStr += makeRowStd("c3_resol_max") + cN;
 
@@ -617,18 +617,18 @@ myStr += procDefBind("spectral_range_max");
 myStr += procDefBind("spectral_sampling_step");
 myStr += procDefBind("spectral_resolution") + cN;
 
-myStr += procDefBind("c1_min");
-myStr += procDefBind("c1_max");
+myStr += procDefBind("c1min");
+myStr += procDefBind("c1max");
 myStr += procDefBind("c1_resol_min");
 myStr += procDefBind("c1_resol_max") + cN;
 
-myStr += procDefBind("c2_min");
-myStr += procDefBind("c2_max");
+myStr += procDefBind("c2min");
+myStr += procDefBind("c2max");
 myStr += procDefBind("c2_resol_min");
 myStr += procDefBind("c2_resol_max") + cN;
 
-myStr += procDefBind("c3_min");
-myStr += procDefBind("c3_max");
+myStr += procDefBind("c3min");
+myStr += procDefBind("c3max");
 myStr += procDefBind("c3_resol_min");
 myStr += procDefBind("c3_resol_max") + cN;
 
