@@ -1,3 +1,3 @@
 # DaCHS-for-VESPA
-Current task is to build a wizard to make q.rd from scratch with user-friendly webform interface (qrd_generator.html).
-
+Current task is to update q.rd generator:
+ * to defind binds, especially for spatial_frame type (so it doesn't need so much tinkering for GAVO to ingest it)
