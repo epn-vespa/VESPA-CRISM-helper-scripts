@@ -1,6 +1,6 @@
 # VVEx EPN-TAP v2 service
 
-Configuration files for Virtis Venus-Express v2 service, can be used as templates and adapted.
+Configuration files for Virtis Venus-Express v2 service, can be used as templates and adapted (reduced version with footprint implmented)
 
 
 dbvex2.pro

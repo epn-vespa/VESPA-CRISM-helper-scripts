@@ -2,7 +2,7 @@
 
 <resource schema="vvex">
   <meta name="title">VIRTIS Venus Express nominal mission (demo)</meta>
-  <meta name="creationDate">2016-04-10T09:42:00Z</meta>
+  <meta name="creationDate">2016-06-05T09:42:00Z</meta>
   <meta name="description" format="plain">
 VIRTIS/Venus Express demonstrator service: imaging spectroscopy of Venus in the visible and the near infrared. This lists all the calibrated files from the nominal mission for the three channels M-vis, M-IR and H. Files are described according to the extended index in the PSA archive, with links to the PSA: ftp://psa.esac.esa.int/pub/mirror/VENUS-EXPRESS/VIRTIS/VEX-V-VIRTIS-2-3-V3.0/. See Piccioni et al, 2007, VIRTIS: The Visible and Infrared Thermal Imaging Spectrometer, ESA SP 1295.  </meta>
   <meta name="copyright">LESIA-Obs Paris/IAPS-INAF/ESA</meta>
@@ -29,12 +29,13 @@ VIRTIS/Venus Express demonstrator service: imaging spectroscopy of Venus in the 
     <property key="supportsModel">EPN-TAP 2.0</property>
     <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore-2.0</property>
     <publish sets="ivo_managed"/>
-    
-    <column name="granule_uid" type="text" required="True" ucd="meta.id" 
+    <stc> Polygon UNKNOWNFrame [s_region] </stc>
+
+    <column name="granule_uid" type="text" ucd="meta.id" 
       description="Granule unique identifier, provides direct access"/>
-    <column name="granule_gid" type="text" required="True" ucd="meta.id" 
+    <column name="granule_gid" type="text" ucd="meta.id" 
       description="Group identifier, identical for similar data products"/>
-    <column name="obs_id" type="text" required="True" ucd="meta.id" 
+    <column name="obs_id" type="text" ucd="meta.id" 
       description="Identical for data products related to the same original data"/>
     <column name="dataproduct_type"  type="text" ucd="meta.code.class" 
       description="Organization of the data product (from enumerated list)"/>
@@ -102,7 +103,7 @@ VIRTIS/Venus Express demonstrator service: imaging spectroscopy of Venus in the 
       description="not used"/>
     <column name="spatial_frame_type"  type="text"  ucd="meta.code.class;pos.frame" 
       description="Defines the nature of coordinates (from enumerated list)"/>
-    <column name="s_region"  type="text" ucd="phys.angArea;obs" 
+    <column name="s_region"  type="spoly" ucd="phys.outline;obs.field" 
       description="Provides footprint"/>
     <column name="local_time_min"  type="double precision" ucd="time.phase;stat.min" unit="h"
       description="Local time at observed region"/>

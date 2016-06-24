@@ -1,6 +1,6 @@
 -- SQL procedure to define the planets service view for EPN-TAP v2
 
--- Stephane Erard, LESIA/OVPDC, April 2016 (hand-written from v1 and VVEx v2 examples)
+-- Stephane Erard, LESIA/OVPDC, June 2016 (hand-written from v1 and VVEx v2 examples)
 -- Can be used as a template for other light services 
 -- Use a single granule group
 
@@ -8,19 +8,17 @@
 
 
 CREATE OR REPLACE VIEW planets.epn_core AS SELECT
-	CAST(target  AS TEXT)						 AS granule_uid,
-	TEXT 'Planet'							 AS granule_gid,
-	CAST(id AS TEXT)						 AS obs_id,
+	CAST(target  AS TEXT)						AS granule_uid,
+	TEXT 'Planet'							 	AS granule_gid,
+	CAST(id AS TEXT)						 	AS obs_id,
 
 	TEXT 'ca'  									AS dataproduct_type,
-	CAST(target AS TEXT)	 					AS target_name ,
+	CAST(target AS TEXT)	 					AS target_name,
 	TEXT 'planet'								AS target_class,
 
 	cast(NULL AS DOUBLE PRECISION) 		AS time_min,
 	cast(NULL AS DOUBLE PRECISION)	 	AS time_max,
 	TEXT 'UTC' 							AS time_scale,
---	CAST(NULL AS DOUBLE PRECISION)				AS  target_time_min,
---	CAST(NULL AS DOUBLE PRECISION)				AS  target_time_max,
 
 
 	CAST(NULL AS DOUBLE PRECISION)		AS time_sampling_step_min,
@@ -49,8 +47,6 @@ CREATE OR REPLACE VIEW planets.epn_core AS SELECT
 	TEXT 'celestial'					 	AS spatial_frame_type,
 	TEXT 'Sun' 								AS spatial_origin,
 	CAST(NULL AS TEXT) 							AS s_region,
---	CAST(NULL AS DOUBLE PRECISION)  			AS local_time_min,
---	CAST(NULL AS DOUBLE PRECISION)  			AS local_time_max,
 	CAST(NULL AS DOUBLE PRECISION) 		as incidence_min,
 	CAST(NULL AS DOUBLE PRECISION) 		as incidence_max,
 	CAST(NULL AS DOUBLE PRECISION) 		as emergence_min,
@@ -59,13 +55,11 @@ CREATE OR REPLACE VIEW planets.epn_core AS SELECT
 	CAST(NULL AS DOUBLE PRECISION) 		as phase_max,
 	CAST(NULL AS TEXT)							AS  instrument_host_name,
 	CAST(NULL AS TEXT)						 	AS  instrument_name,
-	TEXT '"phys.mass" "phys.size.radius"' 		AS  measurement_type,
---	CAST(NULL AS TEXT)			AS access_url,
---	CAST(NULL AS TEXT)			AS access_format,
---	CAST(NULL AS INTEGER)		AS access_estsize,
---	CAST(NULL AS TEXT) 			AS file_name,
+	TEXT 'phys.mass#phys.size.radius' 		AS  measurement_type,
 	
-	CAST(Mean_Dist AS DOUBLE PRECISION)		 	AS target_distance,
+--	CAST(Mean_Dist AS DOUBLE PRECISION)		 	AS target_distance_min,
+--	CAST(Mean_Dist AS DOUBLE PRECISION)		 	AS target_distance_max,
+	CAST(Mean_Dist/149597870.7 AS DOUBLE PRECISION)		 AS semi_major_axis,
 	CAST(Mean_rad AS DOUBLE PRECISION) 			AS Mean_radius,
 	CAST(Mean_rad_unc AS DOUBLE PRECISION) 		AS Mean_radius_uncertainty,
 	CAST(Eq_rad AS DOUBLE PRECISION) 			AS Equatorial_radius,
@@ -78,11 +72,11 @@ CREATE OR REPLACE VIEW planets.epn_core AS SELECT
 	CAST(Mass AS DOUBLE PRECISION) 				AS Mass,
 	CAST(Rotation AS DOUBLE PRECISION) 			AS Sideral_rotation_period,
 
-	TEXT '2011CeMDA.109..101A 2000asqu.book.....C' 		AS bib_reference,
-	DATE '2015-08-20T07:54:00.00+00:00'	AS  creation_date,		
-	DATE '2015-08-20T07:54:00.00+00:00'	AS  modification_date,
-	DATE '2015-08-20T07:54:00.00+00:00'	AS  release_date,
-	TEXT 'Planets'  					AS  service_title,
+	TEXT '2011CeMDA.109..101A#2000asqu.book.....C' 		AS bib_reference,
+	DATE '2015-08-20T07:54:00.00+00:00'		AS  creation_date,		
+	DATE '2015-08-20T07:54:00.00+00:00'		AS  modification_date,
+	DATE '2015-08-20T07:54:00.00+00:00'		AS  release_date,
+	TEXT 'Planets'  								AS  service_title,
 	integer '5'											AS processing_level
 FROM planets.data_table;
 

@@ -48,7 +48,8 @@ CREATE OR REPLACE VIEW vvex.calibrated AS SELECT
 	CAST(NULL AS DOUBLE PRECISION)							AS c3_resol_min,
 	CAST(NULL AS DOUBLE PRECISION)							AS c3_resol_max,
 	TEXT 'body'												AS spatial_frame_type,
-	CAST(s_region AS TEXT)										AS s_region,
+	s_region										AS s_region,
+--	TEXT 'BOX("ICRS", 25.4, -20.0, 10, 10)'					AS s_region,
 	CAST(local_t_min AS DOUBLE PRECISION)					AS  local_time_min,
 	CAST(local_t_max AS DOUBLE PRECISION)					AS  local_time_max,
 	CAST(NULL AS DOUBLE PRECISION)		as incidence_min,
@@ -118,7 +119,8 @@ CREATE OR REPLACE VIEW vvex.geometry AS SELECT
 	CAST(NULL AS DOUBLE PRECISION)							AS c3_resol_min,
 	CAST(NULL AS DOUBLE PRECISION)							AS c3_resol_max,
 	TEXT 'body'												AS spatial_frame_type,
-	CAST(s_region AS TEXT)										AS s_region,
+	s_region										AS s_region,
+--	TEXT 'BOX("ICRS", 25.4, -20.0, 10, 10)'					AS s_region,
 	CAST(local_t_min AS DOUBLE PRECISION)					AS  local_time_min,
 	CAST(local_t_max AS DOUBLE PRECISION)					AS  local_time_max,
 	CAST(NULL AS DOUBLE PRECISION)		as incidence_min,
@@ -152,7 +154,7 @@ FROM vvex.data_table;
 	-- merge the above views and interleave groups
 CREATE OR REPLACE VIEW vvex.epn_core AS (
 	SELECT * FROM vvex.calibrated
-	UNION
+	UNION ALL 
 	SELECT * FROM vvex.geometry
 	ORDER BY granule_uid
 );

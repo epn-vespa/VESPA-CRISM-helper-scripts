@@ -164,8 +164,8 @@ Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IA
       ucd="meta.ucd"
       description="UCD(s) defining the nature of measurements"/>
 
-    <column name="target_distance"  type="double precision"
-      ucd="pos.distance" unit="km"
+    <column name="semi_major_axis"  type="double precision"
+      ucd="phys.angSize.smajAxis" unit="au"
       description="Mean heliocentric distance (semi-major axis)"/>
     <column name="mean_radius"    type="double precision" unit="km"
       ucd="phys.size.radius"

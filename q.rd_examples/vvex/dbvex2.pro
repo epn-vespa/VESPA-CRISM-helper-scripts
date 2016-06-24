@@ -62,8 +62,8 @@ Pro dbvex2, FILE
 ;Flist= 'BID_INDEX.LBL'
 
 ; **** short for tries
-dir = '/Data4/RSI/perso_IDL/MaPomme/VO-essais/VIRTIS_VEx/2013'
- Flist= 'BID3court_INDEX.LBL'
+;dir = '/Data4/RSI/perso_IDL/MaPomme/VO-essais/VIRTIS_VEx/2013'
+; Flist= 'BID3court_INDEX.LBL'
 
 
 ; Old file with only CAL versions - nominal mission only, Vis missing
@@ -71,10 +71,13 @@ dir = '/Data4/RSI/perso_IDL/MaPomme/VO-essais/VIRTIS_VEx/2013'
 ;Flist= 'BID2_INDEX.LBL'
 
 ; ** Complete file with only CAL versions - nominal mission only
-;dir = '/Data4/RSI/perso_IDL/MaPomme/VO-essais/VIRTIS_VEx/2013'
-;Flist= 'BID3_INDEX.LBL'
+dir = '/Data4/RSI/perso_IDL/MaPomme/VO-essais/VIRTIS_VEx/2013'
+Flist= 'BID3_INDEX.LBL'
 ;Flist= ['BID3_INDEX.LBL','BID3_INDEX_1.LBL','BID3_INDEX_2.LBL','BID3_INDEX_3.LBL','BID3_INDEX_4.LBL']
 ; for complete mission: concatenate files first in shell, not in routine.
+; ** Complete file with only CAL versions - all phase except cruise
+;dir = '/Data4/RSI/perso_IDL/MaPomme/VO-essais/VIRTIS_VEx/2013'
+;Flist= 'TOTINDEX.LBL'
 
 cd, dir, cur = dir0
 
@@ -198,6 +201,7 @@ VExparam.a_Gurl = tata
 ; thumbnails
 tata =strarr(Nf)
 tata(Mfiles)= (VExparam.a_url)(Mfiles)
+;stop
 ; process in sequence
 for ii = 0, Nm-1 do tata(Mfiles(ii)) = STRJOIN(STRSPLIT(tata(Mfiles(ii)), "DATA", /ext, /reg), "BROWSE") 
 ; 		beware of initial // here:
@@ -275,7 +279,10 @@ VExparam.exp_time = bid  * temp.index_table.(13)	; x summed frames
 
 VExparam.time_samp = temp.index_table.(16)
 
-VExparam.s_region = "Polygon 153.311 2.548 165.374 2.594 177.980 1.985 189.941 0.806 193.336 -10.169 196.416 -38.171 203.565 -53.349 180.079 -58.780 154.473 -57.614 133.818 -50.372 143.051 -35.946 149.022 -8.905"
+;VExparam.s_region = "Polygon 'UNKNOWNFrame' 153.311, 2.548, 165.374, 2.594, 177.980, 1.985, 189.941, 0.806, 193.336, -10.169, 196.416, -38.171, 203.565, -53.349, 180.079, -58.780, 154.473, -57.614, 133.818, -50.372, 143.051, -35.946, 149.022, -8.905"
+
+;VExparam.s_region = "BOX('ICRS', 25.4, -20.0, 10, 10)"
+VExparam.s_region = "{(153.311d, 2.548d), (165.374d, 2.594d), (177.980d, 1.985d), (189.941d, 0.806d)}"
 
 
 ; 3) Write an SQL procedure
@@ -341,14 +348,14 @@ cstsql= $
 '    inst_host_name		character varying(13),',$
 '    ref 				character varying(110),',$	
 '    a_url 				character varying(130),',$
-'    a_format 			character varying(7),',$
+'    a_format 			character varying(20),',$
 '    a_Gurl				character varying(130),',$   	; @Cor2016: ajout
 '    th_url				character varying(130),',$   	; @Cor2016: ajout
 '    th_url1			character varying(130),',$   	; @Cor2016: ajout
 '    th_Gurl			character varying(130),',$   	; @Cor2016: ajout
 '    SizeD 				integer,',$   	; @Cor2016: ajout
 '    SizeG 				integer,',$   	; @Cor2016: ajout
-'    s_region 			character varying(210),',$		; @Cor2016: ajout, try
+'    s_region 			spoly,',$		; @Cor2016: ajout, try
 '    creattime 			character varying(23)',$		; @Cor2016: ajout
 ');']
 printf, Lun, ' '

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <resource schema="iks">
-  <meta name="title">IKS</meta>
+  <meta name="title">SHORT NAME</meta>
   <meta name="creationDate">2016-05-22T09:42:00Z</meta>
   <meta name="description" format="plain">
-Service description: this is generic q.rd file for EPN-TAP v2 services in DaCHS. Mandatory parameters are in first block.</meta>
+Service description: this is generic q.rd file for EPN-TAP v2 services in DaCHS. Mandatory parameters are in first block. Replace with your values</meta>
   <meta name="copyright">PADC/LESIA</meta>
   <meta name="creator.name">Stephane Erard</meta>
   <meta name="publisher">Paris Astronomical Data Centre - LESIA</meta>
