@@ -10,7 +10,7 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
   <meta name="publisher">Paris Astronomical Data Centre - LESIA</meta>
   <meta name="contact.name">Stephane Erard</meta>
   <meta name="contact.email">vo.paris@obspm.fr</meta>
-  <meta name="contact.address">Observatoire de Paris VOPDC, bat. Perrault, 77 av. Denfert Rochereau, 75014 Paris, FRANCE</meta>
+  <meta name="contact.address">Observatoire de Paris PADC, bat. Perrault, 77 av. Denfert Rochereau, 75014 Paris, FRANCE</meta>
   <meta name="subject">comet</meta>
   <meta name="subject">spectroscopy</meta>
   <meta name="subject">infrared</meta>
@@ -19,7 +19,7 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
   <meta name="contentLevel">General</meta>
   <meta name="contentLevel">University</meta>
   <meta name="contentLevel">Research</meta>
-  <meta name="utype">eon  </meta>
+  <meta name="utype">ivo://vopdc.obspm/std/EpnCore#schema-2.0</meta>
 
 
 <table id="epn_core" onDisk="True" adql="True">
@@ -27,8 +27,8 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
     <meta name="description"> IR spectroscopy of comet Halley </meta>
     <meta name="referenceURL">http://lesia.obspm.fr</meta>
     <meta name="utype">EPN-TAP 2.0</meta>
-    <property key="supportsModel">EPN-TAP 2.0</property>
-    <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore-2.0</property>
+    <property key="supportsModel">EpnCore#schema-2.0</property>
+    <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore#schema-2.0</property>
     <publish sets="ivo_managed"/>
     <stc> Polygon UNKNOWNFrame [s_region] </stc>
 
@@ -96,10 +96,10 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
       ucd="time.interval;stat.max"  unit="s"
       description="Max time sampling step"/>
     <column name="time_exp_min"   type="double precision"
-      ucd="time.duration;stat.min"  unit="s"
+      ucd="time.duration;obs.exposure;stat.min"  unit="s"
       description="Min integration time"/>
     <column name="time_exp_max"   type="double precision"
-      ucd="time.duration;stat.max"  unit="s"
+      ucd="time.duration;obs.exposure;stat.max"  unit="s"
       description="Max integration time"/>
     <column name="spectral_range_min"   type="double precision"
       ucd="em.freq;stat.min" unit="Hz"
@@ -231,5 +231,6 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
 <data id="collection" auto="false">
         <register services="__system__/tap#run"/>
         <make table="epn_core"/>
+		<publish/>
 </data>
 </resource>

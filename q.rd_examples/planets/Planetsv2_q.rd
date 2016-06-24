@@ -10,7 +10,7 @@ Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IA
   <meta name="publiser">Paris Astronomical Data Centre - LESIA</meta>
   <meta name="contact.name">Stephane Erard</meta>
   <meta name="contact.email">vo.paris@obspm.fr</meta>
-  <meta name="contact.address">Observatoire de Paris VOPDC, bat. Perrault, 77 av. Denfert Rochereau, 75014 Paris, FRANCE</meta>
+  <meta name="contact.address">Observatoire de Paris PADC, bat. Perrault, 77 av. Denfert Rochereau, 75014 Paris, FRANCE</meta>
   <meta name="subject">planet</meta>
   <meta name="subject">mass</meta>
   <meta name="subject">radius</meta>
@@ -20,7 +20,7 @@ Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IA
   <meta name="contentLevel">University</meta>
   <meta name="contentLevel">Research</meta>
   <meta name="contentLevel">Amateur</meta>
-  <meta name="utype">eon  </meta>
+  <meta name="utype">ivo://vopdc.obspm/std/EpnCore#schema-2.0</meta>
 
 
 <table id="epn_core" onDisk="True" adql="True">
@@ -28,8 +28,8 @@ Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IA
     <meta name="description"> Reference values for dimensions, mass, and rotation period of solar system planets.</meta>
    <meta name="referenceURL">http://lesia.obspm.fr</meta>
     <meta name="utype">EPN-TAP 2.0</meta>
-    <property key="supportsModel">EPN-TAP 2.0</property>
-    <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore-2.0</property>
+    <property key="supportsModel">EpnCore#schema-2.0</property>
+    <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore#schema-2.0</property>
     <publish sets="ivo_managed"/>
     
     <column name="granule_uid" type="text" required="True" 
@@ -67,10 +67,10 @@ Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IA
       ucd="time.interval;stat.max"  unit="s"
       description="Max time sampling step"/>
     <column name="time_exp_min"   type="double precision"
-      ucd="time.duration;stat.min"  unit="s"
+      ucd="time.duration;obs.exposure;stat.min"  unit="s"
       description="Min integration time"/>
     <column name="time_exp_max"   type="double precision"
-      ucd="time.duration;stat.max"  unit="s"
+      ucd="time.duration;obs.exposure;stat.max"  unit="s"
       description="Max integration time"/>
     <column name="spectral_range_min"   type="double precision"
       ucd="em.freq;stat.min" unit="Hz"
@@ -132,8 +132,8 @@ Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IA
     <column name="spatial_origin"  type="text" 
       ucd="meta.code" 
       description="Spatial origin of coordinate system"/>
-    <column name="s_region"  type="text" 
-      ucd="phys.angArea;obs" 
+    <column name="s_region"  type="spoly" 
+      ucd="phys.outline;obs.field" 
       description="Provides footprint"/>
 
     <column name="incidence_min"    type="double precision"
@@ -228,5 +228,6 @@ Main characteristics of planets. Data are retrieved from Archinal et al 2009 (IA
 
 <data id="collection" auto="false">
         <make table="epn_core"/>
+	<publish/>
 </data>
 </resource>
