@@ -30,7 +30,8 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
     <property key="supportsModel">EPN-TAP 2.0</property>
     <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore-2.0</property>
     <publish sets="ivo_managed"/>
-    
+    <stc> Polygon UNKNOWNFrame [s_region] </stc>
+
     <column name="granule_uid" type="text" required="True" 
       ucd="meta.id" 
       description="Granule unique identifier, provides direct access"/>
@@ -61,12 +62,18 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
     <column name="target_distance_max"  type="double precision"
       ucd="pos.distance;stat.max" unit="km"
       description="Spacecraft-target max distance"/>
-    <column name="sun_distance"  type="double precision"
-      ucd="pos.distance" unit="au"
-      description="Extra: target heliocentric distance in au"/>
-    <column name="earth_distance"  type="double precision"
-      ucd="pos.distance" unit="au"
-      description="Extra: target-Earth distance in au"/>
+    <column name="sun_distance_min"  type="double precision"
+      ucd="pos.distance;stat.min" unit="au"
+      description="Extra: min target heliocentric distance in au"/>
+    <column name="sun_distance_max"  type="double precision"
+      ucd="pos.distance;stat.max" unit="au"
+      description="Extra: max target heliocentric distance in au"/>
+    <column name="earth_distance_min"  type="double precision"
+      ucd="pos.distance;stat.min" unit="au"
+      description="Extra: min target-Earth distance in au"/>
+    <column name="earth_distance_max"  type="double precision"
+      ucd="pos.distance;stat.max" unit="au"
+      description="Extra: max target-Earth distance in au"/>
     <column name="time_min"  type="double precision"
       ucd="time.start" unit="d"
       description="Acquisition start time (in JD)"/>
@@ -151,8 +158,8 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
     <column name="spatial_frame_type"  type="text" 
       ucd="meta.code.class;pos.frame" 
       description="Defines the nature of coordinates (from enumerated list)"/>
-    <column name="s_region"  type="text" 
-      ucd="phys.angArea;obs" 
+    <column name="s_region"  type="spoly" 
+      ucd="phys.outline;obs.field" 
       description="Provides footprint"/>
     <column name="incidence_min"    type="double precision"
       ucd="pos.posAng;stat.min" unit="deg"

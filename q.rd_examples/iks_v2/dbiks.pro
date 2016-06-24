@@ -42,6 +42,7 @@ Pro dbiks, FILE
 ;  SE, Nov 2015: Recovered phase angle added + passed all floats to double precision => @Cor2015
 ;  SE, Feb 2016: Added rootname param for v2
 ;				 Does not compute target time, because only date is provided (diff is very small) 
+;  SE, May 2016: Updated parameters
 ; ------------------------------------------------------------------------------------
 
 
@@ -58,7 +59,7 @@ if N_params() NE 1 then FILE = 'indexdb.txt'
 
 
 ; Structure pour les données/granules
-IKSparam = replicate({id:1,Filename:'',Rootname:'',observation_id:1L, time_obs:'',target:'',distance:1.,Sdistance:1., Edistance:1.,sp_min:1.,sp_max:1.,sp_step_min:1.,sp_step_max:1.,sp_res_min:1.,sp_res_max:1., exp_time:1., phase_ang:1., Inst_Name:'',Inst_Host_name:'', ref:'NULL',a_url:'',a_format:'',o_url:'',o_format:''},Nf) 
+IKSparam = replicate({id:1,Filename:'',Rootname:'',observation_id:1L, time_obs:'',target:'',distance:1.,Sdistance:1., Edistance:1.,sp_min:1.,sp_max:1.,sp_step_min:1.,sp_step_max:1.,sp_res_min:1.,sp_res_max:1., exp_time:1., phase_ang:1., Inst_Name:'',Inst_Host_name:'', ref:'NULL',a_url:'',a_format:'',o_url:'',o_format:'', s_region:''},Nf) 
 
 
 For i =0, Nf-1 do begin
@@ -196,9 +197,10 @@ cstsql= $
 '    inst_host_name character varying(6),',$
 '    ref 			character varying(60),',$	;	@Cor2014: added new fields
 '    a_url 			character varying(94),',$
-'    a_format 		character varying(7),',$
+'    a_format 		character varying(25),',$
 '    o_url 			character varying(94),',$	;	@Cor2014: added new fields
-'    o_format 		character varying(5)',$
+'    o_format 		character varying(10),',$
+'    s_region 		spoly',$
 ');']
 printf, Lun, ' '
 ; -- the lines after CREATE TABLE could be derived from iksparam structure definition + SQL type…

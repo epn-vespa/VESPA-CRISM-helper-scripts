@@ -1,5 +1,5 @@
 -- SQL procedure to define the IKS service view for EPN-TAP v2
--- Stephane Erard, LESIA/OVPDC, Feb 2016 (adapted from older v1 version, hand-written)
+-- Stephane Erard, LESIA/OVPDC, June 2016 (adapted from older v1 version, hand-written)
 -- Can be used as a template for other light services, especially in spectroscopy 
 
 -- Creates one view per granule group (here, 2 of them), then merge to epn_core view (EPN-TAP v2)
@@ -16,8 +16,10 @@ CREATE OR REPLACE VIEW iks.corrected AS SELECT
 	CAST(observation_id AS TEXT) 				AS  acquisition_id,			-- renamed to avoid confusions with obs_id
 	distance		 							AS  target_distance_min,
 	distance		 							AS  target_distance_max,
-	sdistance		 							AS  sun_distance,
-	edistance		 							AS  earth_distance,
+	sdistance		 							AS  sun_distance_min,
+	sdistance		 							AS  sun_distance_max,
+	edistance		 							AS  earth_distance_min,
+	edistance		 							AS  earth_distance_max,
 	cast(to_char(time_obs::timestamp,'J') as double precision) + EXTRACT(EPOCH FROM time_obs::timestamp::time)/86400 -0.5 AS time_min,
 	cast(to_char(time_obs::timestamp,'J') as double precision) + EXTRACT(EPOCH FROM time_obs::timestamp::time)/86400 -0.5 AS time_max,
 
@@ -48,7 +50,7 @@ CREATE OR REPLACE VIEW iks.corrected AS SELECT
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_min,
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_max,
 	TEXT 'body'									AS spatial_frame_type,
-	CAST(NULL AS TEXT) 							AS s_region,
+	CAST(NULL AS TEXT)							AS s_region,
 
 	CAST(NULL AS DOUBLE PRECISION) as incidence_min,
 	CAST(NULL AS DOUBLE PRECISION) as incidence_max,
@@ -85,8 +87,10 @@ CREATE OR REPLACE VIEW iks.archive AS SELECT
 	CAST(observation_id AS TEXT) 				AS  acquisition_id,
 	distance		 							AS  target_distance_min,
 	distance		 							AS  target_distance_max,
-	sdistance		 							AS  sun_distance,
-	edistance		 							AS  earth_distance,
+	sdistance		 							AS  sun_distance_min,
+	sdistance		 							AS  sun_distance_max,
+	edistance		 							AS  earth_distance_min,
+	edistance		 							AS  earth_distance_max,
 	cast(to_char(time_obs::timestamp,'J') as double precision) + EXTRACT(EPOCH FROM time_obs::timestamp::time)/86400 -0.5 AS time_min,
 	cast(to_char(time_obs::timestamp,'J') as double precision) + EXTRACT(EPOCH FROM time_obs::timestamp::time)/86400 -0.5 AS time_max,
 
@@ -117,7 +121,7 @@ CREATE OR REPLACE VIEW iks.archive AS SELECT
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_min,
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_max,
 	TEXT 'body'									AS spatial_frame_type,
-	CAST(NULL AS TEXT) 							AS s_region,
+	CAST(NULL AS TEXT)							AS s_region,
 
 	CAST(NULL AS DOUBLE PRECISION) as incidence_min,
 	CAST(NULL AS DOUBLE PRECISION) as incidence_max,
@@ -145,7 +149,7 @@ FROM IKS.data_table;
 	-- merge the above views and interleave groups
 CREATE OR REPLACE VIEW iks.epn_core AS (
 	SELECT * FROM iks.corrected
-	UNION
+	UNION ALL
 	SELECT * FROM iks.archive
 	ORDER BY granule_uid
 );
