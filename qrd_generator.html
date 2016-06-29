@@ -82,10 +82,11 @@ For null values choose "NUL"
 <tr><td><br /></td></tr>
 <tr>
 <td>
-<!--
 <select id="rVM_processing_level">
-<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
+<!--
+<option>NUL</option><option>MAP</option>
 -->
+<option>VAR</option></select></td>
 <td>Processing Level: </td>
 <td>
 <select id="r_processing_level">
@@ -243,10 +244,11 @@ For null values choose "NUL"
 <tr><td><br /></td></tr>
 <tr>
 <td>
-<!--
 <select id="rVM_spatial_frame_type">
-<option>NUL</option><option>MAP</option><option>VAR</option></select>
+<!--
+<option>NUL</option><option>MAP</option>
 -->
+<option>VAR</option></select>
 </td>
 <td>Spatial Frame Type: </td>
 <td>
@@ -357,7 +359,7 @@ For null values choose "NUL"
 </tr>
 <tr>
 <td><select id="rVM_access_format">
-<option>NUL</option><option>MAP</option><option>VAR</option></select> <i>must conform with MIME types spec.: <a href="https://voparis-confluence.obspm.fr/display/VES/Data+Formats+and+MIME+Types">https://voparis-confluence.obspm.fr/display/VES/Data+Formats+and+MIME+Types</a></i></td>
+<option>NUL</option><option>MAP</option><option>VAR</option></select></td>
 <td>access_format: </td>
 <td><input id="r_access_format"></input></td>
 </tr>
@@ -524,7 +526,7 @@ var makeRow = function(myType, myValue, myKey) {
 }
 
 var makeRowStd = function(name) { return makeRow($('#rVM_' + name).val(), $('#r_' + name).val(), name);}
-
+var makeRowStdSFT = function(name) { return makeRow($('#rVM_' + name).val(), ('"' + $('#r_' + name).val() + '"'), name);}
 
 myStr += makeRowStd("granule_uid");
 myStr += makeRowStd("granule_gid");
@@ -561,6 +563,8 @@ myStr += makeRowStd("c3max");
 myStr += makeRowStd("c3_resol_min");
 myStr += makeRowStd("c3_resol_max") + cN;
 
+myStr += makeRowStdSFT("spatial_frame_type") + cN;
+
 myStr += makeRowStd("incidence_min");
 myStr += makeRowStd("incidence_max");
 myStr += makeRowStd("emergence_min");
@@ -570,6 +574,8 @@ myStr += makeRowStd("phase_max") + cN;
 
 myStr += makeRowStd("instrument_host_name");
 myStr += makeRowStd("instrument_name") + cN;
+
+myStr += makeRowStd("processing_level") + cN;
 
 myStr += makeRowStd("service_title");
 myStr += makeRowStd("creation_date");
@@ -661,3 +667,4 @@ myStr += '\</resource\>' + cN;
 </script>
 </body>
 </html>
+
