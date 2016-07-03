@@ -12,7 +12,7 @@ CREATE OR REPLACE VIEW planets.epn_core AS SELECT
 	TEXT 'Planet'							 	AS granule_gid,
 	CAST(id AS TEXT)						 	AS obs_id,
 
-	TEXT 'ca'  									AS dataproduct_type,
+	TEXT 'ci'  									AS dataproduct_type,
 	CAST(target AS TEXT)	 					AS target_name,
 	TEXT 'planet'								AS target_class,
 
@@ -46,7 +46,7 @@ CREATE OR REPLACE VIEW planets.epn_core AS SELECT
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_max,
 	TEXT 'celestial'					 	AS spatial_frame_type,
 	TEXT 'Sun' 								AS spatial_origin,
-	CAST(NULL AS TEXT) 							AS s_region,
+	CAST(NULL AS SPOLY) 							AS s_region,
 	CAST(NULL AS DOUBLE PRECISION) 		as incidence_min,
 	CAST(NULL AS DOUBLE PRECISION) 		as incidence_max,
 	CAST(NULL AS DOUBLE PRECISION) 		as emergence_min,

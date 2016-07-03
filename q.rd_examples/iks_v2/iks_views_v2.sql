@@ -50,7 +50,7 @@ CREATE OR REPLACE VIEW iks.corrected AS SELECT
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_min,
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_max,
 	TEXT 'body'									AS spatial_frame_type,
-	CAST(NULL AS TEXT)							AS s_region,
+	CAST(NULL AS SPOLY)							AS s_region,
 
 	CAST(NULL AS DOUBLE PRECISION) as incidence_min,
 	CAST(NULL AS DOUBLE PRECISION) as incidence_max,
@@ -121,7 +121,7 @@ CREATE OR REPLACE VIEW iks.archive AS SELECT
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_min,
 	CAST(NULL AS DOUBLE PRECISION)				AS c3_resol_max,
 	TEXT 'body'									AS spatial_frame_type,
-	CAST(NULL AS TEXT)							AS s_region,
+	CAST(NULL AS SPOLY)							AS s_region,
 
 	CAST(NULL AS DOUBLE PRECISION) as incidence_min,
 	CAST(NULL AS DOUBLE PRECISION) as incidence_max,

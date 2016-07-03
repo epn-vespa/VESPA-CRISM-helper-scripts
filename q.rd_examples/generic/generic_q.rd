@@ -16,7 +16,7 @@ Service description: this is generic q.rd file for EPN-TAP v2 services in DaCHS.
   <meta name="contentLevel">General</meta>
   <meta name="contentLevel">University</meta>
   <meta name="contentLevel">Research</meta>
-  <meta name="utype">eon  </meta>
+  <meta name="utype">ivo://vopdc.obspm/std/EpnCore#schema-2.0</meta>
 
 
 <table id="epn_core" onDisk="True" adql="True">
@@ -24,9 +24,10 @@ Service description: this is generic q.rd file for EPN-TAP v2 services in DaCHS.
     <meta name="description"> Short service description </meta>
     <meta name="referenceURL">http://lesia.obspm.fr</meta>
     <meta name="utype">EPN-TAP 2.0</meta>
-    <property key="supportsModel">EPN-TAP 2.0</property>
-    <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore-2.0</property>
+    <property key="supportsModel">EpnCore#schema-2.0</property>
+    <property key="supportsModelURI">ivo://vopdc.obspm/std/EpnCore#schema-2.0</property>
     <publish sets="ivo_managed"/>
+    <stc> Polygon UNKNOWNFrame [s_region] </stc>
     
     <column name="granule_uid" type="text" required="True" ucd="meta.id" 
       description="Granule unique identifier"/>
@@ -92,7 +93,7 @@ Service description: this is generic q.rd file for EPN-TAP v2 services in DaCHS.
       description="Max resolution of 3rd spatial coordinate"/>
     <column name="spatial_frame_type"  type="text" ucd="meta.code.class;pos.frame" 
       description="Defines the nature of coordinates"/>
-    <column name="s_region"  type="text" ucd="phys.angArea;obs" 
+    <column name="s_region"  type="spoly" ucd="phys.outline;obs.field" 
       description="Footprint, STC style"/>
     <column name="incidence_min"    type="double precision" ucd="pos.posAng;stat.min" unit="deg"
       description="Min incidence angle (solar zenith angle)"/>
@@ -175,5 +176,6 @@ Service description: this is generic q.rd file for EPN-TAP v2 services in DaCHS.
 <data id="collection" auto="false">
         <register services="__system__/tap#run"/>
         <make table="epn_core"/>
+		<publish/>
 </data>
 </resource>
