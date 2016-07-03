@@ -128,9 +128,9 @@ Service description: this is generic q.rd file for EPN-TAP v2 services in DaCHS.
       description="URL of the data file"/>
     <column name="access_format"  type="text" ucd="meta.code;mime"
       description="Data file format"/>
-    <column name="access_estsize" type="integer" unit="kbyte" ucd="phys.size;meta.file"
+    <column name="access_estsize" type="integer" unit="kbyte" ucd="phys.size;meta.file" required="True"
       description="Estimate file size in kB"/>
-    <column name="access_md5" type="integer" ucd="meta.checksum;meta.file"
+    <column name="access_md5" type="integer" ucd="meta.checksum;meta.file" required="True"
       description="Ckecksum, md5"/>
     <column name="thumbnail_url"  type="text" ucd="meta.ref.url;meta.file"
       description="URL of a small thumbnail"/>
