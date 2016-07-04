@@ -58,30 +58,13 @@
 			Use the `//epntap#populate`_ apply in rowmakers
 			feeding tables mixing this in.
 		]]></doc>
-<!-- 
-c1/c2/c3 units depend on spatial_frame_type value. We should build a STREAM to
-set the correct units:
- - celestial	c1: deg	(RA)	c2: deg	(Dec)	c3: m (Distance)
- - body 		c1: deg	(Lon)	c2: deg	(Lat)	c3: m (Radius)
- - cartesian	c1: m	(X)		c2: m	(Y)		c3: m (Z)
- - cylindrical	c1: m	(R)		c2: deg	(Azimuth)	c3: m (Z)
- - spherical	c1: m	(R)		c2: deg	(Colatitude)c3: m (Azimuth)
- - healpix		c1: no unit (H)	c2: no unit	(K)	c3: N/A
--->
 		<mixinPar key="c1unit" description="Unit of the first spatial
 			coordinate">myC1</mixinPar>
 		<mixinPar key="c2unit" description="Unit of the second spatial
 			coordinate">myC2</mixinPar>
 		<mixinPar key="c3unit" description="Unit of the third spatial
 			coordinate">myC3</mixinPar>
-<!-- mixinPar values are only accessible only from within the code block of 
-either processEarly or processLate. processEarly is called as the final step of element fix-up
-making it already too late to edit mixinPar, since by that time the columns within the events have already been fixed.
-Hence, to edit the column property values such as units, these should be changed not in the mixinPars, but in the 
-columns themselves. This is a little bit more bulky then I would like, but it works.
--->
-<!-- mixinPar cXunit perhaps should be removed completely, the spatial_frame_type is present as a parameter, but
-a parameter for procDef, and not a mixinPar, so at this stage we create a mixinPar of the same name-->
+
 		<mixinPar key="spatial_frame_type" description="Flavour of the coordinate system,
 			should be the same as for ProcDef" />
                 <processEarly>
@@ -109,13 +92,6 @@ a parameter for procDef, and not a mixinPar, so at this stage we create a mixinP
                         </code>
                 </processEarly>
 
-<!-- Spectral is now always for em radiation. 
-Particle or mass spectroscopy is described with specific keywords
- 
-		<mixinPar key="spectralUCD" description="UCD of the spectral
-			axis; this must be one of em.freq (for electromagnetic
-			radiation) or phys.energy;phys.part (for particles)"
-			>em.freq</mixinPar>-->
 
 		<mixinPar key="processing_level" description="How processed is the
 			data?  This is a numerical code explained in the corresponding
@@ -125,11 +101,11 @@ Particle or mass spectroscopy is described with specific keywords
 		<events>
 			<adql>True</adql>
 			<onDisk>True</onDisk>
-			<meta name="utype">epntap</meta>
-			<meta name="info" infoName="SERVICE_PROTOCOL" 
-				infoValue="0.37">EPN-TAP 2.0</meta>
-<!-- i don't think we need this-->
-			<column name="accref" original="//products#products.accref"/>
+			<meta name="utype">EPN-TAP 2.0</meta>
+			<meta name="info" infoName="SERVICE_PROTOCOL" infoValue="2.0">EPN-TAP</meta>
+
+<!-- i don't think we need this
+			<column name="accref" original="//products#products.accref"/> -->
 <!--However, something breaks at import when above line is commented out
 giving the following error:
 
@@ -140,48 +116,19 @@ Failed db query: '
                 '
 So i'm leaving it as the first column to make it easy to find
 -->
-<!--the parameter _index v1.0 is renamed to granule_uid in v2.0
-			<column name="index_" type="bigint" required="True"
-				ucd="meta.id"
-				description="Numeric identifier (like a record number) of this
-				row.">
-				<property key="std">1</property>
-			</column>
--->
+
 			<column name="granule_uid" type="text" required="True"
 				ucd="meta.id"
 				description="Internal table row index 
 					Unique ID in data service, also in v2. Can be alphanum.">
 				<property key="std">1</property>
 			</column>
-<!-- resource_type is not in v2.0
-			<column name="resource_type" type="text" 
-				utype="Epn.ResourceType" ucd="meta.id;class" 
-				description="'granule' if the row describes a smallest 
-					element reachable
-					in a service (e.g., a file), or 'dataset' for an aggregate
-					of granules.">
-				<property key="std">1</property>
-				<values>
-					<option>dataset</option>
-					<option>granule</option>
-				</values>
-			</column>
--->
-<!-- dataset_id is replaced by granule_gid in v2.0
-			<column name="dataset_id" type="text"
-				ucd="meta.id;meta.dataset"
-				description="An identifier for the dataset this granule belongs to.">
-				<property key="std">1</property>
-			</column>
--->
 			<column name="granule_gid" type="text" required="True"
 				ucd="meta.id"
 				description="Common to granules of same type (e.g. same map projection, 
 					or geometry data products). Can be alphanum.">
 				<property key="std">1</property>
 			</column>
-<!--the parameters obs_id is new to v2.0 -->
 			<column name="obs_id" type="text" required="True"
 				ucd="meta.id"
 				description="Associates granules derived from the same data (e.g. 
@@ -189,13 +136,6 @@ So i'm leaving it as the first column to make it easy to find
 					Can be alphanum., may be the ID of original observation.">
 				<property key="std">1</property>
 			</column>
-<!--END NEW PARAMS granule_uid, granule_gid, obs_id-->
-<!--ucd for dataproduct_type was changed from "meta.id;class" to "meta.code.class"-->
-<!--
-Utype can be used as a reference to a data model, like the EPNcore data model or other IVOA data models 
-(VOUnit, Characterization, STC...). 
-We will have to think of it at some point, but it is not crucial for now.
--->
 			<column name="dataproduct_type"	type="text" 
 				ucd="meta.code.class" utype="Epn.dataProductType"
 				description="The high-level organization of the data product
@@ -222,8 +162,6 @@ We will have to think of it at some point, but it is not crucial for now.
 					to target class), case sensitive">
 				<property key="std">1</property>
 			</column>
-<!--target_class ucd changed from "src.class" to "meta.code.class;src"
-THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
 			<column name="target_class"	type="text" 
 				ucd="meta.code.class;src"  utype="Epn.TargetClass"
 				description="Type of target, from enumerated list">
@@ -245,26 +183,15 @@ THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
 				</values>
 			</column>
 
-			<!-- time doesn't use not _minmax because ucds and utypes
-			are irregular -->
-<!--for time _min _max removed obs.exposure from ucd, relaced unit from "d" to "d (date as JD)"
-added type="double"-->
-			<column name="time_min"	type="double precision"
-				ucd="time.start;" unit="d (date as JD)"
-				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StartTime"
-				description="Acquisition start time (in JD). UTC measured 
-					at time_origin location (default is observer's frame)"/>
-			<column name="time_max"		type="double precision"
-				ucd="time.stop;" unit="d (date as JD)"
-				utype="Char.TimeAxis.Coverage.Bounds.Limits.Interval.StopTime"
-				description="Acquisition stop time (in JD). UTC measured 
-					at time_origin location (default is observer's frame)"/>
-<!-- time_scale was moved to the end of the table-->
-<!--changed t_* to time_*, also in the stream said that type="Double"-->
-<!--I'm keeping Descriptions for time_sampling_step, time_exp, spectral_range,
-spectral_sampling_step, spectral_resolution, c1, c2, c3, c*_resol, 
-incidence, emergence, phase,
-the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
+			<column name="time_min"	
+				ucd="time.start" unit="d"
+				type="double precision"
+				description="Acquisition start time"/>
+			<column name="time_max"	
+				ucd="time.end" unit="d"
+				type="double precision"
+				description="Acquisition stop time"/>
+
 			<FEED source="_minmax"
 				basename="time_sampling_step"
 				baseucd="time.interval" unit="s"
@@ -281,7 +208,7 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 				baseucd="em.freq" unit="Hz"
 				baseutype="Epn.Spectral.Spectral_range"
 				basedescr="Spectral domain of the data"/>
-<!-- sampling_step renamed to spectral_sampling_step, also baseucd="spect" changed to ="em.freq.step"-->
+
 			<FEED source="_minmax"
 				basename="spectral_sampling_step"
 				baseucd="em.freq.step" unit="Hz"
@@ -290,10 +217,10 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 					filters or channels"/>
 			<FEED source="_minmax"
 				basename="spectral_resolution"
-				baseucd="spec.resolution" unit="Hz"
+				baseucd="spect.resolution" unit="Hz"
 				baseutype="Epn.Spectral.Spectral_resolution"
 				basedescr="FWHM of the instrument profile"/>
-<!--c1, c2, c3 baseucd changed from "obs.field" to "pos"-->
+
 			<FEED source="_c_minmax"
 				basename="c1"
 				baseucd="pos" unit="\c1unit"
@@ -309,9 +236,7 @@ the way they were in V1.0; since the ones in V2.0 are not very descriptive-->
 				baseucd="pos" unit="\c3unit"
 				baseutype="Epn.Spatial.Spatial_range.c3"
 				basedescr="Third coordinate (e.g., height, 'z')"/>
-<!--added s_region, new to V2.0; 
-I'm not including "instr.fov" in ucd, as it's TBC 
-ucd="obs" is from obsCore-->
+
 			<column name="s_region"	type="spoly" 
 				ucd="phys.outline;obs.field" unit="(STC-S String)" 
 				description="ObsCore-like footprint, assume 
@@ -334,9 +259,7 @@ ucd="obs" is from obsCore-->
 				baseucd="pos.resolution" unit="\c3unit"
 				baseutype="Epn.Spatial.Spatial_resolution.c3_resol"
 				basedescr="Resolution in the third coordinate"/>
-<!-- changed ucd of "spatial_frame_type" to "meta.code.class;pos.frame" from "pos.frame"--> 
-<!--THIS SHOULD BE FROM ENUMERATED LIST. IS IT?-->
-<!--THIS SHOULD BE OBTAINED FROM Q.RD, IS IT?-->
+
 			<column name="spatial_frame_type"	type="text" 
 				ucd="meta.code.class;pos.frame"
 				description="Flavor of coordinate system, 
@@ -351,26 +274,22 @@ ucd="obs" is from obsCore-->
 					<option>healpix</option>
 				</values>
 			</column>
-<!--changed "incidence" baseucd from "pos.incidenceAng" to "pos.posAng"-->
 			<FEED source="_minmax"
 				basename="incidence"
 				baseucd="pos.posAng" unit="deg"
 				baseutype="Epn.View_angle.Incidence_angle"
 				basedescr="Incidence angle (solar zenithal angle) during
 					data acquisition"/>
-<!--changed "emergence" baseucd from "pos.emergenceAng" to "pos.posAng"-->
 			<FEED source="_minmax"
 				basename="emergence"
 				baseucd="pos.posAng" unit="deg"
 				baseutype="Epn.View_angle.Emergence_angle"
 				basedescr="Emergence angle during data acquisition"/>
-<!--changed "phase" baseucd from "pos.posang" to "pos.posAng"-->
 			<FEED source="_minmax"
 				basename="phase"
-				baseucd="pos.posAng" unit="deg"
+				baseucd="pos.phaseAng" unit="deg"
 				baseutype="Epn.View_angle.Phase_angle"
 				basedescr="Phase angle during data acquisition"/>
-<!--change instrument_host_name ucd from "meta.class" to "meta.id;instr.obsty"-->
 			<column name="instrument_host_name"	type="text" 
 				ucd="meta.id;instr.obsty"
 				utype="Provenance.ObsConfig.Facility.name"
@@ -392,26 +311,14 @@ in V2.0?-->
 					separated by space characters.">
 				<property key="std">1</property>
 			</column>
-<!--processing_level CODMAC calibration level in v1 TO BE replaced 
-with enumerated list of PDS4 values in v2:
 
-Telemetry
-Raw
-Partially Processed
-Calibrated
-Derived (includes ancillary/calibration data)
-
-Most EPN_TAP data services are expected to include Calibrated or Derived data. Other values would therefore only flag associated products.
-
-There doesn't seem to be a column for this, I'm creating a new one:
--->
 			<column name="processing_level" type="integer"
 				ucd="meta.code;obs.calib" 
 				description="Calibration level coded according to PDS4 values."
 				note="et_cal">
-				<property key="std">\processing_level</property>
+				<property key="std">1</property>
 			</column>
-<!--columns creation_date, modification_date, release_date are new-->
+
 			<column name="creation_date"	type="date" 
 				ucd="time.creation" 	unit="(ISO-8601 String)"
 				description="Date of first entry of this granule">
@@ -428,9 +335,6 @@ There doesn't seem to be a column for this, I'm creating a new one:
 				<property key="std">1</property>
 			</column>
 
-<!--STOPPED HERE -->
-<!-- in service_title changed ucd from "meta.ref" to "meta.title" -->
-<!-- Probably needs to be mandatory for cross-reference and mulitple db processing - nickname needed -->
 			<column name="service_title"	type="text" 
 				ucd="meta.title" 
 				description="The title of the data service producing this row. 	
@@ -455,7 +359,7 @@ There doesn't seem to be a column for this, I'm creating a new one:
 			</column>
 
 			<column name="access_url"	type="text" 
-				ucd="meta.ref.url" utype="Obs.Access.Reference"
+				ucd="meta.ref.url;meta.file" utype="Obs.Access.Reference"
 				description="URL to retrieve the data product described."
 				displayHint="type=url">
 				<property key="std">1</property>
@@ -545,27 +449,7 @@ There doesn't seem to be a column for this, I'm creating a new one:
 					list of summit coordinates defining a vector, e.g., vector
 					information from a GIS, spatial footprints...
 			</meta>
-<!-- replaced processing_level CODMAC calibration level in v1
-with enumerated list of PDS4 values in v2:
 
-				CODMAC levels are:
-				1  Raw (UDR in PDS)
-				2  Edited (EDR in PDS, NASA level 0)
-				3  Calibrated (RDR in PDS, NASA Level 1A)
-				4  Resampled (REFDR in PDS, NASA Level 1B)
-				5  Derived (DDR in PDS, NASA Level 3)
-				6  Ancillary (ANCDR in PDS)
-
-Telemetry
-Raw
-Partially Processed
-Calibrated
-Derived (includes ancillary/calibration data)
-
-Most EPN_TAP data services are expected to include Calibrated or Derived data. Other values would therefore only flag associated products.
-
-There doesn't seem to be a column for this, I'm creating a new one:
--->
 			<meta name="note" tag="et_cal">
 				PDS4 levels are:
 
@@ -580,8 +464,8 @@ There doesn't seem to be a column for this, I'm creating a new one:
 				5 -- Derived
 			</meta>
 		</events>
-<!--STOPPED HERE -->
-		<FEED source="//products#hackProductsData"/>
+
+<!--		<FEED source="//products#hackProductsData"/> -->
 	</mixinDef>
 
 	<procDef type="apply" id="populate">
@@ -658,7 +542,7 @@ There doesn't seem to be a column for this, I'm creating a new one:
 						"access_format", "target_region", "processing_level",
 						"target_class", "index_", "dataset_id", 
 						# the following are set via products#define
-						"access_estsize", "access_url", "accref",
+						"access_estsize", "access_url", 
 						"preview_url",])
 
 					mixin = context.getById("table")
@@ -690,22 +574,6 @@ There doesn't seem to be a column for this, I'm creating a new one:
 				del p
 			</code>
 		</setup>
-		<!-- uncomment this if you want accref generated from input table location
-and if you want access_url to point to data which is on your server.
-My service simply provides a table of footprints, the actual images are on a different server, 
-to which i point in q.rd, hence i commented this out
-		<code>
-			l = locals()
-			for key in EPNTAP_KEYS:
-				vars[key] = l[key]
-			
-			# map things from products#define
-			vars["access_estsize"] = vars["prodtblFsize"]/1024
-			vars["access_url"] = makeProductLink(vars["prodtblAccref"])
-			if @prodtblPreview:
-				vars["preview_url"] = @prodtblPreview
-			vars["accref"] = vars["prodtblAccref"]
-		</code>
-		-->
+
 	</procDef>
 </resource>
