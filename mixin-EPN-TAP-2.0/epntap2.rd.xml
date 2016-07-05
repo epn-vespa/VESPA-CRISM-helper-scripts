@@ -103,20 +103,6 @@
 			<onDisk>True</onDisk>
 			<meta name="utype">EPN-TAP 2.0</meta>
 			<meta name="info" infoName="SERVICE_PROTOCOL" infoValue="2.0">EPN-TAP</meta>
-
-<!-- i don't think we need this
-			<column name="accref" original="//products#products.accref"/> -->
-<!--However, something breaks at import when above line is commented out
-giving the following error:
-
-Failed db query: '
-                        CREATE OR REPLACE RULE cleanupProducts AS ON DELETE TO mypolydd.epn_core 
-                        DO ALSO
-                        DELETE FROM dc.products WHERE accref=OLD.accref
-                '
-So i'm leaving it as the first column to make it easy to find
--->
-
 			<column name="granule_uid" type="text" required="True"
 				ucd="meta.id"
 				description="Internal table row index 
@@ -465,7 +451,6 @@ in V2.0?-->
 			</meta>
 		</events>
 
-<!--		<FEED source="//products#hackProductsData"/> -->
 	</mixinDef>
 
 	<procDef type="apply" id="populate">
