@@ -224,7 +224,7 @@
 				basedescr="Third coordinate (e.g., height, 'z')"/>
 
 			<column name="s_region"	type="spoly" 
-				ucd="phys.outline;obs.field" unit="(STC-S String)" 
+				ucd="phys.outline;obs.field" 
 				description="ObsCore-like footprint, assume 
 					spatial_coordinate_description – 
 					this one TBC (needs another param for GIS interface?)">
