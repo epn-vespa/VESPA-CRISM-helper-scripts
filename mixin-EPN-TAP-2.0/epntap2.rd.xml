@@ -77,11 +77,11 @@
                         </setup>
                         <code>
 				def setMyUnits(mySpatialFrameType):
-					if   mySpatialFrameType == "celestial":   c1, c2, c3 = "deg (RA)",    "deg (Dec)",   "m (Dist)"
-					elif mySpatialFrameType == "body":        c1, c2, c3 = "deg (Lon)",   "deg (Lat)",   "m (Alt)"	
-					elif mySpatialFrameType == "cartesian":   c1, c2, c3 = "m (X)",       "m (Y)",       "m (Z)"
-					elif mySpatialFrameType == "cylindrical": c1, c2, c3 = "m (R)",       "deg (Azi)",   "m (Z)"
-					elif mySpatialFrameType == "spherical":   c1, c2, c3 = "m (R)",       "deg (Colat)", "m (Azi)"
+					if   mySpatialFrameType == "celestial":   c1, c2, c3 = "deg", "deg", "m"
+					elif mySpatialFrameType == "body":        c1, c2, c3 = "deg", "deg", "m"	
+					elif mySpatialFrameType == "cartesian":   c1, c2, c3 = "m",   "m",   "m"
+					elif mySpatialFrameType == "cylindrical": c1, c2, c3 = "m",   "deg", "m"
+					elif mySpatialFrameType == "spherical":   c1, c2, c3 = "m",   "deg", "m"
 					elif mySpatialFrameType == "healpix":     c1, c2, c3 = "no unit (H)", "no unit (K)", "N/A"
 					return (c1,c2,c3)
 				getColumnNamesC  = lambda n: map(lambda a,b:b+a,("min","max","_resol_min","_resol_max"),["c"+str(n)]*4)
@@ -306,17 +306,17 @@ in V2.0?-->
 			</column>
 
 			<column name="creation_date"	type="date" 
-				ucd="time.creation" 	unit="(ISO-8601 String)"
+				ucd="time.creation"
 				description="Date of first entry of this granule">
 				<property key="std">1</property>
 			</column>
 			<column name="modification_date"	type="date" 
-				ucd="time.update" 		unit="(ISO-8601 String)"
+				ucd="time.update"
 				description="Date of last modification (used to handle mirroring)">
 				<property key="std">1</property>
 			</column>
 			<column name="release_date" 	type="date" 
-				ucd="time.release" 	unit="(ISO-8601 String)"
+				ucd="time.release"
 				description="Start of public access period">
 				<property key="std">1</property>
 			</column>
