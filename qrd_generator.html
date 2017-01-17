@@ -21,6 +21,7 @@ Describe your table: <input id="m_Service_Description"></input><br />
 <tr><td>Contact name: </td><td><input id="mContactName"></input></td></tr>
 <tr><td>Contact email: </td><td><input id="mContactEmail"></input></td></tr>
 <tr><td>Instrument: </td><td><input id="mInstrument"></input></td></tr>
+<tr><td>Subjects (Keywords): </td><td><input id="mSubjects"></input></td></tr>
 <tr><td>Facility: </td><td><input id="mFacility"></input></td></tr>
 <tr><td>Source: </td><td><input id="mSource"></input></td></tr>
 <tr><td>Content level: </td><td><input id="mContentLevel"></input></td></tr>
@@ -415,6 +416,7 @@ myStr = "\<resource schema=\"" + $('#mSchema').val() + "\"\>" + cN
 	+ metaLine("contact.name",  $('#mContactName').val()  )
 	+ metaLine("contact.email", $('#mContactEmail').val() )
 	+ metaLine("instrument",    $('#mInstrument').val()   )
+	+ metaLine("subjects",      $('#mSubjects').val()     )
 	+ metaLine("facility",      $('#mFacility').val()     )
 	+ metaLine("source",        $('#mSource').val()       )
 	+ metaLine("contentLevel",  $('#mContentLevel').val() )
