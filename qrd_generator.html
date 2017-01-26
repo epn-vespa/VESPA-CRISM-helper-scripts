@@ -469,8 +469,7 @@ var procDefBind = function(name) {
 	}*/
 
 if ($('#rVM_' + 'access_url').val() != "NUL") {
-	myStr += cTT + '\<column name=\"access_url\" type=\"text\" ucd=\"meta.ref.url;meta.file\" verbLevel=\"1\" description=\"URL of the data file, ' 
-+ cN + cTTT + 'case sensitive. If present, next 2 paramenters must be present.\"/\> ' + cN;}
+	myStr += cTT + '\<column name=\"access_url\" type=\"text\" ucd=\"meta.ref.url;meta.file\" verbLevel=\"1\" description=\"URL of the data file\"/\> ' + cN;}
 if ($('#rVM_' + 'access_format').val() != "NUL") {
 	myStr += cTT + '\<column name=\"access_format\" type=\"text\" ucd=\"meta.code.mime\" verbLevel=\"1\" description=\"File format type\"/\> ' + cN;}
 if ($('#rVM_' + 'access_estsize').val() != "NUL") {

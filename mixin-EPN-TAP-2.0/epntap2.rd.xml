@@ -65,8 +65,8 @@
 		<mixinPar key="c3unit" description="Unit of the third spatial
 			coordinate">myC3</mixinPar>
 
-		<mixinPar key="spatial_frame_type" description="Flavour of the coordinate system,
-			should be the same as for ProcDef" />
+		<mixinPar key="spatial_frame_type" description="Flavour of the coordinate system" />
+<!--			Flavour of the coordinate system should be the same as for ProcDef-->
                 <processEarly>
                         <setup>
                                 <code>
@@ -105,21 +105,22 @@
 			<meta name="info" infoName="SERVICE_PROTOCOL" infoValue="2.0">EPN-TAP</meta>
 			<column name="granule_uid" type="text" required="True"
 				ucd="meta.id"
-				description="Internal table row index 
-					Unique ID in data service, also in v2. Can be alphanum.">
+				description="Internal table row index - unique ID in data service.">
+<!--also in v2. Can be alphanum-->
 				<property key="std">1</property>
 			</column>
 			<column name="granule_gid" type="text" required="True"
 				ucd="meta.id"
-				description="Common to granules of same type (e.g. same map projection, 
-					or geometry data products). Can be alphanum.">
+				description="Common to granules of same type.">
+<!-- (e.g. same map projection, or geometry data products). Can be alphanum.-->
 				<property key="std">1</property>
 			</column>
 			<column name="obs_id" type="text" required="True"
 				ucd="meta.id"
-				description="Associates granules derived from the same data (e.g. 
-					various representations / processing levels). 
-					Can be alphanum., may be the ID of original observation.">
+				description="Associates granules derived from the same data.">
+<!-- (e.g. various representations / processing levels). 
+Can be alphanum., may be the ID of original observation.
+-->
 				<property key="std">1</property>
 			</column>
 			<column name="dataproduct_type"	type="text" 
@@ -144,8 +145,8 @@
 			</column>
 			<column name="target_name"	type="text" 
 				ucd="meta.id;src" utype="Epn.TargetName"
-				description="Standard IAU name of target (from a list related 
-					to target class), case sensitive">
+				description="Standard IAU name of target">
+<!-- (from a list related to target class), case sensitive-->
 				<property key="std">1</property>
 			</column>
 			<column name="target_class"	type="text" 
@@ -225,9 +226,9 @@
 
 			<column name="s_region"	type="spoly" 
 				ucd="phys.outline;obs.field" 
-				description="ObsCore-like footprint, assume 
-					spatial_coordinate_description – 
-					this one TBC (needs another param for GIS interface?)">
+				description="ObsCore-like footprint">
+<!--, assume spatial_coordinate_description –  this one TBC 
+(needs another param for GIS interface?)-->
 				<property key="std">1</property>
 			</column>
 			<FEED source="_minmax"
@@ -248,8 +249,8 @@
 
 			<column name="spatial_frame_type"	type="text" 
 				ucd="meta.code.class;pos.frame"
-				description="Flavor of coordinate system, 
-					defines the nature of coordinates. From enumerated list">
+				description="Flavor of coordinate system.">
+<!--defines the nature of coordinates. From enumerated list-->
 				<property key="std">1</property>
 				<values>
 					<option>celestial</option>
@@ -293,8 +294,8 @@ in V2.0?-->
 			<column name="measurement_type"	type="text" 
 				ucd="meta.ucd" 
 				utype="Epn.Measurement_type"
-				description="UCD(s) defining the data, with multiple entries
-					separated by space characters.">
+				description="UCD(s) defining the data.">
+<!--, with multiple entries separated by space characters-->
 				<property key="std">1</property>
 			</column>
 
@@ -312,7 +313,8 @@ in V2.0?-->
 			</column>
 			<column name="modification_date"	type="date" 
 				ucd="time.update"
-				description="Date of last modification (used to handle mirroring)">
+				description="Date of last modification">
+<!-- (used to handle mirroring)-->
 				<property key="std">1</property>
 			</column>
 			<column name="release_date" 	type="date" 
@@ -323,8 +325,8 @@ in V2.0?-->
 
 			<column name="service_title"	type="text" 
 				ucd="meta.title" 
-				description="The title of the data service producing this row. 	
-					(will be used to handle multiservice results)">
+				description="The title of the data service producing this row.">
+<!--(will be used to handle multiservice results)-->
 				<property key="std">1</property>
 			</column>
 
