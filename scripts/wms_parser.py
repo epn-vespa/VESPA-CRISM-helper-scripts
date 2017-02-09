@@ -1,7 +1,22 @@
-#this parses WMS, ad hoc for planetarymaps.usgs.gov
-mObject="Mars"#input field
-mSystem="Mars"#input field
+'''This parses WMS, ad hoc for planetarymaps.usgs.gov
+To use - download and run from command line terminal:
+python wms_parser.py Object System
+e.g.
+python wms_parser.py Deimos Mars
+or
+python wms_parser.py Mars Mars
+This should print out a dictionary of all 
+simple cylindrical astrogeology maps available from USGS.
+'''
+#
+#
+#
+#################################
+#mObject="Mars"#input field DEBUG
+#mSystem="Mars"#input field DEBUG
 import sys
+mObject=sys.argv[1]#command line parameter
+mSystem=sys.argv[2]#command line parameter
 import json
 import urllib
 from xml.dom.minidom import parseString
