@@ -1,7 +1,7 @@
 <!-- A template for resource metadata; look for ___ and fill these pieces
 out (or delete them) -->
 
-<resource schema="evn_vespa_crism">
+<resource schema="RD">
         <meta name="title">CRISM data from Earth Server 2</meta>
         <meta name="description">
                 ___
@@ -55,10 +55,10 @@ out (or delete them) -->
 		</csvGrammar>
                 <make table="epn_core">
 			<rowmaker idmaps="*">
-				<map key="c1_min" source="Westernmost_longitude" />
-				<map key="c1_max" source="Easternmost_longitude" />
-				<map key="c2_min" source="Minimum_latitude" />
-				<map key="c2_max" source="Maximum_latitude" />
+				<map key="c1min" source="Westernmost_longitude" />
+				<map key="c1max" source="Easternmost_longitude" />
+				<map key="c2min" source="Minimum_latitude" />
+				<map key="c2max" source="Maximum_latitude" />
 				<map key="s_region" source="footprint" />
 
 				<var key="granule_uid" source="name" />
