@@ -1,3 +1,6 @@
+For testing save this folder to /var/gavo/inputs/epn_vespa_crism
+
+
 A test dataset is now online at
 http://epn1.epn-vespa.jacobs-university.de/__system__/tap/run/tap
 as TAP service epn_vespa_crism.epn_core
