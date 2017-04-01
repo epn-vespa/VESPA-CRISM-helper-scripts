@@ -155,6 +155,7 @@ def nda_metadata(file_cdf, file_pdf, file_type):
         print 'Illegal file type... Aborting'
         return md, -1
 
+    md['accref'] = cur_file
     md['target_name'] = '#'.join(cdf.attrs['PDS_Observation_target'])
     md['target_class'] = '#'.join(cdf.attrs['VESPA_target_class'])
     md['time_min'] = cdf.attrs['PDS_Observation_start_time'][0]
