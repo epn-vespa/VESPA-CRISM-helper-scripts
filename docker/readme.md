@@ -13,14 +13,14 @@ This images are built from the [docker-compose](docker-compose.yml) file.
 
 This project is developped with in mind that the only file you have to edit is the [.env](.env) configuration file:
 
-- `TAG` : the tag of you containers; this allow you to build several instances of DaCHS containers, in order to have - for instance - a production container and a test container;
-- `SERVERNAME` : The server name;
-- `DOMAIN` : The server domain;
-- `DACHS_PORT` : The web port used by the DaCHS software;
-- `AWSTATS_PORT` : The web port used by awstats;
-- `PSQL_PORT` : The port used by Postgres (i.e. if you want to access it from PGAdmin);
-- `CRONTAB` : the [crontab string](http://www.nncron.ru/help/EN/working/cron-format.htm) used to update awstats statistics;
-- `SERVICE_PATH` : The (absolute or relative) path of your services folder;
+- `TAG`: the tag of you containers; this allow you to build several instances of DaCHS containers, in order to have - for instance - a production container and a test container;
+- `SERVERNAME`: The server name;
+- `DOMAIN`: The server domain;
+- `DACHS_PORT`: The web port used by the DaCHS software;
+- `AWSTATS_PORT`: The web port used by awstats;
+- `PSQL_PORT`: The port used by Postgres (i.e., if you want to access it from PGAdmin);
+- `CRONTAB`: the [crontab string](http://www.nncron.ru/help/EN/working/cron-format.htm) used to update awstats statistics;
+- `SERVICE_PATH`: The (absolute or relative) path of your services folder;
 
 ## Setting up Docker
 
@@ -32,7 +32,7 @@ Depending on your network, you may want to configure the DNS used by Docker:
 
 First, check if you need it:
 
-	docker run -it debian /bin/bash # Dowload the Debian image, run the container and a shell
+	docker run -it debian /bin/bash # Download the Debian image, run the container and a shell
 	ping 128.31.0.62 # Debian archives IP
 
 You should received all packets. But then ping it from the domain name:
