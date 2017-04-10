@@ -14,7 +14,7 @@ Stop the current DaCHS instance if running:
 ```
 sudo gavo serve stop
 ```
-Select the "beta" version of DaCHS repository. In `/etc/apt/source.list`, edit
+Select the "beta" version of DaCHS repository. In `/etc/apt/sources.list`, edit
 the GAVO DaCHS Debian repository configuration to:
 ```
 deb http://vo.ari.uni-heidelberg.de/debian beta main
