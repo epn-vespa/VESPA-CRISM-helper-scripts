@@ -21,6 +21,7 @@ Resource Descriptor files (`q.rd`) and scripts.
 ## More info
 
 More tutorials and informations on how to set up a service are available from:
+
 * the [VESPA discussion and documentation wiki](https://voparis-confluence.obspm.fr/display/VES/Implementing+a+VESPA+service)
 * the [GAVO/DaCHS documentation web site](http://docs.g-vo.org/DaCHS/)
 
