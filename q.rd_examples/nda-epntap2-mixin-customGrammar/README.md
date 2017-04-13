@@ -21,8 +21,8 @@ deb http://vo.ari.uni-heidelberg.de/debian beta main
 ```
 Load the last version of DaCHS:
 ```
-sudo apt-get upgrade
 sudo apt-get update
+sudo apt-get upgrade
 ```
 Start DaCHS again:
 ```
