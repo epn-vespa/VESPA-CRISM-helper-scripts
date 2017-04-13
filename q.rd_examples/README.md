@@ -17,5 +17,11 @@ Resource Descriptor files (`q.rd`) and scripts.
 * [ObsNancay NDA-new](nda-epntap2-mixin-customGrammar): This the new version of the previous example. This example proposes a complete tutorial for setting up similar services (using daily CDF files). It contains the `epntap2` mixin and uses a customGrammar.
 * [Planets](planets): A generic service, with the solar system planet main parameters. _(outdated: to be updated with the `epntap2` mixin)_
 * [VVEx](vvex): An example service for VIRTIS-VEx data using IDL to build the ingestion SQL script.  _(outdated: to be updated with the `epntap2` mixin)_
-* 
-* 
+
+## More info
+
+More tutorials and informations on how to set up a service are available from:
+* the [VESPA discussion and documentation wiki](https://voparis-confluence.obspm.fr/display/VES/Implementing+a+VESPA+service)
+* the [GAVO/DaCHS documentation web site](http://docs.g-vo.org/DaCHS/)
+
+
