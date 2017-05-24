@@ -1,6 +1,8 @@
-# This script processes JSON file with coverages, 
-# queries ODE REST for coverage description in xml (to get angles and dates), 
-# and writes out data file in csv to be loaded into GAVO using q.rd for CRISM.
+# This script processes JSON file with L coverages only, 
+# queries ODE REST for coverage description in xml (to get angles and dates),
+# queries rasdaman to get S coverage dimensions,
+# and writes out data file in csv to be loaded into GAVO using q.rd for CRISM
+# for both L and S coverages.
 
 import sys
 import json
@@ -18,6 +20,7 @@ fields=['name','footprint','Easternmost_longitude','Maximum_latitude','Minimum_l
 
 def makeRow(r):
     name=r['coverageID']
+    print(name)
     strList= lambda l:[str(a) for a in l]
     footprint='Polygon '+' '.join([' '.join(i) for i in zip(strList(r['longList']),strList(r['latList']))])
     Easternmost_longitude=r['Easternmost_longitude']
@@ -34,17 +37,52 @@ def makeRow(r):
     UTC_start_time=Time(myDoc.getNodeValue('UTC_start_time')).jd
     UTC_stop_time=Time(myDoc.getNodeValue('UTC_stop_time')).jd
     Solar_longitude=myDoc.getNodeValue('Solar_longitude')
-    rowvals=[name,footprint,Easternmost_longitude,Maximum_latitude,Minimum_latitude,             Westernmost_longitude,dimE,dimN,Incidence_angle,Emission_angle,Phase_angle,             UTC_start_time,UTC_stop_time,Solar_longitude]
+    rowvals=[name,footprint,Easternmost_longitude,Maximum_latitude,Minimum_latitude,
+             Westernmost_longitude,dimE,dimN,Incidence_angle,Emission_angle,Phase_angle,
+             UTC_start_time,UTC_stop_time,Solar_longitude]
+    row=','.join([str(i) for i in rowvals])
+    return row+'\n'+makeRowS(name)+'\n'
+
+def makeRowS(name):
+    nameS=name[:-6]+'S'+name[-5:]
+    myDoc=parseString(requests.get(baseURL+nameS).text)
+    myDoc.getNodeValue=lambda val: myDoc.getElementsByTagName(val)[0].firstChild.nodeValue
+    footprintRaw=myDoc.getNodeValue('Footprint_C0_geometry')
+    footprintS='Polygon '+footprintRaw[10:-2].replace(',', '')
+    Easternmost_longitude=myDoc.getNodeValue('Easternmost_longitude')
+    Maximum_latitude=myDoc.getNodeValue('Maximum_latitude')
+    Minimum_latitude=myDoc.getNodeValue('Minimum_latitude')
+    Westernmost_longitude=myDoc.getNodeValue('Westernmost_longitude')
+    rasdamanURL="http://access.planetserver.eu:8080/rasdaman/ows?service=WCS&version=2.0.1&request=DescribeCoverage&CoverageId="
+    rasdamanDoc=parseString(requests.get(rasdamanURL+nameS.lower()).text)
+    rasdamanBox=rasdamanDoc.getElementsByTagName('high')[0].firstChild.nodeValue
+    rasdamanEN=[int(x)+1 for x in rasdamanBox.split()]
+    dimE=rasdamanEN[0]
+    dimN=rasdamanEN[1]
+    Incidence_angle=myDoc.getNodeValue('Solar_longitude')
+    Emission_angle=myDoc.getNodeValue('Emission_angle')
+    Phase_angle=myDoc.getNodeValue('Phase_angle')
+    UTC_start_time=Time(myDoc.getNodeValue('UTC_start_time')).jd
+    UTC_stop_time=Time(myDoc.getNodeValue('UTC_stop_time')).jd
+    Solar_longitude=myDoc.getNodeValue('Solar_longitude')
+    rowvals=[nameS,footprintS,Easternmost_longitude,Maximum_latitude,Minimum_latitude,
+             Westernmost_longitude,dimE,dimN,Incidence_angle,Emission_angle,Phase_angle,
+             UTC_start_time,UTC_stop_time,Solar_longitude]
     row=','.join([str(i) for i in rowvals])
     return row
+####
 
 jsonData=json.load(open(InputFile))
 output=open(OutputFile,'w')
 headerRow=','.join([str(i) for i in fields])
-output.writelines(headerRow)
+output.writelines(headerRow+'\n')
 upperBound=len(jsonData)
-for x in range(0,upperBound,100):
+#for x in range(0,upperBound,100):
+upperBound=10
+n=10
+for x in range(0,upperBound,n):
     print(str(x)+' out of '+str(upperBound))
-    limit=[upperBound, x+100][upperBound>x]
+    limit=[upperBound, x+n][upperBound>x]
     output.writelines([makeRow(j) for j in jsonData[x:limit]])
+
 output.close()
