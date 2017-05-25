@@ -41,12 +41,15 @@ def makeRow(r):
              Westernmost_longitude,dimE,dimN,Incidence_angle,Emission_angle,Phase_angle,
              UTC_start_time,UTC_stop_time,Solar_longitude]
     row=','.join([str(i) for i in rowvals])
-    return row+'\n'+makeRowS(name)+'\n'
+    return row+'\n'+makeRowS(name)
 
 def makeRowS(name):
     nameS=name[:-6]+'S'+name[-5:]
     myDoc=parseString(requests.get(baseURL+nameS).text)
     myDoc.getNodeValue=lambda val: myDoc.getElementsByTagName(val)[0].firstChild.nodeValue
+    if str(myDoc.getNodeValue('Products'))=='No Products Found':
+        print ('product not found')
+        return
     footprintRaw=myDoc.getNodeValue('Footprint_C0_geometry')
     footprintS='Polygon '+footprintRaw[10:-2].replace(',', '')
     Easternmost_longitude=myDoc.getNodeValue('Easternmost_longitude')
@@ -69,7 +72,7 @@ def makeRowS(name):
              Westernmost_longitude,dimE,dimN,Incidence_angle,Emission_angle,Phase_angle,
              UTC_start_time,UTC_stop_time,Solar_longitude]
     row=','.join([str(i) for i in rowvals])
-    return row
+    return row+'\n'
 ####
 
 jsonData=json.load(open(InputFile))
