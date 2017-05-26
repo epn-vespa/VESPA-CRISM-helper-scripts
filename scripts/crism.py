@@ -49,7 +49,7 @@ def makeRowS(name):
     myDoc.getNodeValue=lambda val: myDoc.getElementsByTagName(val)[0].firstChild.nodeValue
     if str(myDoc.getNodeValue('Products'))=='No Products Found':
         print ('product not found')
-        return
+        return ''
     footprintRaw=myDoc.getNodeValue('Footprint_C0_geometry')
     footprintS='Polygon '+footprintRaw[10:-2].replace(',', '')
     Easternmost_longitude=myDoc.getNodeValue('Easternmost_longitude')
@@ -79,9 +79,10 @@ jsonData=json.load(open(InputFile))
 output=open(OutputFile,'w')
 headerRow=','.join([str(i) for i in fields])
 output.writelines(headerRow+'\n')
+lowerBound=0
 upperBound=len(jsonData)
 #for x in range(0,upperBound,100):
-upperBound=10
+upperBound=lowerBound+10
 n=10
 for x in range(0,upperBound,n):
     print(str(x)+' out of '+str(upperBound))
