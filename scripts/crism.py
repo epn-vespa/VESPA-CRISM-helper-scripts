@@ -47,8 +47,13 @@ def makeRowS(name):
     nameS=name[:-6]+'S'+name[-5:]
     myDoc=parseString(requests.get(baseURL+nameS).text)
     myDoc.getNodeValue=lambda val: myDoc.getElementsByTagName(val)[0].firstChild.nodeValue
+    rasdamanURL="http://access.planetserver.eu:8080/rasdaman/ows?service=WCS&version=2.0.1&request=DescribeCoverage&CoverageId="
+    rasdamanDoc=parseString(requests.get(rasdamanURL+nameS.lower()).text)
     if str(myDoc.getNodeValue('Products'))=='No Products Found':
         print ('product not found')
+        return ''
+    if rasdamanDoc.getElementsByTagName('high')==[]:
+        print ('rasdaman empty')
         return ''
     footprintRaw=myDoc.getNodeValue('Footprint_C0_geometry')
     footprintS='Polygon '+footprintRaw[10:-2].replace(',', '')
@@ -56,8 +61,6 @@ def makeRowS(name):
     Maximum_latitude=myDoc.getNodeValue('Maximum_latitude')
     Minimum_latitude=myDoc.getNodeValue('Minimum_latitude')
     Westernmost_longitude=myDoc.getNodeValue('Westernmost_longitude')
-    rasdamanURL="http://access.planetserver.eu:8080/rasdaman/ows?service=WCS&version=2.0.1&request=DescribeCoverage&CoverageId="
-    rasdamanDoc=parseString(requests.get(rasdamanURL+nameS.lower()).text)
     rasdamanBox=rasdamanDoc.getElementsByTagName('high')[0].firstChild.nodeValue
     rasdamanEN=[int(x)+1 for x in rasdamanBox.split()]
     dimE=rasdamanEN[0]
