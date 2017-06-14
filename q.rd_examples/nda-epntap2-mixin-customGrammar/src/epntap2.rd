@@ -637,7 +637,7 @@
 				http://exoplanet.eu, the meteor catalog at 
 				http://www.lpi.usra.edu/meteor/, the catalog of stardust
 				samples at http://curator.jsc.nasa.gov/stardust/catalog/" 
-				late="True"/>
+				late="True">None</par>
 			<par key="time_scale" description="Time scale used for the
 				various times, as given by IVOA's STC data model.  Choose
 				from TT, TDB, TOG, TOB, TAI, UTC, GPS, UNKNOWN" 
@@ -647,7 +647,7 @@
 				ground-based data, use IAU observatory codes, 
 				http://www.minorplanetcenter.net/iau/lists/ObsCodesF.html,
 				for space-borne instruments use
-				http://nssdc.gsfc.nasa.gov/nmc/" late="True"/>
+				http://nssdc.gsfc.nasa.gov/nmc/" late="True">None</par>
 			<par key="instrument_name" description="Service providers are
 				invited to include multiple values for instrumentname, e.g.,
 				complete name + usual acronym. This will allow queries on either
@@ -655,7 +655,7 @@
 				produce the same reply." late="True">None</par>
 			<par key="access_format" description="The standard text proposes
 				the standard names VOTable, Fits, CSV, ASCII, PDS, as well as
-				image formats." late="True"/>
+				image formats." late="True">"application/octet-stream"</par>
 			<par key="target_region" description="This is a complement to the
 				target name to identify a substructure of the target that was
 				being observed (e.g., Atmosphere, Surface).  Take terms from
