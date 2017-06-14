@@ -22,6 +22,9 @@
 	<meta name="coverage.waveband">Infrared</meta>
 
 	<procDef type="apply" id="setInstrConfig">
+		
+		<!-- This <procDef> defines the variables with instrument configuration setup -->
+		
 		<code>
 			vars["instrument_host_name"] = '#'.join(['568','Mauna Kea Observatory'])
 			vars["instrument_name"] = '#'.join([vars["TELESCOP"]])
@@ -41,6 +44,7 @@
 			vars["opt_element"] = " / ".join([":".join(["Slit",vars["SLIT"]]),":".join(["GuideFilter",vars["GFLT"]]),
 				":".join(["OrderSortedFilter",vars["OSF"]])])
 		</code>
+		
 	</procDef>
 
 <!--
@@ -50,6 +54,9 @@
 ##
 -->
 	<procDef type="apply" id="miriadeEphemph">
+		
+		<!-- input parameters to be set with <bind> elements in <apply> element -->
+		
 		<setup>
 			<par key="ignoreUnknowns" description="Return Nones for unknown
 				objects?  (if false, ValidationErrors will be raised)">True</par>
@@ -61,28 +68,52 @@
 				description="The observer name (Default is Mauna Kea Observatory, for IRTF).">'@568'</par>
 			<par key="obs_time" late="True"
 				description="Observation date time."/>
+			
+			<!-- any piece of python code to be run before the main procedure, like importing modules -->
+			
 			<code>
 				import zeep
 			</code>
+			
 		</setup>
+		
 		<code>
+			## This is the beginning of the core python code, indentation matters as in python.
+			
+			# Initializing some parameters
 			slat, slon, olat, olon = None, None, None, None
 			np_pos, phase, rap, hemis1, hemis2 = None, None, None, None, None
+			
 			try:
+				# Initialize SOAP client using zeep module
 				client = zeep.Client('http://vo.imcce.fr/webservices/miriade/miriade.wsdl')
+
+				# Setting up request parameters (as defined on service description page)
+				# NB: Here we will use the ephemph webservice.
 				request = {'name': target_name, 'type':'', 'epoch':obs_time.isoformat(), 'nbd':1, 'step':'', 'tscale':'', 'so':1, 
 					'observer':observer, 'mime':'text', 'view':'none', 'rv':0, 'anim':0, 'print':1, 'visu':'', 
 					'output':'--iso,--coord:eq', 'get':''}
+
+				# Retrieving response from webservice
 				response = client.service.ephemph(request)
+
+				# Each line of the output text is separated by ';' characters, 
+				# and the data line is the first line not starting with '#'
+				# The next command split lines and retrieves the first data line
 				for line in (item for item in response['result'].split(';') if item[0] != '#'): break
+
+				# splitting results columns
 				data = line.split()
-				olon = float(data[3])
-				olat = float(data[4])
-				slon = float(data[7])
-				slat = float(data[8])
-				np_pos = float(data[9])
-				phase = float(data[11])
-				rap = float(data[12])
+				
+				olon = float(data[3])  # Sub-Observer Longitude in Jovian System III (Sub-Earth Point)
+				olat = float(data[4])  # Sub-Observer Latitude in Jovian System III (Sub-Earth Point)
+				slon = float(data[7])  # Sub-Solar Longitude in Jovian System III
+				slat = float(data[8])  # Sub-Solar Latitude in Jovian System III
+				np_pos = float(data[9])  # Angle between planetary North pole and celestial North Pole
+				phase = float(data[11])  # Phase angle
+				rap = float(data[12])  # Apparent radius of target
+				
+				# in case of APIS extension, we need to tell what is the primary hemisphere (best viewed)
 				if olat >= 0:
 					hemis1 = 'north'
 					hemis2 = 'south'
@@ -96,6 +127,9 @@
 				if not ignoreUnknowns:
 					raise base.Error("resolveObject could not resolve object"
 						" %s."%identifier)
+			
+			# Preparing output: whatever you put into the vars dictionary can be used outside the procedure.
+			# E.g.: vars["subsolar_longitude"] is defined here, and can be used as @subsolar_longitude outside
 			vars["subsolar_longitude"] = slon
 			vars["subsolar_latitude"] = slat
 			vars["subobserver_longitude"] = olon
