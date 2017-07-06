@@ -626,11 +626,6 @@
 				(usually) change when new data is added, you should override it
 				with some unique integer number specific to the data product 
 				when there is such a thing." late="True">\rowsMade</par>
-			<par key="dataset_id" description="Unless you understand the
-				implications, leave this at the default.  In particular, note
-				that this is *not* a dataset id in the VO sense, so this should
-				normally not be whatever standardPubDID generates."
-				late="True">"1"</par>
 			<par key="target_name" description="Name of the target object,
 				preferably according to the official IAU nomenclature.
 				As appropriate, take these from the exoplanet encyclopedia
@@ -677,7 +672,7 @@
 				<codeItems>
 					# overridden is a set of column names for which the parameters
 					# are manually defined above or which are set in some other way.
-					overridden = set(["index_", "dataset_id",
+					overridden = set(["index_",
 						"target_name", "time_scale",
 						"instrument_host_name", "instrument_name",
 						"access_format", "target_region", "target_class"])
