@@ -1,3 +1,19 @@
+QUESTIONS:
+* It feels redundant to mention that a field "Can be alphanumeric" in the column description, eg:
+                        <column name="granule_uid" type="text" required="True"
+                                ucd="meta.id"
+                                description="Internal table row index
+                                        Unique ID in data service,
+					also in v2. Can be alphanumeric.">
+Might be better shortened to just:
+                        <column name="granule_uid" type="text" required="True"
+                                ucd="meta.id"
+                                description="Internal table row index
+                                        Unique ID in data service.>
+
+
+
+
 BUGS:
 * Parameter access_format should be optional unless access_url is provided. 
 	However it appears to be currently mandatory:
