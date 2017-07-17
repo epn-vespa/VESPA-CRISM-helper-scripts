@@ -1,7 +1,7 @@
 # mineral spectroscopy EPN-TAP v2 service
 
 Configuration files for spectro service, can be used as templates and adapted 
-(formerly spectro service, to be renamed PDS_speclib)
+(formerly spectro service, renamed PDS_speclib)
 
 
 spectrodb_ex.csv
