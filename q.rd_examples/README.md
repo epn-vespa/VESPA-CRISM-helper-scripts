@@ -19,6 +19,7 @@ Resource Descriptor files (`q.rd`) and scripts.
 * [PDS_speclib](PDS_speclib): For PDS spectral library service. Uses the `epntap2` mixin and csv Grammar.
 * [spectro_planets](spectro_planets): For Telescopic Planetary Spectra collection. Uses the `epntap2` mixin and csv Grammar.
 * [VVEx](vvex): An example service for VIRTIS-VEx data using IDL to build the ingestion SQL script.  _(outdated: to be updated with the `epntap2` mixin)_
+* [BDIP_v2](bdip_v2): This service prototype illustrates the connection to a remote database in the resource descriptor.
 
 ## More info
 
