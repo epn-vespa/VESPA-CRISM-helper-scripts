@@ -1,4 +1,4 @@
-# This example was developed for use with older version of DaCHS (0.9) and the first version of the mixin.
+# This example was developed for use with older version of DaCHS (0.9.6) and the first version of the mixin.
 ## Do not use this with the embedded DaCHS mixin, or the later mixin versions, instead use q.rd creator to generate your own q.rd: http://epn1.epn-vespa.jacobs-university.de:8080/qrdcreator2/
 
 
