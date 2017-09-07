@@ -16,7 +16,8 @@ Resource Descriptor files (`q.rd`) and scripts.
 * [ObsNancay NDA-old](nancay_dam): This is an old version of the Nancay Decameter Array service. _(outdated: to be updated with the `epntap2` mixin)_
 * [ObsNancay NDA-new](nda-epntap2-mixin-customGrammar): This the new version of the previous example. This example proposes a complete tutorial for setting up similar services (using daily CDF files). It contains the `epntap2` mixin and uses a customGrammar.
 * [Planets](planets): A generic service, with the solar system planet main parameters. _(outdated: to be updated with the `epntap2` mixin)_
-* [Spectro](spectro): Skeleton for PDS spectral library. Uses the `epntap2` mixin and csv Grammar.
+* [PDS_speclib](PDS_speclib): For PDS spectral library service. Uses the `epntap2` mixin and csv Grammar.
+* [spectro_planets](spectro_planets): For Telescopic Planetary Spectra collection. Uses the `epntap2` mixin and csv Grammar.
 * [VVEx](vvex): An example service for VIRTIS-VEx data using IDL to build the ingestion SQL script.  _(outdated: to be updated with the `epntap2` mixin)_
 
 ## More info
