@@ -1,10 +1,10 @@
-<resource schema="PDS_speclib">
+<resource schema="pds_speclib">
 	<meta name="title">PDS spectral library</meta>
 	<meta name="description" format="plain">
 		This service provides a VO version of the PDS spectral library, distributed by the PDS Geosciences node: 
-		http://pds-geosciences.wustl.edu/mro/mro-m-crism-4-speclib-v1/mrocr_90xx/<br/>
-		Reference:<br/> 
-		Murchie et al (2007) Compact Reconnaissance Imaging Spectrometer for Mars (CRISM) on Mars Reconnaissance Orbiter (MRO). JGR Planets, 112:E05S03.
+		http://pds-geosciences.wustl.edu/mro/mro-m-crism-4-speclib-v1/mrocr_90xx/
+		Reference:
+		Murchie et al (2007) Compact Reconnaissance Imaging Spectrometer for Mars (CRISM) on Mars Reconnaissance Orbiter (MRO). JGR Planets, 112:E05S03
  </meta>
 	<meta name="creationDate">2017-07-12T00:00:00</meta>
 	<meta name="subject">spectroscopy</meta>
@@ -157,7 +157,7 @@
 				<var key="instrument_name" source="instrument_id" />
 
 
-				<var key="service_title">"PDS_speclib" </var>
+				<var key="service_title">"pds_speclib" </var>
 				<var key="creation_date" source="product_creation_time" />
 				<var key="modification_date" source="product_creation_time" />
 				<var key="release_date">"2006-03-10T00:00:00.00" </var>
@@ -230,7 +230,7 @@
 					<bind name="instrument_host_name">@instrument_host_name</bind>
 					<bind name="instrument_name">@instrument_name</bind>
 					<!--  <bind name="access_format">"application/x-pds"</bind> -->
-					 <bind name="access_format">"application/x-votable+xml"</bind>
+					<!--   <bind name="access_format">"application/x-votable+xml"</bind> -->
 
 
 					<bind name="service_title">@service_title</bind>
