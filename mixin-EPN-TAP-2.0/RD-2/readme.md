@@ -1,4 +1,8 @@
 This folder contains a test table for the embedded mixin in GAVO DaCHS version 1.0 (same as epntap2.rd-2.xml).
+The schema name is m3, so the contents should be saved in 
+/var/gavo/inputs/m3/
+
+
 To create your own q.rd please use the q.rd creator found at:
 http://epn1.epn-vespa.jacobs-university.de:8080/qrdcreator2/
 
