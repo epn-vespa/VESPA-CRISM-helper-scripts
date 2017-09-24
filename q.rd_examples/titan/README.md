@@ -11,5 +11,5 @@ Configuration files for TITAN in EPN-TAP v2 prototype service, can be used as te
 ## Description
 
 The RD imports titan ascii files into the service schema, and sets up views 
-automatically, it also create thumbnais.
-in this case the file and thumbnais are stored in a serparate server to be delivered
+automatically, it also create thumbnail.
+in this case the files and thumbnails are stored in a serparate server to be delivered
