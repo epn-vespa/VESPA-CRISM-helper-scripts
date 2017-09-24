@@ -1,4 +1,4 @@
-# BDIP(v2) EPN-TAP v2 service
+# TITAN EPN-TAP v2 service
 
 Configuration files for TITAN in EPN-TAP v2 prototype service, can be used as templates and adapted. 
 
