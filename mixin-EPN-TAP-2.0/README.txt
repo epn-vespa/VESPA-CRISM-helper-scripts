@@ -1,3 +1,5 @@
+##The latest version is epntap2.rd-2.xml
+
 New row definitions were taken from this table: https://voparis-confluence.obspm.fr/display/VES/EPN-TAP+V2.0+parameters
 
 epntap2.rd.xml must be renamed to epntap2.rd
