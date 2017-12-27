@@ -83,7 +83,7 @@ This service provides a compilation of global spectra of planets and satellites 
 						@thumbnail_url = ("http://voparis-srv.obspm.fr/vo/planeto/spectro_planets"
 							"/thumbnails/"+@file_name.replace('.txt', '.png'))
 						@file_name = @dataset_id+".vot"
-						@measurement_type="phys.radiance;em.wvl" 
+						@measurement_type="phot.radiance;em.wvl" 
 						@modification_date="2017-08-19T20:00:00.00"
 						yield row.copy()
 
@@ -215,8 +215,8 @@ This service provides a compilation of global spectra of planets and satellites 
 						# transmission spectrum
 						#@file_name2 = @file_name
 						#@access_format = ""
-						#@measurement_type="phys.transmission;em.wl" 
-						#@access_url = ("www.pole-ether.fr/tapas/")
+						#@measurement_type="obs.atmos.extinction;em.wl" 
+						#@access_url = ("http://cds-espri.ipsl.fr/tapas/")
 						#@access_estsize = ""
 						#yield row.copy()
 
@@ -229,7 +229,7 @@ This service provides a compilation of global spectra of planets and satellites 
 						@access_estsize = "180"
 						@thumbnail_url = ("http://voparis-srv.obspm.fr/vo/planeto/spectro_planets"
 							"/thumbnails/"+@dataset_id+".png")
-						@measurement_type="phys.transmission;em.wl" 
+						@measurement_type="obs.atmos.extinction;em.wl" 
 						@modification_date="2017-08-25T18:18:00.00"
 						yield row
 
