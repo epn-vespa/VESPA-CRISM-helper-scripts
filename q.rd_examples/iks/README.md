@@ -10,7 +10,11 @@ dbiks2.pro
 
 indexiks.csv
 
-   - csv file with metadata table
+   - csv file with metadata table, from routine above
+
+catiksfiles.pro
+
+   - IDL routine to convert PDS3/ascii files to VOTable
 
 IKS_mixin_q.rd
 
