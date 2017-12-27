@@ -158,8 +158,8 @@
 
 
 				<var key="service_title">"pds_speclib" </var>
+				<var key="modification_date">"2017-09-25T15:45:11.000" </var>
 				<var key="creation_date" source="product_creation_time" />
-				<var key="modification_date" source="product_creation_time" />
 				<var key="release_date">"2006-03-10T00:00:00.00" </var>
 				<var key="bib_reference" source="reference_key_id"/>
 				<var key="access_estsize" source="filesize" />
