@@ -2,7 +2,7 @@
   <meta name="title">IKS</meta>
   <meta name="description" format="plain">
 Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 spacecraft. Data are retrieved from the PDS Small Bodies Node data set (2011 reformatted version) and updated. The data set consists in 101 tables providing the radiance spectrum of comet Halley from various distances, plus two composite spectra. For details and further references, see: Combes M. et al., 1988, The 2.5-12 micron Spectrum of Comet Halley from the IKS-VEGA Experiment, Icarus, 76, 404-436 [1988Icar...76..404C]  </meta>
-  <meta name="creationDate">2017-12-11T19:42:00Z</meta>
+  <meta name="creationDate">2018-04-30T19:42:00Z</meta>
   <meta name="subject">comet</meta>
   <meta name="subject">spectroscopy</meta>
   <meta name="subject">infrared</meta>
@@ -118,18 +118,6 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
 
 		<make table="epn_core">
 			<rowmaker idmaps="*">
-				<var key="dataproduct_type">"sp"</var>
-				<var key="spectral_range_min" source="sp_min" />
-				<var key="spectral_range_max" source="sp_max" />
-				<var key="spectral_resolution_min" source="sp_res_min" />
-				<var key="spectral_resolution_max" source="sp_res_max" />
-				<var key="time_exp_min" source="exp_time" />
-				<var key="time_exp_max" source="exp_time" />
-
-				<var key="spatial_frame_type">"body"</var>
-
-				<var key="phase_min" source="phase_ang" />
-				<var key="phase_max" source="phase_ang" />
 
 				<var key="acquisition_id" source="observation_id" />
 				<var key="target_distance_min" source="distance" />
@@ -138,54 +126,46 @@ Measurements of comet Halley in the spectral channel of IKS on board the Vega-1 
 				<var key="sun_distance_max" source="sdistance" />
 				<var key="earth_distance_min" source="edistance" />
 				<var key="earth_distance_max" source="edistance" />
-
 				<var key="alt_target_name" source="target" />
+				<var key="bib_reference" source="ref" /> 
+				<var key="publisher">"LESIA" </var>  
 
 
-				<var key="instrument_host_name">"Vega 1" </var>
-				<var key="instrument_name">"IKS" </var>
-
-				<var key="service_title">"IKS" </var>
-				<var key="bib_reference" source="ref"/>
-				<var key="publisher">"LESIA" </var>
-
-				<var key="access_format" source="access_format" />
-				<var key="file_name" source="file_name" />
+		<!--		<var key="access_format" source="access_format" /> *** Something weird with this one, TBC -->
 
 				<apply procDef="//epntap2#populate-2_0" name="fillepn">
-					<bind name="granule_gid">@granule_gid</bind>
-					<bind name="granule_uid">@granule_uid</bind>
-					<bind name="obs_id">@rootname</bind>
-					<bind name="target_name">"1P"</bind>
-					<bind name="target_class">"comet"</bind>
-
+					<bind key="granule_gid">@granule_gid</bind>
+					<bind key="granule_uid">@granule_uid</bind>
+					<bind key="obs_id">@rootname</bind>
+					<bind key="target_name">"1P"</bind>
+					<bind key="target_class">"comet"</bind>
+					<bind key="dataproduct_type">"sp"</bind>
 					<bind key="processing_level">3</bind>
+					<bind key="measurement_type">"phot.radiance;em.wl"</bind>
+					<bind key="instrument_host_name">@inst_host_name</bind>
+					<bind key="instrument_name">@inst_name</bind>
+					<bind key="service_title">"iks"</bind>
 
-					<bind name="dataproduct_type">@dataproduct_type</bind>
-					<bind name="measurement_type">"phot.radiance;em.wl"</bind>
+					<bind key="spectral_resolution_min">2.99792458E14 *(float(@sp_res_max)+float(@sp_res_min))/ 2 / float(@sp_max)**2</bind>
+					<bind key="spectral_resolution_max">2.99792458E14 *(float(@sp_res_max)+float(@sp_res_min))/ 2 / float(@sp_min)**2</bind>
+					<bind key="spectral_sampling_step_min">2.99792458E14 *(float(@sp_step_min)+float(@sp_step_max))/ 2 / float(@sp_max)**2</bind>
+					<bind key="spectral_sampling_step_max">2.99792458E14 *(float(@sp_step_min)+float(@sp_step_max))/ 2 / float(@sp_min)**2</bind>
+					<bind key="spectral_range_min">2.99792458E14 /float(@sp_max)</bind>
+					<bind key="spectral_range_max">2.99792458E14 /float(@sp_min)</bind>
 
-					<bind name="spectral_resolution_min">2.99792458E14 *(float(@sp_res_max)+float(@sp_res_min))/ 2 / float(@sp_max)**2</bind>
-					<bind name="spectral_resolution_max">2.99792458E14 *(float(@sp_res_max)+float(@sp_res_min))/ 2 / float(@sp_min)**2</bind>
-					<bind name="spectral_sampling_step_min">2.99792458E14 *(float(@sp_step_min)+float(@sp_step_max))/ 2 / float(@sp_max)**2</bind>
-					<bind name="spectral_sampling_step_max">2.99792458E14 *(float(@sp_step_min)+float(@sp_step_max))/ 2 / float(@sp_min)**2</bind>
-					<bind name="spectral_range_min">2.99792458E14 /float(@sp_max)</bind>
-					<bind name="spectral_range_max">2.99792458E14 /float(@sp_min)</bind>
-
-					<bind name="phase_min">@phase_min</bind>
-					<bind name="phase_max">@phase_max</bind>
-
+					<bind key="phase_min">@phase_ang</bind>
+					<bind key="phase_max">@phase_ang</bind>
+								
+					<bind key="time_exp_min">@exp_time</bind>
+					<bind key="time_exp_max">@exp_time</bind>
 					<bind key="time_min">dateTimeToJdn(parseISODT(@time_obs))</bind>
 					<bind key="time_max">dateTimeToJdn(parseISODT(@time_obs))</bind>
-					<bind key="time_scale">"UTC"</bind>
+					<bind key="creation_date">@creation_date</bind>
+					<bind key="modification_date">@modification_date</bind>
+					<bind key="release_date">@release_date</bind>
 
-					<bind key="access_format">@access_format</bind>
-					<bind name="service_title">@service_title</bind>
-					<bind name="instrument_host_name">@instrument_host_name</bind>
-					<bind name="instrument_name">@instrument_name</bind>
-					<bind name="creation_date">@creation_date</bind>
-					<bind name="modification_date">@modification_date</bind>
-					<bind name="release_date">@release_date</bind>
-
+					<bind key="time_scale">"UTC"</bind>   <!-- *** Something weird with these, TBC in next mixin -->
+		<!--			<bind key="access_format">@access_format</bind> -->
 
 				</apply>
 			</rowmaker>
