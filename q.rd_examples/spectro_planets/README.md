@@ -5,7 +5,7 @@ Configuration files for Telescopic planetary spectra service, can be used as tem
 
 spectro_planet.csv
 
-   -  csv file containing description of all data files (because this contains a limited number of spectra, and because parameters have to be retrieved from the original papers, this is prepared manually under a French version of Xcel, then converted to actual csv)
+   -  csv file containing description of all data files (because this contains a limited number of spectra, and because parameters have to be retrieved from the original papers, this is prepared manually under a French version of Xcel, then converted to actual csv). To be renamed spectroplanet.csv for ingestion.
 
 q.rd
 

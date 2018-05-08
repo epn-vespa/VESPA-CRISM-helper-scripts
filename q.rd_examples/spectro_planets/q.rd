@@ -184,6 +184,13 @@ This service provides a compilation of global spectra of planets and satellites 
 							@access_url = ("...")
 							@access_estsize = "300"
 							@access_estsize2 = "730"
+						elif "spectrum.dat.gz" in @file_name: 
+							@file_name2 = "meftah"
+							@access_format = "text/plain.gzip"
+							@measurement_type="phot.flux.density;em.wl" 
+							@access_url = ("http://cdsarc.u-strasbg.fr/vizier/ftp/cats/J/A+A/611/A1/"+@file_name)
+							@access_estsize = "580"
+							@access_estsize2 = "6000"
 						else: 
 							#"irradiancebins.dat" in @file_name: 
 							@file_name2 = "kurucz97"
@@ -266,66 +273,48 @@ This service provides a compilation of global spectra of planets and satellites 
 		<make table="epn_core">
 			<rowmaker idmaps="*">
 
-				<var key="dataproduct_type">"sp"</var>
+					<var key="spectral_range_min" source="sp_min" /> 
+					<var key="spectral_range_max" source="sp_max" /> 
+					<var key="spectral_resolution_min" source="sp_res_min" /> 
+					<var key="spectral_resolution_max" source="sp_res_max" /> 
 
-				<var key="spectral_range_min" source="sp_min" />
-				<var key="spectral_range_max" source="sp_max" />
-				<var key="spectral_resolution_min" source="sp_res_min" />
-				<var key="spectral_resolution_max" source="sp_res_max" />
+					<var key="bib_reference" source="bib_code"/>
+					<var key="publisher">"LESIA" </var>
+					<var key="access_format" source="access_format" /> 
 
-				<var key="spatial_frame_type">"body"</var>
-
-				<var key="phase_min" source="phase_angle" />
-				<var key="phase_max" source="phase_angle" />
-
-				<var key="instrument_host_name" source="instrument_host_name" />
-				<var key="instrument_name" source="instrument_name" />
-
-
-				<var key="service_title">"spectro_planets" </var>
-				<var key="creation_date" source="modification_date" />
-				<var key="modification_date" source="modification_date" />
-				<var key="release_date" source="modification_date" />
-				<var key="bib_reference" source="bib_code"/>
-				<var key="publisher">"LESIA" </var>
-
-				<var key="access_format" source="access_format" />
-				<var key="feature_name" source="feature_name"/>
-				<var key="file_name" source="file_name" />
 
 				<apply procDef="//epntap2#populate-2_0" name="fillepn">
-					<bind name="granule_gid">@granule_gid</bind>
-					<bind name="granule_uid">@granule_uid</bind>
-					<bind name="obs_id">@dataset_id</bind>
-					<bind name="target_name">@target_name</bind>
-					<bind name="target_class">@target_class</bind>
+					<bind key="granule_gid">@granule_gid</bind>
+					<bind key="granule_uid">@granule_uid</bind>
+					<bind key="obs_id">@dataset_id</bind>
+					<bind key="target_name">@target_name</bind>
+					<bind key="target_class">@target_class</bind>
 
 					<bind key="processing_level">3</bind>
-
-					<bind name="dataproduct_type">@dataproduct_type</bind>
-					<bind name="measurement_type">@measurement_type</bind>
-
-
-					<bind name="spectral_resolution_min">2.99792458E14 /@spectral_resolution_max / @spectral_range_max</bind>
-					<bind name="spectral_resolution_max">2.99792458E14 /@spectral_resolution_min / @spectral_range_min</bind>
-					<bind name="spectral_range_min">2.99792458E14 /@spectral_range_max</bind>
-					<bind name="spectral_range_max">2.99792458E14 /@spectral_range_min</bind>
+					<bind key="dataproduct_type">"sp"</bind>
+					<bind key="measurement_type">@measurement_type</bind>
 
 
-					<bind name="phase_min">@phase_min</bind>
-					<bind name="phase_max">@phase_max</bind>
+					<bind key="spectral_resolution_min">2.99792458E14 /@spectral_resolution_max / @spectral_range_max</bind>
+					<bind key="spectral_resolution_max">2.99792458E14 /@spectral_resolution_min / @spectral_range_min</bind>
+					<bind key="spectral_range_min">2.99792458E14 /@spectral_range_max</bind>
+					<bind key="spectral_range_max">2.99792458E14 /@spectral_range_min</bind>
+
+
+					<bind key="phase_min">@phase_min</bind>
+					<bind key="phase_max">@phase_max</bind>
 
 					<bind key="time_min">dateTimeToJdn(parseISODT(@start_time))</bind>
 					<bind key="time_max">dateTimeToJdn(parseISODT(@start_time))</bind>
 					<bind key="time_scale">"UTC"</bind>
 
-					<!--  <bind key="access_format">@access_format</bind> -->
-					<bind name="service_title">@service_title</bind>
-					<bind name="instrument_host_name">@instrument_host_name</bind>
-					<bind name="instrument_name">@instrument_name</bind>
-					<bind name="creation_date">@creation_date</bind>
-					<bind name="modification_date">@modification_date</bind>
-					<bind name="release_date">@release_date</bind>
+			<!--		  <bind key="access_format">@access_format</bind>  -->
+					<bind key="service_title">@service_title</bind>
+					<bind key="instrument_host_name">@instrument_host_name</bind>
+					<bind key="instrument_name">@instrument_name</bind>
+					<bind key="creation_date">@creation_date</bind>
+					<bind key="modification_date">@modification_date</bind>
+					<bind key="release_date">@release_date</bind>
 
 
 				</apply>
