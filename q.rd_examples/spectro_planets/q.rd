@@ -216,6 +216,9 @@ This service provides a compilation of global spectra of planets and satellites 
 						@access_estsize = @access_estsize2
 						@measurement_type="phot.flux.density;em.wl" 
 						@modification_date="2017-08-25T20:00:00.00"
+						if "meftah.vot" in @file_name: 
+							@modification_date="2018-05-08T12:00:00.00"
+
 						yield row
 
 					elif "atmosphere" in @granule_gid: 

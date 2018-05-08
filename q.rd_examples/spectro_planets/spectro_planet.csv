@@ -64,7 +64,7 @@ Titan,satellite,1995-07-06,1995-07-09,ESO-JSNU,Titan_low.vot,8.46,,5.7,1998Icar.
 Mars,planet,1989-01-29,,LESIA,ophir.vot,,bright terrains,,1997Icar..130..449E,1997-07-23T00:00:00,ISM#IRS#PGD-CVF,Phobos-2#Mariner-7#Mauna Kea 61cm,0.4,5.7,80.,100.,Erard#Calvin#Bell,IAS,I/F with thermal emission removed
 Mars,planet,1989-01-29,,LESIA,margaritifer.vot,,dark terrains,,1997Icar..130..449E,1997-07-23T00:00:00,ISM#IRS#PGD-CVF,Phobos-2#Mariner-7#Mauna Kea 61cm,0.4,5.7,80.,100.,Erard#Calvin#Bell,IAS,I/F with thermal emission removed
 Mercury,planet,2006-06-16,2006-06-17,LESIA,mercury_NTT.vot,,Red spectrum in Fig 9,95.,2011P&SS...59.1842E,2011-12-01T00:00:00,SofI,La Silla NTT,0.9,2.45,900.,900.,Erard,LESIA,I/F
-Sun,star,2008-04-05,2008-12-31,solar,spectrum.dat.gz,,,,2018A&A...611A...1M,2018-11-18T00:00:00,SOLAR/SOLSPEC#SOLSPEC,ISS#Atlas 3,0.05,3.0,1000.,25000.,Meftah,LATMOS#BIRA-IASB,Scaled solar flux at 1 au, solar minimum
+Sun,star,2008-04-05,2008-12-31,solar,spectrum.dat.gz,,,,2018A&A...611A...1M,2017-11-18T00:00:00,SOLAR/SOLSPEC#SOLSPEC,ISS#Atlas 3,0.05,3.0,1000.,25000.,Meftah,LATMOS#BIRA-IASB,Scaled solar flux at 1 au, solar minimum
 Sun,star,1996-01-01,,solar,sun_reference_stis_001.fits,,,,1996AJ....112..307C,2001-01-30T16:46:05,,NASA CV-990#model,0.12,2.7,120.,2000.,Colina,STScI,Scaled solar flux at 1 au
 Sun,star,2003-01-01,,solar,solspec.dat,,,,2003SoPh..214....1T,2003-01-15T00:00:00,SOLSPEC#SOSP,Atlas 3#Eureca ,0.2,2.4,200.,2400.,Thuillier,Service d'Aeronomie/CNRS,Scaled solar flux at 1 au
 Sun,star,1997-01-01,,solar,irradiancebins.dat,,,,1999ApJ...518..480F,1997-01-01T00:00:00,,model,0.2,200.,50.,50000.,Kurucz,Harvard-Smithsonian,Scaled solar flux at 1 au
