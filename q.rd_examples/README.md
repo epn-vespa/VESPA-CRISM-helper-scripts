@@ -20,6 +20,10 @@ Resource Descriptor files (`q.rd`) and scripts.
 * [spectro_planets](spectro_planets): For Telescopic Planetary Spectra collection. Uses the `epntap2` mixin and csv Grammar.
 * [VVEx](vvex): An example service for VIRTIS-VEx data using IDL to build the ingestion SQL script.  _(outdated: to be updated with the `epntap2` mixin)_
 * [BDIP_v2](bdip_v2): This service prototype illustrates the connection to a remote database in the resource descriptor.
+* [exoplanet](exoplanet): This example retrieve all the data from a distant database.
+* [spicam](spicam): Defines a datalink parameter to 1) call the Mars Climate Database (with free parameter selecting the scenario in use) 2)provides a link to an ascii version of the files
+* [hst_planeto](hst): Retrieves data from a TAP query on a distant service; defines a datalink parameter to call Miriade ephemeris with current target name and date. 
+
 
 ## More info
 
