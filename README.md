@@ -13,8 +13,7 @@ This directory contains:
 	- qrdcreator2 
 	- qrd_generator.html 
 
-(Original note) Current task is to update q.rd generator:
- * to defind binds, especially for spatial_frame type (so it doesn't need so much tinkering for GAVO to ingest it)
+(Original note) Current task is to update q.rd generator: to defind binds, especially for spatial_frame type (so it doesn't need so much tinkering for GAVO to ingest it)
 
 - Older tries at EPN-TAP mixins - use the one from your DaCHS server
 	- mixin-EPN-TAP-1.0 (deprecated)
