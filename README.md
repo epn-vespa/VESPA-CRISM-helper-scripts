@@ -3,7 +3,7 @@
 This directory contains:
 
 - Examples of q.rd files defining actual data services in DaCHS. 
-	-[q.rd_examples](q.rd_examples)
+	- [q.rd_examples](q.rd_examples)
 
 - Early try at encapsulating DaCHS in a docker
 	- docker
