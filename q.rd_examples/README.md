@@ -24,7 +24,7 @@ Resource Descriptor files (`q.rd`) and scripts.
 * [fub](fub): HRSC/Mars-Express images at Technische Universität, Berlin (preliminary version, outdated)
 * [spicam](spicam): Service for SPICAM/Mars-Express atmospheric profiles in LATMOS. Defines a datalink parameter to 1) call the Mars Climate Database (with free parameter selecting the scenario in use) 2) provides a link to an alternative (ascii) version of the files
 * [hst_planeto](hst): Retrieves data from a TAP query on a distant service; defines a datalink parameter to call Miriade ephemeris with current target name and date. 
-* [cpstasm](csstasm): Service for Cluster spectral matrix data in IAP, Prague. Fills the service from local CDF files using cdfHeaderGrammar. 
+* [cpstasm](cpstasm): Service for Cluster spectral matrix data in IAP, Prague. Fills the service from local CDF files using cdfHeaderGrammar. 
 
 
 ## More info

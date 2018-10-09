@@ -1,4 +1,4 @@
-# hst_planeto EPN-TAP v2 service with mixin
+# SPICAM EPN-TAP v2 service with mixin
 
 Configuration files for spicam service, can be used as templates and adapted.
 
