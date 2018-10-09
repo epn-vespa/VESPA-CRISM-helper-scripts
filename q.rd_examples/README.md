@@ -1,7 +1,7 @@
 # Resource Descriptor file Examples
 
-This directory lists a series of example services configurations 
-to be used by data providers to train on building their own 
+This directory lists a series of example service configurations. 
+They can be used by data providers to train on building their own 
 Resource Descriptor files (`q.rd`) and scripts.
 
 ## List of available examples
@@ -21,8 +21,8 @@ Resource Descriptor files (`q.rd`) and scripts.
 * [VVEx](vvex): An example service for VIRTIS-VEx data using IDL to build the ingestion SQL script.  _(outdated: to be updated with the `epntap2` mixin)_
 * [BDIP_v2](bdip_v2): Historical images collection in ObsParis, relying on a pre-existing databae. This service illustrates the connection to a remote database in the resource descriptor.
 * [exoplanet](exoplanet): This example retrieves all the data from a distant database.
-* [fub](fub): HRSC/Mars-Express images at Technische Universität, Berlin (preliminary version, outdated)
-* [spicam](spicam): Service for SPICAM/Mars-Express atmospheric profiles in LATMOS. Defines a datalink parameter to 1) call the Mars Climate Database (with free parameter selecting the scenario in use) 2) provides a link to an alternative (ascii) version of the files
+* [fub](fub): HRSC/Mars-Express images at Technische Universität, Berlin _(preliminary version, outdated)_
+* [spicam](spicam): Service for SPICAM/Mars-Express atmospheric profiles in LATMOS. Defines a datalink parameter to 1) call the Mars Climate Database (with free parameter selecting the scenario in use) 2) provide a link to an alternative (ascii) version of the file
 * [hst_planeto](hst): Retrieves data from a TAP query on a distant service; defines a datalink parameter to call Miriade ephemeris with current target name and date. 
 * [cpstasm](cpstasm): Service for Cluster spectral matrix data in IAP, Prague. Fills the service from local CDF files using cdfHeaderGrammar. 
 
