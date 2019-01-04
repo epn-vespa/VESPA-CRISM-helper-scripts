@@ -25,28 +25,17 @@ A recent review of the 10 years of observations by SPICAM was published by Montm
 		]]>
 	</meta>
 	<meta name="copyright">LATMOS/IPSL</meta>
-	<meta name="creator.name">Zi Yin; Alexandre Rostaing</meta>
+	<meta name="creator">Zi Yin; Rostaing, A. </meta>
 	<meta name="publisher">Laboratoire Atmosphères, Milieux, Observations Spatiales</meta>
-	<meta name="contact.name">\metaString{contact.name}</meta>
+	<meta name="contact.name">Anni Määttänen</meta>
 	<meta name="contact.email">anni.maattanen@latmos.ipsl.fr</meta>
-	<meta name="contact.address">\metaSting{contact.address}</meta>
-	<meta name="contact.telephone">\metaString{contact.telephone}</meta>
-	<meta name="contributor.name">Anni Määttänen</meta>
-        <meta name="contributor.name">François Forget</meta>
-        <meta name="contributor.name">Sébastien Lebonnois</meta>
+	<meta name="contact.address">LATMOS, Tour 45, couloir 45-46, 3rd and 4th floors, Boite 102 / 4 Place Jussieu, 75005 Paris, FRANCE</meta>
+	<meta name="contact.telephone">+33 (0) 1 44 27 49 70</meta>
+	<meta name="contributor">Anni Määttänen ; Francois Forget ; Sebastien Lebonnois </meta>
 	<meta name="referenceURL">http://europlaneth2020.projet.latmos.ipsl.fr/</meta>
 	<meta name="facility">LATMOS, avec soutien du CNES et de l'ESA</meta>
 	<meta name="instrument">SPICAM</meta>
-	<meta name="subject">Mars Express</meta>
-	<meta name="subject">SPICAM</meta>
-	<meta name="subject">Mars</meta>
-	<meta name="subject">Stellar occulation</meta>
-	<meta name="subject">Solar occulation</meta>
-	<meta name="subject">Atmospheric profiles</meta>
-	<meta name="subject">Temperature</meta>
-        <meta name="subject">CO2 concentration</meta>
-        <meta name="subject">Ozone concentration</meta>
-        <meta name="subject">Aerosol extinction</meta>
+	<meta name="subject">Mars Express ; SPICAM ; Mars ; Stellar occultation ; Solar occultation ; Atmospheric profiles ; Temperature ; CO2 concentration ; Ozone concentration ; Aerosol extinction </meta>
 	<meta name="coverage">
 		<meta name="waveband">Infrared</meta>
 		<meta name="waveband">UV</meta>

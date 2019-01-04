@@ -23,7 +23,8 @@ Resource Descriptor files (`q.rd`) and scripts.
 * [exoplanet](exoplanet): This example retrieves all the data from a distant database.
 * [FUB](fub): HRSC/Mars-Express images at Freie Universität, Berlin _(preliminary version, outdated)_
 * [spicam](spicam): Service for SPICAM/Mars-Express atmospheric profiles in LATMOS. Defines a datalink parameter to 1) call the Mars Climate Database (with free parameter selecting the scenario in use) 2) provide a link to an alternative (ascii) version of the file
-* [HST_planeto](hst): Retrieves data from a TAP query on a distant service; defines a datalink parameter to call Miriade ephemeris with current target name and date. 
+* [MCD](mcd): Service for Mars Climate Database atmospheric simulations in LMD (profiles only). 
+* [HST_planeto](hst): Retrieves data from a TAP query on a distant service. Defines a datalink parameter to call Miriade ephemeris with current target name and date. 
 * [CPSTASM](cpstasm): Service for Cluster spectral matrix data in IAP, Prague. Fills the service from local CDF files using cdfHeaderGrammar. 
 
 
