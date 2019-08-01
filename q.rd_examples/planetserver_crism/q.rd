@@ -1,23 +1,26 @@
 <resource schema="planetserver_crism">
         <meta name="subject">CRISM</meta>
-        <meta name="title">PlanetServer-CRISM</meta>
-        <meta name="description">
-This service provides metadata information and hyperlinks to a subset of the CRISM/MRO[*]
-spectral cubes dataset provided by the PlanetServer/EarthServer-2 project as OGC/WCS
-endpoints.
-The data here hyperlinked was atmospherically calibrated and geo-referenced to suit the
-interactive interface provided by the PlanetServer at http://access.planetserver.eu/ as
-described in Marco Figueira, R. et al, 2018.
+        <meta name="title">PlanetServer CRISM-derived subset</meta>
+        <meta name="description"><![CDATA[
+The data provided by PlanetServer are higher-order products derived from a
+subset of the complete CRISM* dataset. For the original CRISM dataset
+(Murchie, S. et al., 2007), please visit PDS Geosciences node,
+https://pds-geosciences.wustl.edu/missions/mro/crism.htm .
 
-The original dataset is described in Murchie, S. et al, 2007 and is distributed in native format
-on the PDS Geosciences node, https://pds-geosciences.wustl.edu/missions/mro/crism.htm.
+This service provides metadata information and access-URLs to the
+PlanetServer data access OGC/OWS endpoints as well as hyperlinks to access
+the interactive interface provided by the service.
+The data provided by PlanetServer was atmospherically calibrated and
+geo-referenced as described in Figueira, R.M. et al., 2018.
+For the interactive interface, go to http://access.planetserver.eu .
 
-- Marco Figueira, R., 2018, https://doi.org/10.1016/j.pss.2017.09.007
-- Murchie, S., 2007, https://doi.org/10.1029/2006JE002682
+- Murchie, S. et al., 2007, https://doi.org/10.1029/2006JE002682
+- Figueira, R.M. et al., 2018, https://doi.org/10.1016/j.pss.2017.09.007
 
-[*]: Compact Reconnaissance Imaging Spectrometer for Mars (CRISM) on Mars Reconnaissance Orbiter (MRO), http://crism.jhuapl.edu/
-        </meta>
-        <meta name="creationDate">2019-07-01T06:00:00</meta>
+*: Compact Reconnaissance Imaging Spectrometer for Mars (CRISM) on Mars
+Reconnaissance Orbiter (MRO), http://crism.jhuapl.edu/
+        ]]></meta>
+        <meta name="creationDate">2019-08-01T06:00:00</meta>
 
         <meta name="creator.name">Mikhail Minin</meta>
         <meta name="contact.name">Carlos Brandt</meta>
