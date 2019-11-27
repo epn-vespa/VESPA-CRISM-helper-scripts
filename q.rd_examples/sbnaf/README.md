@@ -1,4 +1,4 @@
-SBNAF
+# SBNAF
 
 Configuration file for the SBNAF service in Konkoly Observatory, can be used as template and adapted.
 
