@@ -25,6 +25,7 @@ Resource Descriptor files (`q.rd`) and scripts.
 * [PlanetServer-CRISM](planetserver_crism): Service providing hyperlinks and access URLs to PlanetServer2 interface and CRISM-derived data products.
 * [PlanetServer-M3](planetserver_m3): Service providing hyperlinks and access URLs to PlanetServer2 interface and M3-derived data products.
 * [PDS_speclib](PDS_speclib): For PDS spectral library service. Uses the `epntap2` mixin and csv Grammar.
+* [SBNAF](sbnaf): IR flux of asteroids measured through several observatories, outcome of SBNAF EC programme in Konkoly Obs (alternative access through EPN-TAP). All data are in the table, no attached files. Defines a datalink parameter to call Miriade ephemerides with current target name and date. 
 * [spectro_planets](spectro_planets): For Telescopic Planetary Spectra collection. Uses the `epntap2` mixin and csv Grammar.
 * [spicam](spicam): Service for SPICAM/Mars-Express atmospheric profiles in LATMOS. Defines a datalink parameter to 1) call the Mars Climate Database (with free parameter selecting the scenario in use) 2) provide a link to an alternative (ascii) version of the file
 * [VVEx](vvex): An example service for VIRTIS-VEx data using IDL to build the ingestion SQL script.  _(outdated: to be updated with the `epntap2` mixin)_
