@@ -1,5 +1,7 @@
 # DaCHS-for-VESPA
 
+__This repository is not up-to-date, use the content with caution!__
+
 This directory contains:
 
 - Examples of q.rd files defining actual data services in DaCHS: 
