@@ -32,7 +32,7 @@ out (or delete them) -->
         </meta>
 
         <table id="epn_core">
-                <mixin processing_level="3" spatial_frame_type="body">//epntap2#table</mixin>
+                <mixin spatial_frame_type="body">//epntap2#table-2_0</mixin>
 <!--                <meta name="info" infoName="SERVICE_PROTOCOL" infoValue="0.3">EPN-TAP</meta>-->
                 <meta name="description">EPN-TAP access to the Test CRISM database.</meta>
                 <stc>
@@ -112,7 +112,8 @@ out (or delete them) -->
 <!--
  + str(@c2_max) + ('&amp;E_px=') + str(@E) + ('&amp;N_px=') + str(@N) + ('&amp;sensor_id=') + (@sensor_id)</var>
 -->
-				<apply procDef="//epntap2#populate" name="fillepn">
+				<apply procDef="//epntap2#populate-2_0" name="fillepn">
+					<bind name="processing_level">3</bind>
 					<bind name="target_name">@target_name</bind>
 					<bind name="target_class">@target_class</bind>
 					<bind name="instrument_host_name">@instrument_host_name</bind>
