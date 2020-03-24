@@ -12,10 +12,8 @@ class RowIterator(CustomRowIterator):
         for table in input_tables:
             bdip_table = table.strip()
             print "Loading data from {}".format(bdip_table)
-            bdip_md = bdip_metadata(bdip_table)
-            print "{} rows found".format(len(bdip_md))
-            for md in bdip_md:
-                yield (bdip_table,md)
+            yield bdip_metadata(bdip_table)
+            
                 
 
 def bdip_metadata(bdip_table):
@@ -35,7 +33,7 @@ def bdip_metadata(bdip_table):
     ####
     try:
         con = psycopg2.connect(database=mdb, user=mdbuser, host=mdbhost, password=mdbpassword)
-        cur = con.cursor()
+        cur = con.cursor(name="cursor")
         con.commit()
 
         sql_command  = "SELECT * FROM {}.{};".format(dbschema,bdip_table)
@@ -86,7 +84,7 @@ def bdip_metadata(bdip_table):
             else:
                 print "wrong table name" 
 
-            bdip_md.append(md)
+            yield md
             row = cur.fetchone()
     
         cur.close()
