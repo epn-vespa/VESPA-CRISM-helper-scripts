@@ -4,7 +4,9 @@ Support routines for CRISM are available:
   - [scripts](scripts)
  
 
-# Previous repository content (old name: DaCHS-for-VESPA)
+## Previous repository content 
+
+NB: **This repository was named DaCHS-for-VESPA**
 
 The following content has been moved and is maintained in other places. 
 
