@@ -1,8 +1,12 @@
-# DaCHS-for-VESPA
+# VESPA CRISM helper scripts
 
-__This repository is mostly outdated__
+Support routines for CRISM are available:
+  - [scripts](scripts)
+ 
 
-The content of this repository has been moved to other places. 
+# Previous repository content (old name: DaCHS-for-VESPA)
+
+The following content has been moved and is maintained in other places. 
 
 - The examples of service descriptors (q.rd) are now accessible from: https://voparis-gitlab.obspm.fr/vespa/dachs/services 
 - Docker container installation is now available from: 
@@ -10,10 +14,4 @@ The content of this repository has been moved to other places.
   -  https://gitlab.obspm.fr/phamy/voparis-tap-planeto (preliminary, and in French)
 - The "q.rd generator" script is not maintained anymore. 
 - The EPN-TAP DaCHS mixin script is maintained here: https://voparis-gitlab.obspm.fr/vespa/ivoa-standards/epn-tap/dachs-mixin
-
-# CRISM helper scripts
-
-Support routines for CRISM are available:
-  - [scripts](scripts)
- 
 
