@@ -1,7 +1,0 @@
-bdip_mercure
-bdip_venus
-bdip_mars
-bdip_jupiter
-bdip_saturne
-bdip_files
-observatoires

@@ -1,3 +1,0 @@
-Object,System,LayerTitle,LayerLayerName,TargetClass,InstrumentHostName,InstrumentName,OnlineResource,minx,miny,maxx,maxy,c1res,c2res,reference,Ranges,RangesSing
-Mars,Mars,Mars HRSC DTM hillshade,MEX,planet,MEx,HRSC,http://imars.planet.fu-berlin.de/eqc/,-10668848.6520000007003546,-5215881.5630000000819564,10668848.6520000007003546,5215881.5630000000819564,50.0,50.0,,0.087890625 -0.087890625,0.087890625
-
