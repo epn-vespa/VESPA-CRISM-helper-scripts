@@ -1,27 +1,19 @@
 # DaCHS-for-VESPA
 
-__This repository is not up-to-date, use the content with caution!__
+__This repository is mostly outdated__
 
-This directory contains:
+The content of this repository has been moved to other places. 
 
-- Examples of q.rd files defining actual data services in DaCHS: 
-	- [q.rd_examples](q.rd_examples)
+- The examples of service descriptors (q.rd) are now accessible from: https://voparis-gitlab.obspm.fr/vespa/dachs/services 
+- Docker container installation is now available from: 
+  -  https://github.com/gavodachs/docker-dachs
+  -  https://gitlab.obspm.fr/phamy/voparis-tap-planeto (preliminary, and in French)
+- The "q.rd generator" script is not maintained anymore. 
+- The EPN-TAP DaCHS mixin script is maintained here: https://voparis-gitlab.obspm.fr/vespa/ivoa-standards/epn-tap/dachs-mixin
 
-- Early try at encapsulating DaCHS in a docker:
-	- docker
+# CRISM helper scripts
 
-- Helper to generate q.rd files from a web form:
-	- qrdcreator1 (deprecated)
-	- qrdcreator2 
-	- qrd_generator.html 
-
-(Original note) Current task is to update q.rd generator: to defind binds, especially for spatial_frame type (so it doesn't need so much tinkering for GAVO to ingest it)
-
-- Early tries at EPN-TAP mixins - use the one from your DaCHS server:
-	- mixin-EPN-TAP-1.0 (deprecated)
-	- mixin-EPN-TAP-2.0 (deprecated)
-
-- Support routines for CRISM:
-	- Scripts
+Support routines for CRISM are available:
+  - [scripts](scripts)
  
 
