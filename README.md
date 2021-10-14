@@ -1,14 +1,11 @@
-# VESPA CRISM helper scripts
+# CRISM helper scripts
 
 Support routines for CRISM are available:
   - [scripts](scripts)
  
+# DaCHS-for-VESPA (former repository name)
 
-## Previous repository content 
-
-NB: **This repository was named DaCHS-for-VESPA**
-
-The following content has been moved and is maintained in other places. 
+Most of the content of the previous repository version has been moved to other places. 
 
 - The examples of service descriptors (q.rd) are now accessible from: 
   - https://voparis-gitlab.obspm.fr/vespa/dachs/services 
